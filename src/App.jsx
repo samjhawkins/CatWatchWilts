@@ -1,24 +1,25 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import {Grid} from '@material-ui/core/index';
-import Home from "./components/Home";
-import Background from "./components/Background";
+import renderRoutes from './routes/renderRoutes'
 
 export class App extends React.Component {
     render() {
         return (
-            <React.Fragment>
-                {/*<Grid*/}
-                {/*    container*/}
-                {/*    direction="column"*/}
-                {/*    justify="center"*/}
-                {/*    alignItems="center"*/}
-                {/*>*/}
-                {/*    <Grid item xs={12}>*/}
-                {/*        <Home/>*/}
-                {/*    </Grid>*/}
-                {/*</Grid>*/}
-                <Background/>
-            </React.Fragment>
+            <Router>
+                <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                >
+                    <Grid item xs={12}>
+                        <Switch>
+                            {renderRoutes()}
+                        </Switch>
+                    </Grid>
+                </Grid>
+            </Router>
         );
     }
 
