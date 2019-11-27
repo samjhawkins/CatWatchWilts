@@ -4,7 +4,7 @@ import UndecoratedLink from "./UndecoratedLink";
 
 const LinkedButton = ({to, text, size, colour, className}) => {
     return (
-        <UndecoratedLink to={to} >
+        <UndecoratedLink to={to}>
             <Button size={size} variant="contained" color={colour || undefined} className={className}>
                 {text}
             </Button>

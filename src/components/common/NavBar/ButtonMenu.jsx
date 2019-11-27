@@ -10,9 +10,11 @@ export const ButtonMenu = props => {
                 onClick={props.handleToggle}
                 variant="contained"
             >
+                Menu
+                &nbsp;
                 {props.open ? <MenuOpen/>: <Menu/> }
             </Button>
-            <Collapse in={props.open}>
+            <Collapse in={props.open} style={{position: "fixed"}}>
                 <Paper>
                     <InputMenu handleClose={props.handleClose}/>
                 </Paper>

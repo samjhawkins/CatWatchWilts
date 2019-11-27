@@ -50,7 +50,7 @@ export class NavBar extends Component {
                         <Grid justify={"space-between"} container>
                             <Grid item container sm={6} alignContent={"center"} justify={"center"}>
                                 <Avatar
-                                    alt="Lemon Logo"
+                                    alt="Cat watch wiltshire logo"
                                     src={logo}
                                     variant="rounded"
                                     className={classes.avatar}

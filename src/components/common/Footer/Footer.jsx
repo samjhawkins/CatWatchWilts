@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 export default function StickyFooter() {
     const classes = useStyles();
     return (
-        <AppBar position='fixed' className={classes.footer}>
+        <AppBar position='sticky' className={classes.footer}>
             <Grid
                 container
                 direction="row"
