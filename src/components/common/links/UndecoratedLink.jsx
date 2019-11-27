@@ -9,10 +9,10 @@ const useStyles = makeStyles(theme => ({
     }
 ));
 
-export const UndecoratedLink = ({to, children}) => {
+export const UndecoratedLink = ({to, href, className, children}) => {
     const classes = useStyles();
     return (
-        <Link to={to} className={classes.link}>
+        <Link to={to} href={href} className={`${classes.link} ${className}`}>
             {children}
         </Link>
     )

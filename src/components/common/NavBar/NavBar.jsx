@@ -55,13 +55,6 @@ export class NavBar extends Component {
                                     variant="rounded"
                                     className={classes.avatar}
                                 />
-                                <Typography
-                                    variant='h5'
-                                    display={'inline'}
-                                    style={{alignSelf: "center"}}
-                                >
-                                    CatWatchWiltshire
-                                </Typography>
                             </Grid>
                             <Grid item container xs={12} sm={4} justify={"center"} className={classes.padIt}>
                                 <ButtonMenu

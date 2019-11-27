@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/samjhawkins/secret-santa.git"
+    "url": "git+https://github.com/samjhawkins/catWatchWiltshire.git"
   },
   "author": "Sam Hawkins",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/samjhawkins/secret-santa/issues"
+    "url": "https://github.com/samjhawkins/catWatchWiltshire/issues"
   },
-  "homepage": "https://github.com/samjhawkins/secret-santa#readme",
+  "homepage": "www.catwatchwiltshire.co.uk",
   "dependencies": {
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
