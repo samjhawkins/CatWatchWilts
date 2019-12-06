@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import {Grid} from '@material-ui/core/index';
 import renderRoutes from './routes/renderRoutes'
 import NavBar from './components/common/NavBar/NavBar';
-import Footer from "./components/common/Footer/Footer";
 
 export class App extends React.Component {
     render() {
@@ -21,7 +20,6 @@ export class App extends React.Component {
                             {renderRoutes()}
                         </Switch>
                     </Grid>
-                    <Footer/>
                 </Grid>
             </Router>
         );

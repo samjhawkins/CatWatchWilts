@@ -5,7 +5,7 @@ import {Menu, MenuOpen} from "@material-ui/icons/index";
 export const ButtonMenu = props => {
     const InputMenu = props.menuComponent;
     return (
-        <div>
+        <div className={props.className}>
             <Button
                 onClick={props.handleToggle}
                 variant="contained"
@@ -14,7 +14,7 @@ export const ButtonMenu = props => {
                 &nbsp;
                 {props.open ? <MenuOpen/>: <Menu/> }
             </Button>
-            <Collapse in={props.open} style={{position: "fixed"}}>
+            <Collapse in={props.open} style={{position: "absolute"}}>
                 <Paper>
                     <InputMenu handleClose={props.handleClose}/>
                 </Paper>
