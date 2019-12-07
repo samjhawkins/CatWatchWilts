@@ -58,13 +58,13 @@ export class NavBar extends Component {
     }
 
     render() {
-        const {classes} = this.props;
+        const {classes, matches} = this.props;
         return (
             <AppBar position='sticky'>
                 <Toolbar>
                     <Container maxWidth="md">
                         <Grid justify={"space-between"} container className={classes.container}>
-                            <Grid item container sm={6} alignItems={"center"} justify={"space-evenly"}>
+                            <Grid item container sm={5} alignItems={"center"} justify={"space-evenly"}>
                                 <UndecoratedLink to="/">
                                     <Avatar
                                         alt="Cat watch wiltshire logo"
@@ -77,12 +77,18 @@ export class NavBar extends Component {
                                   className={`${classes.appBarItem} ${classes.donateButton}`}
                                   to="/donations"
                                   text="Donate"
-                                  size="large"
+                                  size="small"
                                   variant="outlined"
                                 />
                             </Grid>
-                            {/*Todo: swap from space evenly to grouping the icons with space evenly at xs breakpoint*/}
-                            <Grid item container sm={6} alignItems={"center"} justify={"space-evenly"}>
+                            <Grid
+                                item
+                                container
+                                xs={7}
+                                sm={4}
+                                alignItems={"center"}
+                                justify={matches.aboveSM ? "space-around":"center"}
+                            >
                                 <SocialAvatar
                                   newWindow={true}
                                   href="http://fb.me/wiltsandhantscats"
@@ -104,6 +110,8 @@ export class NavBar extends Component {
                                   alt="Twitter Logo"
                                   src={twitter}
                                 />
+                            </Grid>
+                            <Grid item container xs={5} sm={3} alignItems={"center"} justify={"center"}>
                                 <ButtonMenu
                                     className={classes.appBarItem}
                                     menuComponent={MainMenu}

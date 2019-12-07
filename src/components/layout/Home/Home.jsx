@@ -60,7 +60,7 @@ export const Home = props => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    {/*//TODO: MAKE BUTTONS SCALABLE!!!*/}
+                    {/*TODO: MAKE BUTTONS SCALABLE!!!*/}
                     <LinkedButton
                         to="/cats"
                         text="Let's get looking"
