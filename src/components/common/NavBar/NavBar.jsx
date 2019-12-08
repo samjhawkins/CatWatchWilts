@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
     AppBar,
     Toolbar,
-    Typography,
     Avatar,
     Container,
 } from '@material-ui/core/index';
@@ -62,9 +61,8 @@ export class NavBar extends Component {
         return (
             <AppBar position='sticky'>
                 <Toolbar>
-                    <Container maxWidth="md">
                         <Grid justify={"space-between"} container className={classes.container}>
-                            <Grid item container sm={5} alignItems={"center"} justify={"space-evenly"}>
+                            <Grid item container sm={5} alignItems={"center"} justify={"flex-start"}>
                                 <UndecoratedLink to="/">
                                     <Avatar
                                         alt="Cat watch wiltshire logo"
@@ -77,7 +75,7 @@ export class NavBar extends Component {
                                   className={`${classes.appBarItem} ${classes.donateButton}`}
                                   to="/donations"
                                   text="Donate"
-                                  size="small"
+                                  size="medium"
                                   variant="outlined"
                                 />
                             </Grid>
@@ -87,7 +85,7 @@ export class NavBar extends Component {
                                 xs={7}
                                 sm={4}
                                 alignItems={"center"}
-                                justify={matches.aboveSM ? "space-around":"center"}
+                                justify={"center"}
                             >
                                 <SocialAvatar
                                   newWindow={true}
@@ -111,7 +109,7 @@ export class NavBar extends Component {
                                   src={twitter}
                                 />
                             </Grid>
-                            <Grid item container xs={5} sm={3} alignItems={"center"} justify={"center"}>
+                            <Grid item container xs={5} sm={3} alignItems={"center"} justify={"flex-end"}>
                                 <ButtonMenu
                                     className={classes.appBarItem}
                                     menuComponent={MainMenu}
@@ -121,8 +119,6 @@ export class NavBar extends Component {
                                 />
                             </Grid>
                         </Grid>
-                    </Container>
-
                 </Toolbar>
             </AppBar>
         );
