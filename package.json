@@ -1,7 +1,7 @@
 {
-  "name": "secret-santa",
-  "version": "1.0.0",
-  "description": "secret santa project",
+  "name": "CatWatchWilts",
+  "version": "0.0.1",
+  "description": "Website for CatWatchWiltshire",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production --config ./config/webpack.prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress",
