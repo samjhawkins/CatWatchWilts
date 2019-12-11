@@ -13,7 +13,7 @@ app.get('/**', function(req, res) {
     res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
-const port = 3333;
+const port = 3334;
 const server = http.createServer(app);
 server.listen(port);
 console.log('Server listening on:',port);
