@@ -22,7 +22,7 @@ console.log('Server listening on:',httpPort);
 
 const cert = {
 //    key: fs.readFileSync('/pi/home/certs/key.pem'),
-    cert: fs.readFileSync('/pi/home/certs/LocalCA.pem')
+    cert: fs.readFileSync('/home/pi/certs/LocalCA.pem')
 };
 const httpsPort = 3335;
 const secureServer = https.createServer(cert, app);
