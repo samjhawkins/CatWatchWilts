@@ -4,7 +4,6 @@ import {Grid} from '@material-ui/core/index';
 import renderRoutes from './routes/renderRoutes'
 import NavBar from './components/common/NavBar/NavBar';
 import Footer from './components/common/Footer/Footer';
-import MediaQuery from "./components/common/wrappers/MediaQuery";
 
 export class App extends React.Component {
   render() {
@@ -16,16 +15,12 @@ export class App extends React.Component {
           justify="center"
           alignItems="center"
         >
-          <MediaQuery>
-            <NavBar/>
-          </MediaQuery>
+          <NavBar/>
           <Grid item container xs={12} justify={"center"}>
             <Switch>
               {renderRoutes()}
             </Switch>
-            <MediaQuery>
-              <Footer/>
-            </MediaQuery>
+            <Footer/>
           </Grid>
         </Grid>
       </Router>

@@ -10,7 +10,7 @@ export const ButtonMenu = props => {
                 onClick={props.handleToggle}
                 variant="contained"
             >
-                {props.matches.aboveSM ? "Menu" : ""}
+                {props.matches.aboveXS ? "Menu" : ""}
                 &nbsp;
                 {props.open ? <MenuOpen/>: <Menu/> }
             </Button>
