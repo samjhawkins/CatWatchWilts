@@ -20,11 +20,11 @@ const server = http.createServer(app);
 server.listen(httpPort);
 console.log('Server listening on:',httpPort);
 
-const cert = {
-//    key: fs.readFileSync('/pi/home/certs/key.pem'),
-    cert: fs.readFileSync('/home/pi/certs/LocalCA.pem')
+const options = {
+    key: fs.readFileSync('/home/pi/certs/cwwServer.key'),
+    cert: fs.readFileSync('/home/pi/certs/cwwServer.cert')
 };
 const httpsPort = 3335;
-const secureServer = https.createServer(cert, app);
+const secureServer = https.createServer(options, app);
 secureServer.listen(httpsPort);
 console.log('Secure server listening on:',httpsPort);
