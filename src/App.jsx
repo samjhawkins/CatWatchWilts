@@ -7,30 +7,30 @@ import Footer from './components/common/Footer/Footer';
 import MediaQuery from "./components/common/wrappers/MediaQuery";
 
 export class App extends React.Component {
-    render() {
-        return (
-            <Router>
-                <Grid
-                    container
-                    direction="column"
-                    justify="center"
-                    alignItems="center"
-                >
-                    <MediaQuery>
-                      <NavBar/>
-                    </MediaQuery>
-                    <Grid item xs={12}>
-                        <Switch>
-                            {renderRoutes()}
-                        </Switch>
-                    </Grid>
-                  <MediaQuery>
-                    <Footer/>
-                  </MediaQuery>
-                </Grid>
-            </Router>
-        );
-    }
+  render() {
+    return (
+      <Router>
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+        >
+          <MediaQuery>
+            <NavBar/>
+          </MediaQuery>
+          <Grid item container xs={12} justify={"center"}>
+            <Switch>
+              {renderRoutes()}
+            </Switch>
+            <MediaQuery>
+              <Footer/>
+            </MediaQuery>
+          </Grid>
+        </Grid>
+      </Router>
+    );
+  }
 
 }
 

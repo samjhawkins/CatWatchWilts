@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import cookie from 'react-cookies';
+import cookie from 'react-cookies';
 
 const AuthContext = React.createContext();
 
@@ -7,41 +7,20 @@ class AuthProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false
-    };
+      isLoggedIn: !!cookie.load('token')
+    }
   }
 
-  // componentDidMount() {
-  //
-  // }
-  //
-  // componentWillUnmount() {
-  //
-  // }
-  //
-  // setStateFromToken = () => {
-  // };
-  //
-  // getTokenCookie = () => {
-  //   return cookie.load('token');
-  // };
-  //
-  // setTokenCookie = token => {
-  //   cookie.save('token', token);
-  // };
-  //
-  // resetTokenCookie = () => {
-  //   cookie.remove('token');
-  // };
-  //
-  // registration = async userInfo => {
-  // };
-  //
-  // login = async credentials => {
-  // };
-  //
-  // logout = () => {
-  // };
+  login = async credentials => {
+    //do a call here to get a token
+    const token = "MOCK_TOKEN_HERE";
+    return cookie.save('token', token);
+  };
+
+  logout = () => {
+    cookie.save('token', '');
+    this.setState({ isLoggedIn : false })
+  };
 
   render() {
     const { children } = this.props;
@@ -49,9 +28,8 @@ class AuthProvider extends Component {
     return (
       <AuthContext.Provider
         value={{
-          // login: this.login,
-          // registration: this.registration,
-          // logout: this.logout,
+          login: this.login,
+          logout: this.logout,
           isLoggedIn,
         }}
       >
