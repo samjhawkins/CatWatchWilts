@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import {Grid} from '@material-ui/core/index';
 import renderRoutes from './routes/renderRoutes'
 import NavBar from './components/common/NavBar/NavBar';
+import Footer from './components/common/Footer/Footer';
 import MediaQuery from "./components/common/wrappers/MediaQuery";
 
 export class App extends React.Component {
@@ -23,6 +24,9 @@ export class App extends React.Component {
                             {renderRoutes()}
                         </Switch>
                     </Grid>
+                  <MediaQuery>
+                    <Footer/>
+                  </MediaQuery>
                 </Grid>
             </Router>
         );

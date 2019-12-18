@@ -3,19 +3,16 @@ import {
     AppBar,
     Toolbar,
     Avatar,
-    Container,
 } from '@material-ui/core/index';
 import Grid from "@material-ui/core/Grid/index";
 import {withStyles} from "@material-ui/core/styles";
 import logo from "../../../images/logo.jpg";
 import ButtonMenu from "./ButtonMenu";
 import MainMenu from "./MainMenu";
-import SocialAvatar from "./SocialAvatar";
-import faceBook from "../../../images/f_logo_White.png";
-import instaGram from "../../../images/i_logo_Black.png";
-import twitter from "../../../images/t_logo_White.png";
 import UndecoratedLink from "../links/UndecoratedLink";
 import LinkedButton from "../links/LinkedButton";
+import MediaQuery from "../wrappers/MediaQuery";
+import SocialAvatarGroup from "../SocialAvatarGroup";
 
 const styles = theme => ({
     avatar: {
@@ -87,36 +84,22 @@ export class NavBar extends Component {
                                 alignItems={"center"}
                                 justify={"center"}
                             >
-                                <SocialAvatar
-                                  newWindow={true}
-                                  href="http://fb.me/wiltsandhantscats"
-                                  className={classes.appBarItem}
-                                  alt="Facebook Logo"
-                                  src={faceBook}
-                                />
-                                <SocialAvatar
-                                  newWindow={true}
-                                  href="https://www.instagram.com/cat_watch_wilts/"
-                                  className={classes.appBarItem}
-                                  alt="Instagram Logo"
-                                  src={instaGram}
-                                />
-                                <SocialAvatar
-                                  newWindow={true}
-                                  href="https://twitter.com/cat_watch_wilts"
-                                  className={classes.appBarItem}
-                                  alt="Twitter Logo"
-                                  src={twitter}
+                                <SocialAvatarGroup
+                                    facebook={true}
+                                    twitter={true}
+                                    instagram={true}
                                 />
                             </Grid>
                             <Grid item container xs={5} sm={3} alignItems={"center"} justify={"flex-end"}>
-                                <ButtonMenu
-                                    className={classes.appBarItem}
-                                    menuComponent={MainMenu}
-                                    open={this.state.open}
-                                    handleClose={this.handleClose}
-                                    handleToggle={this.handleToggle}
-                                />
+                                <MediaQuery>
+                                    <ButtonMenu
+                                        className={classes.appBarItem}
+                                        menuComponent={MainMenu}
+                                        open={this.state.open}
+                                        handleClose={this.handleClose}
+                                        handleToggle={this.handleToggle}
+                                    />
+                                </MediaQuery>
                             </Grid>
                         </Grid>
                 </Toolbar>
