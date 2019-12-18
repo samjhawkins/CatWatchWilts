@@ -4,7 +4,6 @@ import {Menu, MenuOpen} from "@material-ui/icons/index";
 
 export const ButtonMenu = props => {
     const InputMenu = props.menuComponent;
-    console.log(props.matches.aboveXS);
     return (
         <div className={props.className}>
             <Button
