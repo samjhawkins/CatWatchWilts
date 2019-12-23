@@ -12,18 +12,23 @@ const useStyles = makeStyles(theme => ({
             backgroundColor: theme.palette.secondary.light,
         },
     },
+    smallText: {
+        fontSize: '0.7em',
+    }
 }));
 
 const MainMenu = props => {
-    const currentTab = pageList.findIndex(route => route.path === props.location?.pathname);
+    console.log('props',props.matches?.aboveSM );
     const classes = useStyles();
+    const currentTab = pageList.findIndex(route => route.path === props.location?.pathname);
+    const smallTextClass = props.matches?.aboveSM ? undefined : classes.smallText;
     return (
         <Tabs
             value={currentTab > -1 ? currentTab : 0}
             indicatorColor="secondary"
             textColor="primary"
             variant="scrollable"
-            scrollButtons="auto"
+            scrollButtons="on"
             className={props.className}
         >
             {pageList.map((route, index) => (
@@ -33,7 +38,9 @@ const MainMenu = props => {
                         color={route.color}
                         label={route.name}
                         selected={currentTab === index}
-                        className={classes.menuItem}
+                        className={
+                            `${classes.menuItem} ${smallTextClass}`}
+
                     />
                 </UndecoratedLink>
             ))}

@@ -10,6 +10,7 @@ import logo from "../../../images/logo.jpg";
 import UndecoratedLink from "../links/UndecoratedLink";
 import LinkedButton from "../links/LinkedButton";
 import MainMenu from "./MainMenu";
+import MediaQuery from "../wrappers/MediaQuery";
 
 const styles = theme => ({
     avatar: {
@@ -60,12 +61,14 @@ export class NavBar extends Component {
                             size="medium"
                             variant="outlined"
                         />
-                        <MainMenu className={classes.appBarItem}/>
+                        <MediaQuery>
+                            <MainMenu className={classes.appBarItem}/>
+                        </MediaQuery>
                     </Grid>
                 </Toolbar>
             </AppBar>
         );
     }
-};
+}
 
 export default withStyles(styles)(NavBar);
