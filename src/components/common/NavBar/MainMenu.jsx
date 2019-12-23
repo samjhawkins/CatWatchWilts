@@ -1,31 +1,44 @@
 import React from 'react';
-import {MenuList, MenuItem, Typography} from "@material-ui/core/index";
+import {Tabs, Tab} from "@material-ui/core/index";
 import UndecoratedLink from "../links/UndecoratedLink";
 import {makeStyles} from '@material-ui/styles/index';
 import {pageList} from '../../../routes/routes.config';
+import {withRouter} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
-    item: {
+    menuItem: {
         backgroundColor: theme.color.white,
-        justifyContent: 'center',
-    }
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.light,
+        },
+    },
 }));
 
-export const MainMenu = (props) => {
+const MainMenu = props => {
+    const currentTab = pageList.findIndex(route => route.path === props.location?.pathname);
     const classes = useStyles();
     return (
-        <MenuList>
-            {pageList.map( route =>(
-                <UndecoratedLink key={route.name} to={route.path}>
-                    <MenuItem onClick={props.handleClose} className={classes.item}>
-                        <Typography color={route.color}>
-                            {route.name}
-                        </Typography>
-                    </MenuItem>
+        <Tabs
+            value={currentTab > -1 ? currentTab : 0}
+            indicatorColor="secondary"
+            textColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+            className={props.className}
+        >
+            {pageList.map((route, index) => (
+                <UndecoratedLink key={index} to={route.path}>
+                    <Tab
+                        value={index}
+                        color={route.color}
+                        label={route.name}
+                        selected={currentTab === index}
+                        className={classes.menuItem}
+                    />
                 </UndecoratedLink>
             ))}
-        </MenuList>
+        </Tabs>
     );
 };
 
-export default MainMenu;
+export default withRouter(MainMenu);
