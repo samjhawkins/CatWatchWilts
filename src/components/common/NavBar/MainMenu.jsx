@@ -18,7 +18,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MainMenu = props => {
-    console.log('props',props.matches?.aboveSM );
     const classes = useStyles();
     const currentTab = pageList.findIndex(route => route.path === props.location?.pathname);
     const smallTextClass = props.matches?.aboveSM ? undefined : classes.smallText;

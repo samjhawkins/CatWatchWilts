@@ -1,18 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
     AppBar,
     Toolbar,
     Avatar,
 } from '@material-ui/core/index';
 import Grid from "@material-ui/core/Grid/index";
-import {withStyles} from "@material-ui/core/styles";
 import logo from "../../../images/logo.jpg";
 import UndecoratedLink from "../links/UndecoratedLink";
 import LinkedButton from "../links/LinkedButton";
 import MainMenu from "./MainMenu";
 import MediaQuery from "../wrappers/MediaQuery";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
     avatar: {
         margin: theme.spacing(3),
         width: theme.spacing(60),
@@ -32,43 +32,41 @@ const styles = theme => ({
             backgroundColor: theme.color.tertiary.main
         }
     }
-});
+}));
 
-export class NavBar extends Component {
-    render() {
-        const {classes} = this.props;
-        return (
-            <AppBar position='sticky'>
-                <Toolbar>
-                    <Grid
-                        item container
-                        justify={"center"}
-                        alignContent={"flex-end"}
-                        className={classes.container}
-                    >
-                        <UndecoratedLink to="/">
-                            <Avatar
-                                alt="Cat watch wiltshire logo"
-                                src={logo}
-                                variant="rounded"
-                                className={classes.avatar}
-                            />
-                        </UndecoratedLink>
-                        <LinkedButton
-                            className={`${classes.appBarItem} ${classes.donateButton}`}
-                            to="/donations"
-                            text="Donate"
-                            size="medium"
-                            variant="outlined"
+export const NavBar = props => {
+    const classes = useStyles();
+    return (
+        <AppBar position='sticky'>
+            <Toolbar>
+                <Grid
+                    item container
+                    justify={"center"}
+                    alignContent={"flex-end"}
+                    className={classes.container}
+                >
+                    <UndecoratedLink to="/">
+                        <Avatar
+                            alt="Cat watch wiltshire logo"
+                            src={logo}
+                            variant="rounded"
+                            className={classes.avatar}
                         />
-                        <MediaQuery>
-                            <MainMenu className={classes.appBarItem}/>
-                        </MediaQuery>
-                    </Grid>
-                </Toolbar>
-            </AppBar>
-        );
-    }
+                    </UndecoratedLink>
+                    <LinkedButton
+                        className={`${classes.appBarItem} ${classes.donateButton}`}
+                        to="/donations"
+                        text="Donate"
+                        size="medium"
+                        variant="outlined"
+                    />
+                    <MediaQuery>
+                        <MainMenu className={classes.appBarItem}/>
+                    </MediaQuery>
+                </Grid>
+            </Toolbar>
+        </AppBar>
+    );
 }
 
-export default withStyles(styles)(NavBar);
+export default NavBar;
