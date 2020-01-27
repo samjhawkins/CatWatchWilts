@@ -4,8 +4,13 @@ import Avatar from "@material-ui/core/Avatar";
 import {makeStyles} from "@material-ui/styles";
 import LinkedButton from "../../common/links/LinkedButton";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import {Typography} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        minHeight: '700px',
+    },
     avatar: {
         margin: theme.spacing(6),
         width: theme.spacing(150),
@@ -21,6 +26,8 @@ const useStyles = makeStyles(theme => ({
         }
     },
     image: {
+        width: '100%',
+        height: '100%',
         backgroundImage: 'url(https://images.unsplash.com/photo-1517331156700-3c241d2b4d83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1048&q=80)',
         backgroundRepeat: 'no-repeat',
         backgroundColor:
@@ -33,25 +40,30 @@ const Donations = props => {
     const classes = useStyles();
     return (
         <Grid item container component="main" xs={10} className={classes.root}>
-            We rely on your donations to keep our cats happy.
-            If you wish to donate then we have a just giving page that you can go to below.
-
-            <Avatar
-                alt="JustGiving logo"
-                src={justGivingLogo}
-                variant="rounded"
-                className={classes.avatar}
-            />
-            <LinkedButton
-                className={classes.donateButton}
-                to="/donations"
-                text="Donate"
-                size="large"
-                variant="outlined"
-            />
-            <Grid item xs={8} className={classes.image} />
-
-            At the very least, thank you for your time, and thank you so much for your support, it means the world to us.
+            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                <Typography>
+                    We rely on your donations to keep our cats happy.
+                    If you wish to donate then we have a just giving page that you can go to below.
+                </Typography>
+                <Avatar
+                    alt="JustGiving logo" lo
+                    src={justGivingLogo}
+                    variant="rounded"
+                    className={classes.avatar}
+                />
+                <LinkedButton
+                    className={classes.donateButton}
+                    to="/donations"
+                    text="Donate"
+                    size="large"
+                    variant="outlined"
+                />
+                <Typography>
+                    At the very least, thank you for your time, and thank you so much for your support, it means the
+                    world to us.
+                </Typography>
+            </Grid>
+            <Grid item xs={false} sm={4} md={7} className={classes.image}/>
         </Grid>
     );
 }
