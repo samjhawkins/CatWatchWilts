@@ -31,17 +31,18 @@ export const pageList = [
         exact: true,
         component: Contact,
         color: "primary"
-    }, {
-        name: "Login",
-        path: "/login",
-        exact: true,
-        component: Login,
-        color: "primary"
     }
 ];
 
 export const routesConfig = [
     ...pageList,
+    {
+        name: "Login",
+        path: "/login",
+        exact: true,
+        component: Login,
+        color: "primary"
+    },
     {
         name: "Admin",
         path: "/admin",
