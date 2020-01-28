@@ -1,5 +1,6 @@
 import React from 'react';
 import justGivingLogo from '../../../images/just_giving_logo.jpg';
+import payPalLogo from '../../../images/pp-logo.png';
 import {makeStyles} from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -9,7 +10,7 @@ import DonateButton from "../../common/DonateButton";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        minHeight: '95%',
+        minHeight: '90vh',
     },
     image: {
         backgroundImage: 'url(https://images.unsplash.com/photo-1517331156700-3c241d2b4d83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1048&q=80)',
@@ -38,7 +39,7 @@ const Donations = props => {
                     </Typography>
                 </Grid>
                 {/*Need to replace donate button with something better*/}
-                <PaymentMethod name="Paypal"logo={justGivingLogo} button={
+                <PaymentMethod name="Paypal" logo={payPalLogo} button={
                     <DonateButton
                         to="/donations"
                         size="large"
@@ -46,8 +47,8 @@ const Donations = props => {
                 }/>
                 <PaymentMethod name="JustGiving" logo={justGivingLogo} button={
                     <DonateButton
-                    to="/donations"
-                    size="large"
+                        to="/donations"
+                        size="large"
                     />
                 }/>
                 <Grid item xs={12}>

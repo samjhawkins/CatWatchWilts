@@ -7,11 +7,11 @@ import {Typography} from "@material-ui/core";
 const useStyles = makeStyles(theme => ({
     avatar: {
         margin: theme.spacing(6),
-        width: theme.spacing(150),
-        height: theme.spacing(40),
+        width: theme.spacing(100),
+        height: theme.spacing(25),
     },
     topMargin: {
-        paddingTop: theme.spacing(10),
+        paddingTop: theme.spacing(8),
     }
 }));
 
@@ -19,12 +19,7 @@ const PaymentMethod = ({name, button, logo}) => {
     const classes = useStyles();
     return (
         <React.Fragment>
-            <Grid item xs={12} className={classes.topMargin}>
-                <Typography component="h4" variant="h4">
-                    {name}
-                </Typography>
-            </Grid>
-            <Grid item container xs={12}>
+            <Grid item container xs={12}  className={classes.topMargin}>
                 <Grid item xs={12} sm={8} md={12} lg={9}>
                     <Avatar
                         alt={`${name} logo`}
