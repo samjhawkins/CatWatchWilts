@@ -11,6 +11,7 @@ import LinkedButton from "../links/LinkedButton";
 import MainMenu from "./MainMenu";
 import MediaQuery from "../wrappers/MediaQuery";
 import {makeStyles} from "@material-ui/styles";
+import DonateButton from "../DonateButton";
 
 const useStyles = makeStyles(theme => ({
     avatar: {
@@ -21,17 +22,6 @@ const useStyles = makeStyles(theme => ({
     container: {
         padding: theme.spacing(3),
     },
-    appBarItem: {
-        margin: theme.spacing(3),
-    },
-    donateButton: {
-        height: theme.spacing(30),
-        fontWeight: "bold",
-        backgroundColor: theme.color.white,
-        "&:hover": {
-            backgroundColor: theme.color.tertiary.main
-        }
-    }
 }));
 
 export const NavBar = props => {
@@ -53,12 +43,9 @@ export const NavBar = props => {
                             className={classes.avatar}
                         />
                     </UndecoratedLink>
-                    <LinkedButton
-                        className={`${classes.appBarItem} ${classes.donateButton}`}
+                    <DonateButton
                         to="/donations"
-                        text="Donate"
                         size="medium"
-                        variant="outlined"
                     />
                     <MediaQuery>
                         <MainMenu className={classes.appBarItem}/>
