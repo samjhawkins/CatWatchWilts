@@ -2,7 +2,6 @@ import React from 'react';
 import Avatar from "@material-ui/core/Avatar";
 import {makeStyles} from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
-import {Typography} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     avatar: {
