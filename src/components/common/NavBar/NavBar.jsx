@@ -7,11 +7,9 @@ import {
 import Grid from "@material-ui/core/Grid/index";
 import logo from "../../../images/logo.jpg";
 import UndecoratedLink from "../links/UndecoratedLink";
-import LinkedButton from "../links/LinkedButton";
 import MainMenu from "./MainMenu";
 import MediaQuery from "../wrappers/MediaQuery";
 import {makeStyles} from "@material-ui/styles";
-import DonateButton from "../DonateButton";
 
 const useStyles = makeStyles(theme => ({
     avatar: {
@@ -43,10 +41,6 @@ export const NavBar = props => {
                             className={classes.avatar}
                         />
                     </UndecoratedLink>
-                    <DonateButton
-                        to="/donations"
-                        size="medium"
-                    />
                     <MediaQuery>
                         <MainMenu className={classes.appBarItem}/>
                     </MediaQuery>

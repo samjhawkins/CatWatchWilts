@@ -4,9 +4,12 @@ import {CardActions, Card, CardActionArea, Typography, CardContent, CardMedia, B
 
 const useStyles = makeStyles(theme => ({
     card: {
-        maxWidth: 700,
-        padding: theme.spacing(4),
-        margin: theme.spacing(4)
+        minWidth: '200px',
+        maxWidth: '80%',
+        marginTop: theme.spacing(4),
+        marginBottom: theme.spacing(4),
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
 }));
 
@@ -18,7 +21,6 @@ const CatCard = (props) => {
                 <CardMedia
                     component="img"
                     alt={props.imageName}
-                    height="140"
                     image={props.image}
                     title={props.imageName}
                 />

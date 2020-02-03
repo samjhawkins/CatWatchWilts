@@ -1,26 +1,29 @@
+import catNap from '../images/cat_nap.jpg';
+import just from '../images/just_giving_logo.jpg';
+
 const catsMock = [
     {
         name: "Fluffy",
         age: "2",
-        image: "imageOfFluffy",
+        image: catNap,
         imageName: "imageOfFluffy",
         description: "descriptionOfFluffy",
     }, {
         name: "Strausse",
         age: "1",
-        image: "imageOfStrausse",
+        image: just,
         imageName: "imageOfStrausse",
         description: "descriptionOfStrausse",
     }, {
         name: "Jet",
         age: "1",
-        image: "imageOfJet",
+        image: catNap,
         imageName: "imageOfJet",
         description: "descriptionOfJet",
     }, {
         name: "Midnight",
         age: "2",
-        image: "imageOfMidnight",
+        image: catNap,
         imageName: "imageOfMidnight",
         description: "descriptionOfMidnight",
     }
