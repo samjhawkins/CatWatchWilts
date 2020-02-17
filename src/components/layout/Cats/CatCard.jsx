@@ -1,47 +1,53 @@
-import React from 'react';
-import {makeStyles} from "@material-ui/core";
-import {CardActions, Card, CardActionArea, Typography, CardContent, CardMedia, Button} from "@material-ui/core";
+import React, {useState} from 'react';
+import {Button, Card, CardActionArea, CardMedia, GridListTileBar, IconButton} from "@material-ui/core";
+import InfoIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
-    card: {
-        minWidth: '200px',
-        maxWidth: '80%',
-        marginTop: theme.spacing(4),
-        marginBottom: theme.spacing(4),
-        marginLeft: 'auto',
-        marginRight: 'auto',
-    },
-}));
+        icon: {
+            color: 'rgba(255, 255, 255, 0.54)',
+        },
+    }
+));
 
-const CatCard = (props) => {
+const CatCard = props => {
     const classes = useStyles();
+    const calculateDimensions = ({target}) => {
+        props.calculateDimensions(props.index, target);
+    };
+
     return (
-        <Card className={classes.card}>
-            <CardActionArea>
-                <CardMedia
-                    component="img"
-                    alt={props.imageName}
-                    image={props.image}
-                    title={props.imageName}
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {props.name}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {props.description}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                    Share
-                </Button>
-                <Button size="small" color="primary">
-                    Learn More
-                </Button>
-            </CardActions>
-        </Card>
+        <>
+            <Card>
+                <CardActionArea>
+                    <CardMedia
+                        onLoad={calculateDimensions}
+                        component="img"
+                        alt={props.imageName}
+                        image={props.image}
+                        title={props.imageName}
+                    />
+                </CardActionArea>
+            </Card>
+            <GridListTileBar
+                title={<span>{props.name} - {props.age} year{props.age === '1' || 's'} old</span>}
+                subtitle={
+                    <>
+                        <Button size="small" color="secondary">
+                            Share
+                        </Button>
+                        <Button size="small" color="secondary">
+                            Learn More
+                        </Button>
+                    </>
+                }
+                actionIcon={
+                    <IconButton aria-label={`info about ${props.name}`} className={classes.icon}>
+                        <InfoIcon/>
+                    </IconButton>
+                }
+            />
+        </>
     );
 };
 
