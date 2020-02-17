@@ -5,6 +5,9 @@ const https = require('https');
 const path = require('path');
 const fs = require('fs');
 
+require('dotenv').config();
+
+
 console.log('starting server');
 const app = express();
 
@@ -22,8 +25,8 @@ app.get('/**', function (req, res) {
 // console.log('Server listening on:', httpPort);
 
 const options = {
-   key: fs.readFileSync('/home/pi/certs/cwwServer.key'),
-   cert: fs.readFileSync('/home/pi/certs/cwwServer.cert')
+   key: fs.readFileSync(process.env.KEY_PATH),
+   cert: fs.readFileSync(process.env.CERT_PATH)
 };
 
 const httpsPort = 3335;
