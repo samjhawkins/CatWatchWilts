@@ -2,7 +2,6 @@ import PageNotFound from "../components/layout/PageNotFound";
 import Home from "../components/layout/Home/Home";
 import Cats from "../components/layout/Cats/Cats";
 import Donations from "../components/layout/Donations/Donations";
-import Contact from "../components/layout/Contact/Contact";
 import Login from "../components/layout/Login/Login";
 import Admin from "../components/layout/Admin/Admin";
 
@@ -24,12 +23,6 @@ export const pageList = [
         path: "/donations",
         exact: true,
         component: Donations,
-        color: "primary"
-    }, {
-        name: "Contact Us",
-        path: "/contact",
-        exact: true,
-        component: Contact,
         color: "primary"
     }
 ];

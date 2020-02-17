@@ -55,6 +55,14 @@ const Donations = props => {
                     <Typography>
                         At the very least, thank you for your time, and thank you so much for your support, it means the
                         world to us (and to our little furry wards!).
+
+                        You can contact us in the following ways:
+                        <ul>
+                            <li>email</li>
+                            <li>address</li>
+                            <li>socialmedia</li>
+                            <li>charityinfo</li>
+                        </ul>
                     </Typography>
                 </Grid>
             </Grid>
