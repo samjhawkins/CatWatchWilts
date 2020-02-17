@@ -29,7 +29,7 @@ const options = {
    cert: fs.readFileSync(process.env.CERT_PATH)
 };
 
-const httpsPort = 3335;
+const httpsPort = 443;
 const secureServer = https.createServer(options, app);
 secureServer.listen(httpsPort);
 console.log('Secure server listening on:', httpsPort);
