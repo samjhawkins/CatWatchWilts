@@ -17,7 +17,6 @@ const sortGrid = (arrayIn, direction, sum) => {
         if (sumOfAll === sum) {
             //found a match, so process
             indexes.forEach(currentIndex => {
-                console.log(allocatedIndexes.includes(currentIndex));
                 sortArray.push(arrayToSort[currentIndex]);
                 allocatedIndexes.push(currentIndex);
             });

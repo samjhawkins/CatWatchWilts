@@ -41,7 +41,6 @@ export class Cats extends Component {
         const allCatsDimensioned = !cats.find((elem) => !Object.keys(elem).includes(direction));
         if(allCatsDimensioned && !sorted){
             const sortedArray = sortGrid(cats, direction, columnWidth);
-            console.log('sortedArray output:', sortedArray);
             this.setState({cats: sortedArray, sorted: true});
         }
     }
