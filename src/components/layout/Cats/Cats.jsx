@@ -4,6 +4,10 @@ import isPopulatedArray from "../../../utils/isPopulatedArray";
 import {GridList, GridListTile, ListSubheader, Container} from "@material-ui/core";
 import {withStyles} from "@material-ui/styles";
 import CatCard from "./CatCard";
+import sortGrid from "../../../utils/sortGrid";
+
+const columnWidth = 4;
+const direction = 'cols';
 
 const styles = theme => ({
     root: {
@@ -22,7 +26,8 @@ export class Cats extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cats: []
+            cats: [],
+            sorted: false,
         };
         this.calculateDimensions = this.calculateDimensions.bind(this);
     }
@@ -31,12 +36,22 @@ export class Cats extends Component {
         this.setState({cats: catsMock})
     }
 
+    componentDidUpdate() {
+        const { cats, sorted } = this.state;                                   //element includes attribute
+        const allCatsDimensioned = !cats.find((elem) => !Object.keys(elem).includes(direction));
+        if(allCatsDimensioned && !sorted){
+            const sortedArray = sortGrid(cats, direction, columnWidth);
+            console.log('sortedArray output:', sortedArray);
+            this.setState({cats: sortedArray, sorted: true});
+        }
+    }
+
     calculateDimensions(index, img) {
         const height = img.offsetHeight; //cols
         const width = img.offsetWidth; //rows
 
-        console.log('ratiosHeight', Math.ceil(height / width));
-        console.log('ratiosWidth', Math.ceil(width / height));
+        // console.log('ratiosHeight', Math.ceil(height / width));
+        // console.log('ratiosWidth', Math.ceil(width / height));
 
         const cats = [...this.state.cats];
         cats[index].rows = Math.ceil(height / width);
@@ -51,7 +66,7 @@ export class Cats extends Component {
         return (
             <Container component="main" maxWidth="xl" className={classes.root}>
                 <GridList cellHeight={'auto'} className={classes.gridList} cols={4}>
-                    <GridListTile key="Subheader" cols={4} style={{height: 'auto'}}>
+                    <GridListTile key="Subheader" cols={columnWidth} style={{height: 'auto'}}>
                         <ListSubheader component="h2">Our current guests</ListSubheader>
                     </GridListTile>
                     {isPopulatedArray(cats) && cats.map((cat, index) => (
