@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button, Card, CardActionArea, CardMedia, GridListTileBar, IconButton} from "@material-ui/core";
 import InfoIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import {makeStyles} from "@material-ui/styles";
+import LinkedButton from "../../common/links/LinkedButton";
 
 const useStyles = makeStyles(theme => ({
         icon: {
@@ -36,9 +37,9 @@ const CatCard = props => {
                         <Button size="small" color="secondary">
                             Share
                         </Button>
-                        <Button size="small" color="secondary">
+                        <LinkedButton to="viewCat" size="small" color="secondary">
                             Learn More
-                        </Button>
+                        </LinkedButton>
                     </>
                 }
                 actionIcon={

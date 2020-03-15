@@ -4,6 +4,7 @@ import Cats from "../components/layout/Cats/Cats";
 import Donations from "../components/layout/Donations/Donations";
 import Login from "../components/layout/Login/Login";
 import Admin from "../components/layout/Admin/Admin";
+import ViewCat from "../components/layout/ViewCat/ViewCat";
 
 export const pageList = [
     {
@@ -29,6 +30,13 @@ export const pageList = [
 
 export const routesConfig = [
     ...pageList,
+    {
+        name: "ViewCat",
+        path: "/viewcat",
+        exact: true,
+        component: ViewCat,
+        color: "primary"
+    },
     {
         name: "Login",
         path: "/login",
