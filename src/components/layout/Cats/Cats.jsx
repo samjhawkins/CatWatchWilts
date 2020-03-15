@@ -37,7 +37,7 @@ export class Cats extends Component {
     }
 
     componentDidUpdate() {
-        const { cats, sorted } = this.state;                                   //element includes attribute
+        const { cats, sorted } = this.state;
         const allCatsDimensioned = !cats.find((elem) => !Object.keys(elem).includes(direction));
         if(allCatsDimensioned && !sorted){
             const sortedArray = sortGrid(cats, direction, columnWidth);
