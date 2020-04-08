@@ -7,19 +7,19 @@ class AuthProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: !!cookie.load('token')
-    }
+      isLoggedIn: !!cookie.load('token'),
+    };
   }
 
-  login = async credentials => {
-    //do a call here to get a token
-    const token = "MOCK_TOKEN_HERE";
+  login = async (credentials) => {
+    // do a call here to get a token
+    const token = 'MOCK_TOKEN_HERE';
     return cookie.save('token', token);
   };
 
   logout = () => {
     cookie.save('token', '');
-    this.setState({ isLoggedIn : false })
+    this.setState({ isLoggedIn: false });
   };
 
   render() {
@@ -39,11 +39,11 @@ class AuthProvider extends Component {
   }
 }
 
-export const withContext = Component => {
-  return props => {
+export const withContext = (Component) => {
+  return (props) => {
     return (
       <AuthContext.Consumer>
-        {globalState => {
+        {(globalState) => {
           return <Component {...globalState} {...props} />;
         }}
       </AuthContext.Consumer>

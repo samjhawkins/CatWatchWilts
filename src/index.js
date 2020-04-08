@@ -1,18 +1,17 @@
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
+import { CssBaseline } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/styles';
 import App from './App.jsx';
-import {CssBaseline} from '@material-ui/core';
-import {ThemeProvider} from '@material-ui/styles';
 import theme from './themes/theme';
-import {AuthProvider} from "./components/common/wrappers/AuthContext";
+import { AuthProvider } from './components/common/wrappers/AuthContext';
 
 render(
   <AuthProvider>
     <ThemeProvider theme={theme}>
-      <CssBaseline/>
-      <App/>
+      <CssBaseline />
+      <App />
     </ThemeProvider>
-  </AuthProvider>
-  ,
-  document.getElementById('app')
+  </AuthProvider>,
+  document.getElementById('app'),
 );
