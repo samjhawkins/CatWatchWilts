@@ -7,7 +7,10 @@
     "build": "webpack --mode production --config ./config/webpack.prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress",
     "build.dev": "webpack --mode development --config ./config/webpack.prod.config.js --env.PLATFORM=development --env.VERSION=stag --progress --hot --watch",
     "dev": "webpack-dev-server --mode development --config ./config/webpack.base.config.js --open --hot --history-api-fallback --env.PLATFORM=local --env.VERSION=stag",
-    "prod": "npm run build && node server"
+    "prod": "npm run build && node server",
+    "lint": "eslint src --fiz --ext js,jsx",
+    "test": "jest --testPathIgnorePatterns --watchAll",
+    "coverage": "jest --coverage --watchAll=false"
   },
   "repository": {
     "type": "git",
@@ -19,6 +22,18 @@
     "url": "https://github.com/samjhawkins/catWatchWiltshire/issues"
   },
   "homepage": "www.catwatchwiltshire.co.uk",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
@@ -81,5 +96,23 @@
     "extends": [
       "react-app"
     ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/index.js",
+      "!src/**/*.style.js"
+    ],
+    "setupFiles": [
+      "<rootDir>/jestSetup.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|svg)$": "<rootDir>/src/images/imageMock.js"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
   }
 }
