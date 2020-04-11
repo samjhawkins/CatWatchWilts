@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const NavBar = (props) => {
+const NavBar = () => {
   const classes = useStyles();
   return (
     <AppBar position="sticky">

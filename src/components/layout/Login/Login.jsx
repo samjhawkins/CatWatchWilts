@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = (props) => {
+const Login = () => {
   const classes = useStyles();
 
   return (
@@ -100,13 +100,13 @@ const Login = (props) => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="/" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  Don't have an account? Sign Up
+                <Link href="/" variant="body2">
+                  Don&apos;t have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>

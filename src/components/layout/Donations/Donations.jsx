@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Donations = (props) => {
+const Donations = () => {
   const classes = useStyles();
   return (
     <Grid item container component="main" xs={10} className={classes.root}>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Button,
   Card,
@@ -11,16 +12,23 @@ import InfoIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import { makeStyles } from '@material-ui/styles';
 import LinkedButton from '../../common/links/LinkedButton';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
 }));
 
-const CatCard = (props) => {
-  const classes = useStyles();
-  const calculateDimensions = ({ target }) => {
-    props.calculateDimensions(props.index, target);
+const CatCard = ({
+  calculateDimensions,
+  index,
+  imageName,
+  image,
+  name,
+  age,
+}) => {
+  const { icon } = useStyles();
+  const cardCalculateDimensions = ({ target }) => {
+    calculateDimensions(index, target);
   };
 
   return (
@@ -28,18 +36,18 @@ const CatCard = (props) => {
       <Card>
         <CardActionArea>
           <CardMedia
-            onLoad={calculateDimensions}
+            onLoad={cardCalculateDimensions}
             component="img"
-            alt={props.imageName}
-            image={props.image}
-            title={props.imageName}
+            alt={imageName}
+            image={image}
+            title={imageName}
           />
         </CardActionArea>
       </Card>
       <GridListTileBar
         title={
           <span>
-            {props.name} - {props.age} year{props.age === '1' || 's'} old
+            {name} - {age} year{age === '1' || 's'} old
           </span>
         }
         subtitle={
@@ -53,16 +61,22 @@ const CatCard = (props) => {
           </>
         }
         actionIcon={
-          <IconButton
-            aria-label={`info about ${props.name}`}
-            className={classes.icon}
-          >
+          <IconButton aria-label={`info about ${name}`} className={icon}>
             <InfoIcon />
           </IconButton>
         }
       />
     </>
   );
+};
+
+CatCard.propTypes = {
+  calculateDimensions: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  imageName: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  age: PropTypes.string.isRequired,
 };
 
 export default CatCard;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useMediaQuery } from '@material-ui/core';
 
 const MediaQuery = ({ children }) => {
@@ -17,6 +18,10 @@ const MediaQuery = ({ children }) => {
   };
 
   return <>{renderChildren}</>;
+};
+
+MediaQuery.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default MediaQuery;

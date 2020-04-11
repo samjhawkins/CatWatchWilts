@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Home = () => {
+const Home = () => {
   const classes = useStyles();
   return (
     <Container component="main" maxWidth="xl" className={classes.root}>

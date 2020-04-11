@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import cookie from 'react-cookies';
 
 const AuthContext = React.createContext();
@@ -11,7 +12,7 @@ class AuthProvider extends Component {
     };
   }
 
-  login = async (credentials) => {
+  login = async () => {
     // do a call here to get a token
     const token = 'MOCK_TOKEN_HERE';
     return cookie.save('token', token);
@@ -39,12 +40,16 @@ class AuthProvider extends Component {
   }
 }
 
-export const withContext = (Component) => {
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export const withContext = (ContextComponent) => {
   return (props) => {
     return (
       <AuthContext.Consumer>
         {(globalState) => {
-          return <Component {...globalState} {...props} />;
+          return <ContextComponent {...globalState} {...props} />;
         }}
       </AuthContext.Consumer>
     );

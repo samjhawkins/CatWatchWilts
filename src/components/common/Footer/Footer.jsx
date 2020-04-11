@@ -3,7 +3,7 @@ import { AppBar, Grid, Typography } from '@material-ui/core';
 import { CopyrightRounded } from '@material-ui/icons';
 import SocialAvatarGroup from '../SocialAvatarGroup';
 
-const Footer = (props) => (
+const Footer = () => (
   <AppBar position="relative" color="primary">
     <Grid item container alignItems="center" justify="center">
       <div>
@@ -31,7 +31,9 @@ const Footer = (props) => (
     <Grid item container alignItems="center" justify="center">
       <div>
         <hr />
-        <Typography component="p">// TODO: CHARITY DETAILS GO HERE</Typography>
+        <Typography component="p">
+          {/* TODO: CHARITY DETAILS GO HERE */}
+        </Typography>
       </div>
     </Grid>
     <Grid item container alignItems="center" justify="center">

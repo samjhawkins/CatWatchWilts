@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
@@ -33,6 +34,12 @@ const PaymentMethod = ({ name, button, logo }) => {
       </Grid>
     </>
   );
+};
+
+PaymentMethod.propTypes = {
+  name: PropTypes.string.isRequired,
+  button: PropTypes.string.isRequired,
+  logo: PropTypes.string.isRequired,
 };
 
 export default PaymentMethod;

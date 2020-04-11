@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core/index';
 import UndecoratedLink from './UndecoratedLink';
 
@@ -8,7 +9,7 @@ const LinkedButton = ({ to, text, size, colour, className, variant }) => {
       <Button
         size={size}
         variant={variant}
-        color={colour || undefined}
+        color={colour}
         className={className}
       >
         {text}
@@ -16,8 +17,21 @@ const LinkedButton = ({ to, text, size, colour, className, variant }) => {
     </UndecoratedLink>
   );
 };
+
+LinkedButton.propTypes = {
+  to: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  size: PropTypes.string,
+  colour: PropTypes.string,
+  className: PropTypes.string,
+  variant: PropTypes.string,
+};
+
 LinkedButton.defaultProps = {
   variant: 'contained',
+  size: 'small',
+  colour: undefined,
+  className: '',
 };
 
 export default LinkedButton;

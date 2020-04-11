@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   GridList,
   GridListTile,
@@ -27,7 +28,7 @@ const styles = (theme) => ({
   },
 });
 
-export class Cats extends Component {
+class Cats extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,6 +49,7 @@ export class Cats extends Component {
     );
     if (allCatsDimensioned && !sorted) {
       const sortedArray = sortGrid(cats, direction, columnWidth);
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ cats: sortedArray, sorted: true });
     }
   }
@@ -59,11 +61,12 @@ export class Cats extends Component {
     // console.log('ratiosHeight', Math.ceil(height / width));
     // console.log('ratiosWidth', Math.ceil(width / height));
 
-    const cats = [...this.state.cats];
-    cats[index].rows = Math.ceil(height / width);
-    cats[index].cols = Math.ceil(width / height);
+    const { cats } = this.state;
+    const newCats = [...cats];
+    newCats[index].rows = Math.ceil(height / width);
+    newCats[index].cols = Math.ceil(width / height);
 
-    this.setState(cats);
+    this.setState({ cats: newCats });
   }
 
   render() {
@@ -82,7 +85,7 @@ export class Cats extends Component {
           {isPopulatedArray(cats) &&
             cats.map((cat, index) => (
               <GridListTile
-                key={`${index}-${cat.name}`}
+                key={`${cat.name}-${cat.age}-${cat.image}`}
                 cols={cat.cols || 1}
                 rows={cat.rows || 1}
               >
@@ -98,5 +101,12 @@ export class Cats extends Component {
     );
   }
 }
+
+Cats.propTypes = {
+  classes: PropTypes.shape({
+    root: PropTypes.shape.isRequired,
+    gridList: PropTypes.shape.isRequired,
+  }).isRequired,
+};
 
 export default withStyles(styles)(Cats);

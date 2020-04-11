@@ -4,7 +4,6 @@ import { withContext } from './wrappers/AuthContext';
 
 class PrivateRoute extends Route {
   render() {
-    console.log('loggedIn', this.props.isLoggedIn);
     if (this.props.isLoggedIn) {
       return super.render();
     }

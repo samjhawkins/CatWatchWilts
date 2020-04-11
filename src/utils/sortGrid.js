@@ -1,5 +1,3 @@
-import { red } from '@material-ui/core/colors';
-
 const sortGrid = (arrayIn, direction, sum) => {
   const arrayToSort = [...arrayIn];
   const sortArray = [];
@@ -8,7 +6,11 @@ const sortGrid = (arrayIn, direction, sum) => {
   const checkElement = (...indexes) => {
     let sumOfAll = 0;
     // sum all rows, but if already allocated then exit checkElement
-    for (let reducerIndex = 0; reducerIndex < indexes.length; reducerIndex++) {
+    for (
+      let reducerIndex = 0;
+      reducerIndex < indexes.length;
+      reducerIndex += 1
+    ) {
       if (allocatedIndexes.includes(indexes[reducerIndex])) {
         return;
       }
@@ -27,7 +29,7 @@ const sortGrid = (arrayIn, direction, sum) => {
   const deepestSort = (depth, ...indexes) => {
     const newDepth = depth + 1;
     if (newDepth <= sum) {
-      for (let i = 0; i < arrayToSort.length; i++) {
+      for (let i = 0; i < arrayToSort.length; i += 1) {
         if (!(allocatedIndexes.includes(i) || indexes.includes(i))) {
           if (newDepth < sum) {
             deepestSort(newDepth, ...indexes, i);
@@ -41,7 +43,7 @@ const sortGrid = (arrayIn, direction, sum) => {
   deepestSort(0);
 
   // Adds any non matches at this point before return
-  for (let checkIndex = 0; checkIndex < arrayToSort.length; checkIndex++) {
+  for (let checkIndex = 0; checkIndex < arrayToSort.length; checkIndex += 1) {
     if (!allocatedIndexes.includes(checkIndex)) {
       sortArray.push(arrayToSort[checkIndex]);
     }

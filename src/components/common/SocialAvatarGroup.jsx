@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SocialAvatarGroup = (props) => {
+const SocialAvatarGroup = () => {
   const classes = useStyles();
   return (
     <>

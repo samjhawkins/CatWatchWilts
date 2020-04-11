@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from '../axiosInstance.js';
+import PropTypes from 'prop-types';
+import axios from '../axiosInstance';
 
 const CatContext = React.createContext();
 
@@ -17,7 +18,7 @@ class CatProvider extends Component {
     };
   }
 
-  loadCat(id) {
+  loadCat = (id) => {
     return axios
       .get('OURBACKENDPOINT/cat', {
         params: {
@@ -26,11 +27,12 @@ class CatProvider extends Component {
       })
       .then((response) => response.data.data)
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.log(error);
       });
-  }
+  };
 
-  updateCat() {
+  updateCat = () => {
     return axios
       .put('OURBACKENDPOINT/cat', {
         params: {
@@ -39,9 +41,10 @@ class CatProvider extends Component {
       })
       .then((response) => response.data.data)
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.log(error);
       });
-  }
+  };
 
   render() {
     const { children } = this.props;
@@ -59,12 +62,16 @@ class CatProvider extends Component {
   }
 }
 
-export const withContext = (Component) => {
+CatProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export const withContext = (ContextComponent) => {
   return (props) => {
     return (
       <CatContext.Consumer>
         {(globalState) => {
-          return <Component {...globalState} {...props} />;
+          return <ContextComponent {...globalState} {...props} />;
         }}
       </CatContext.Consumer>
     );
