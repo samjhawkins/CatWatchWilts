@@ -5,10 +5,11 @@ import { routesConfig } from './routes.config';
 
 const renderRoutes = () => {
   return routesConfig.map((route) => {
+    const key = `${route.name}-${route.path}`;
     if (route.private) {
-      return <PrivateRoute key={route.name} {...route} />;
+      return <PrivateRoute key={key} {...route} />;
     }
-    return <Route key={route.name} {...route} />;
+    return <Route key={key} {...route} />;
   });
 };
 

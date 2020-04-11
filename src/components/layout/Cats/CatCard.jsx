@@ -55,9 +55,12 @@ const CatCard = ({
             <Button size="small" color="secondary">
               Share
             </Button>
-            <LinkedButton to="viewCat" size="small" color="secondary">
-              Learn More
-            </LinkedButton>
+            <LinkedButton
+              to="viewCat"
+              size="small"
+              color="secondary"
+              text="Learn More"
+            />
           </>
         }
         actionIcon={
@@ -71,7 +74,7 @@ const CatCard = ({
 };
 
 CatCard.propTypes = {
-  calculateDimensions: PropTypes.string.isRequired,
+  calculateDimensions: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   imageName: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,

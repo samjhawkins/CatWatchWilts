@@ -38,7 +38,7 @@ const PaymentMethod = ({ name, button, logo }) => {
 
 PaymentMethod.propTypes = {
   name: PropTypes.string.isRequired,
-  button: PropTypes.string.isRequired,
+  button: PropTypes.node.isRequired,
   logo: PropTypes.string.isRequired,
 };
 
