@@ -3,9 +3,17 @@ import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core/index';
 import UndecoratedLink from './UndecoratedLink';
 
-const LinkedButton = ({ to, text, size, colour, className, variant }) => {
+const LinkedButton = ({
+  to,
+  text,
+  size,
+  colour,
+  className,
+  variant,
+  ...rest
+}) => {
   return (
-    <UndecoratedLink to={to}>
+    <UndecoratedLink to={to} {...rest}>
       <Button
         size={size}
         variant={variant}

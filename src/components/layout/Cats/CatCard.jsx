@@ -11,6 +11,7 @@ import {
 import InfoIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import { makeStyles } from '@material-ui/styles';
 import LinkedButton from '../../common/links/LinkedButton';
+import { withCatContext } from '../../common/wrappers/CatContext';
 
 const useStyles = makeStyles(() => ({
   icon: {
@@ -19,7 +20,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 const CatCard = ({
+  setSelectedCat,
   calculateDimensions,
+  id,
   index,
   imageName,
   image,
@@ -29,6 +32,10 @@ const CatCard = ({
   const { icon } = useStyles();
   const cardCalculateDimensions = ({ target }) => {
     calculateDimensions(index, target);
+  };
+
+  const setCat = () => {
+    setSelectedCat(id);
   };
 
   return (
@@ -56,6 +63,7 @@ const CatCard = ({
               Share
             </Button>
             <LinkedButton
+              onClick={setCat}
               to="viewCat"
               size="small"
               color="secondary"
@@ -74,6 +82,7 @@ const CatCard = ({
 };
 
 CatCard.propTypes = {
+  id: PropTypes.number.isRequired,
   calculateDimensions: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   imageName: PropTypes.string.isRequired,
@@ -82,4 +91,4 @@ CatCard.propTypes = {
   age: PropTypes.string.isRequired,
 };
 
-export default CatCard;
+export default withCatContext(CatCard);

@@ -7,10 +7,9 @@ import {
   Container,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
-import catsMock from '../../../mocks/catsMock';
 import isPopulatedArray from '../../../utils/isPopulatedArray';
 import CatCard from './CatCard';
-import sortGrid from '../../../utils/sortGrid';
+import { withCatContext } from '../../common/wrappers/CatContext';
 
 const columnWidth = 4;
 const direction = 'cols';
@@ -29,49 +28,23 @@ const styles = (theme) => ({
 });
 
 class Cats extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cats: [],
-      sorted: false,
-    };
-    this.calculateDimensions = this.calculateDimensions.bind(this);
-  }
-
   componentDidMount() {
-    this.setState({ cats: catsMock });
+    const { loadCats } = this.props;
+    loadCats();
   }
 
   componentDidUpdate() {
-    const { cats, sorted } = this.state;
+    const { cats, sorted, sortCatsForGrid } = this.props;
     const allCatsDimensioned = !cats.find(
       (elem) => !Object.keys(elem).includes(direction),
     );
     if (allCatsDimensioned && !sorted) {
-      const sortedArray = sortGrid(cats, direction, columnWidth);
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ cats: sortedArray, sorted: true });
+      sortCatsForGrid(direction, columnWidth);
     }
   }
 
-  calculateDimensions(index, img) {
-    const height = img.offsetHeight; // cols
-    const width = img.offsetWidth; // rows
-
-    // console.log('ratiosHeight', Math.ceil(height / width));
-    // console.log('ratiosWidth', Math.ceil(width / height));
-
-    const { cats } = this.state;
-    const newCats = [...cats];
-    newCats[index].rows = Math.ceil(height / width);
-    newCats[index].cols = Math.ceil(width / height);
-
-    this.setState({ cats: newCats });
-  }
-
   render() {
-    const { classes } = this.props;
-    const { cats } = this.state;
+    const { classes, cats } = this.props;
     return (
       <Container component="main" maxWidth="xl" className={classes.root}>
         <GridList cellHeight="auto" className={classes.gridList} cols={4}>
@@ -85,15 +58,11 @@ class Cats extends Component {
           {isPopulatedArray(cats) &&
             cats.map((cat, index) => (
               <GridListTile
-                key={`${cat.name}-${cat.age}-${cat.image}`}
+                key={`${cat.id}`}
                 cols={cat.cols || 1}
                 rows={cat.rows || 1}
               >
-                <CatCard
-                  calculateDimensions={this.calculateDimensions}
-                  index={index}
-                  {...cat}
-                />
+                <CatCard index={index} {...cat} />
               </GridListTile>
             ))}
         </GridList>
@@ -103,10 +72,18 @@ class Cats extends Component {
 }
 
 Cats.propTypes = {
+  cats: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
+  sorted: PropTypes.bool.isRequired,
   classes: PropTypes.shape({
     root: PropTypes.shape.isRequired,
     gridList: PropTypes.shape.isRequired,
   }).isRequired,
+  loadCats: PropTypes.func.isRequired,
+  sortCatsForGrid: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Cats);
+export default withCatContext(withStyles(styles)(Cats));

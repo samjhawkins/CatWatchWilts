@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -11,6 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
+import { withCatContext } from '../../common/wrappers/CatContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,8 +20,7 @@ const useStyles = makeStyles((theme) => ({
     height: '94vh',
   },
   image: {
-    backgroundImage:
-      'url(https://images.unsplash.com/photo-1415369629372-26f2fe60c467?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80)',
+    backgroundImage: (props) => `url(${props.selectedCat.image})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'dark'
@@ -35,10 +35,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -48,17 +44,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ViewCat = () => {
-  const classes = useStyles();
+const ViewCat = ({ selected, cats }) => {
+  const selectedCat = cats.find((cat) => cat.id === selected) || {};
+  const classes = useStyles({ selectedCat });
 
   return (
     <Grid item container component="main" xs={10} className={classes.root}>
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item sm={12} md={7} className={classes.image} />
+      <Grid item sm={12} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
@@ -118,4 +112,13 @@ const ViewCat = () => {
   );
 };
 
-export default ViewCat;
+ViewCat.propTypes = {
+  selected: PropTypes.number.isRequired,
+  cats: PropTypes.arrayOf(
+    PropTypes.shape({
+      image: PropTypes.string.isRequired,
+    }),
+  ),
+};
+
+export default withCatContext(ViewCat);
