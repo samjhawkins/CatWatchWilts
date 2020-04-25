@@ -16,14 +16,19 @@ class CatProvider extends Component {
     };
   }
 
+  componentDidMount = () => {
+    // get from session storage
+  };
+
   setSelectedCat = (id) => {
     const { state } = this;
+    // set in session storage
     this.setState({ ...state, selected: id });
   };
 
   loadCats = () => {
     const { state } = this;
-    this.setState({ ...state, cats: catsMock });
+    this.setState({ ...state, cats: catsMock, selected: 0, sorted: false });
   };
 
   updateCat = () => {

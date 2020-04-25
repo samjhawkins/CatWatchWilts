@@ -82,6 +82,7 @@ const CatCard = ({
 };
 
 CatCard.propTypes = {
+  setSelectedCat: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   calculateDimensions: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
