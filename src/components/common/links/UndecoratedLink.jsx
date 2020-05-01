@@ -1,22 +1,40 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import {makeStyles} from "@material-ui/styles/index";
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/styles/index';
 
-const useStyles = makeStyles(theme => ({
-        link: {
-            textDecoration: "none",
-        }
-    }
-));
+const useStyles = makeStyles(() => ({
+  link: {
+    textDecoration: 'none',
+  },
+}));
 
-export const UndecoratedLink = ({to, href, className, children}) => {
-    const classes = useStyles();
-    return (
-        <Link to={to} href={href} className={`${classes.link} ${className}`}>
-            {children}
-        </Link>
-    )
+const UndecoratedLink = ({ to, href, className, children, onClick }) => {
+  const classes = useStyles();
+  return (
+    <Link
+      to={to}
+      href={href}
+      className={`${classes.link} ${className}`}
+      onClick={onClick}
+    >
+      {children}
+    </Link>
+  );
+};
 
+UndecoratedLink.propTypes = {
+  to: PropTypes.string.isRequired,
+  href: PropTypes.string,
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
+};
+
+UndecoratedLink.defaultProps = {
+  href: undefined,
+  className: '',
+  onClick: () => {},
 };
 
 export default UndecoratedLink;

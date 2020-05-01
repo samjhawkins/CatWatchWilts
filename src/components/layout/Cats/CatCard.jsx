@@ -1,54 +1,95 @@
-import React, {useState} from 'react';
-import {Button, Card, CardActionArea, CardMedia, GridListTileBar, IconButton} from "@material-ui/core";
-import InfoIcon from "@material-ui/core/SvgIcon/SvgIcon";
-import {makeStyles} from "@material-ui/styles";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardMedia,
+  GridListTileBar,
+  IconButton,
+} from '@material-ui/core';
+import InfoIcon from '@material-ui/core/SvgIcon/SvgIcon';
+import { makeStyles } from '@material-ui/styles';
+import LinkedButton from '../../common/links/LinkedButton';
+import { withCatContext } from '../../common/wrappers/CatContext';
 
-const useStyles = makeStyles(theme => ({
-        icon: {
-            color: 'rgba(255, 255, 255, 0.54)',
-        },
-    }
-));
+const useStyles = makeStyles(() => ({
+  icon: {
+    color: 'rgba(255, 255, 255, 0.54)',
+  },
+}));
 
-const CatCard = props => {
-    const classes = useStyles();
-    const calculateDimensions = ({target}) => {
-        props.calculateDimensions(props.index, target);
-    };
+const CatCard = ({
+  setSelectedCat,
+  calculateDimensions,
+  id,
+  index,
+  imageName,
+  image,
+  name,
+  age,
+}) => {
+  const { icon } = useStyles();
+  const cardCalculateDimensions = ({ target }) => {
+    calculateDimensions(index, target);
+  };
 
-    return (
-        <>
-            <Card>
-                <CardActionArea>
-                    <CardMedia
-                        onLoad={calculateDimensions}
-                        component="img"
-                        alt={props.imageName}
-                        image={props.image}
-                        title={props.imageName}
-                    />
-                </CardActionArea>
-            </Card>
-            <GridListTileBar
-                title={<span>{props.name} - {props.age} year{props.age === '1' || 's'} old</span>}
-                subtitle={
-                    <>
-                        <Button size="small" color="secondary">
-                            Share
-                        </Button>
-                        <Button size="small" color="secondary">
-                            Learn More
-                        </Button>
-                    </>
-                }
-                actionIcon={
-                    <IconButton aria-label={`info about ${props.name}`} className={classes.icon}>
-                        <InfoIcon/>
-                    </IconButton>
-                }
+  const setCat = () => {
+    setSelectedCat(id);
+  };
+
+  return (
+    <>
+      <Card>
+        <CardActionArea>
+          <CardMedia
+            onLoad={cardCalculateDimensions}
+            component="img"
+            alt={imageName}
+            image={image}
+            title={imageName}
+          />
+        </CardActionArea>
+      </Card>
+      <GridListTileBar
+        title={
+          <span>
+            {name} - {age} year{age === '1' || 's'} old
+          </span>
+        }
+        subtitle={
+          <>
+            <Button size="small" color="secondary">
+              Share
+            </Button>
+            <LinkedButton
+              onClick={setCat}
+              to="viewCat"
+              size="small"
+              color="secondary"
+              text="Learn More"
             />
-        </>
-    );
+          </>
+        }
+        actionIcon={
+          <IconButton aria-label={`info about ${name}`} className={icon}>
+            <InfoIcon />
+          </IconButton>
+        }
+      />
+    </>
+  );
 };
 
-export default CatCard;
+CatCard.propTypes = {
+  setSelectedCat: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  calculateDimensions: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  imageName: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  age: PropTypes.string.isRequired,
+};
+
+export default withCatContext(CatCard);
