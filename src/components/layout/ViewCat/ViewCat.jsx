@@ -5,8 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import { withCatContext } from '../../common/wrappers/CatContext';
+import CatForm from '../../common/CatForm/CatForm';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ViewCat = ({ selected, cats }) => {
-  const selectedCat = cats.find((cat) => cat.id === selected) || {};
+const ViewCat = ({ selectedCat }) => {
+  console.log('selectedViewCat', selectedCat);
   const classes = useStyles({ selectedCat });
 
   return (
@@ -51,30 +51,7 @@ const ViewCat = ({ selected, cats }) => {
           <Typography component="h1" variant="h5">
             {selectedCat.name}
           </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-          </form>
+          <CatForm mode="view" cat={selectedCat} withInitialDisplay />
         </div>
       </Grid>
     </Grid>
@@ -82,12 +59,10 @@ const ViewCat = ({ selected, cats }) => {
 };
 
 ViewCat.propTypes = {
-  selected: PropTypes.number.isRequired,
-  cats: PropTypes.arrayOf(
-    PropTypes.shape({
-      image: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  selectedCat: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withCatContext(ViewCat);
