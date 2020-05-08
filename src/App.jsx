@@ -6,15 +6,17 @@ import NavBar from './components/common/NavBar/NavBar';
 import Footer from './components/common/Footer/Footer';
 
 const App = () => (
-  <Router>
-    <Grid container direction="column" justify="center" alignItems="center">
-      <NavBar />
-      <Grid item container xs={12} justify="center">
-        <Switch>{renderRoutes()}</Switch>
-        <Footer />
+  <React.Suspense fallback={() => <span>Loading...</span>}>
+    <Router>
+      <Grid container direction="column" justify="center" alignItems="center">
+        <NavBar />
+        <Grid item container xs={12} justify="center">
+          <Switch>{renderRoutes()}</Switch>
+          <Footer />
+        </Grid>
       </Grid>
-    </Grid>
-  </Router>
+    </Router>
+  </React.Suspense>
 );
 
 export default App;
