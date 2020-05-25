@@ -8,10 +8,11 @@ const dbNode = require('./db');
 require('dotenv').config();
 
 console.log('starting server');
-const app = dbNode(express());
+const app = express();
 
 app.use('/', express.static(path.join(__dirname, '../dist')));
 app.use(bodyParser.json({ type: '*/*' }));
+app.use('/db', dbNode);
 
 app.get('/**', function (req, res) {
   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
