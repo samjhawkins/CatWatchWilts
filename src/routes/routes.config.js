@@ -1,10 +1,18 @@
-import PageNotFound from '../components/layout/PageNotFound';
-import Home from '../components/layout/Home/Home';
-import Cats from '../components/layout/Cats/Cats';
-import Donations from '../components/layout/Donations/Donations';
-import Login from '../components/layout/Login/Login';
-import Admin from '../components/layout/Admin/Admin';
-import ViewCat from '../components/layout/ViewCat/ViewCat';
+import React from 'react';
+
+const PageNotFound = React.lazy(() =>
+  import('../components/layout/PageNotFound'),
+);
+const Home = React.lazy(() => import('../components/layout/Home/Home'));
+const Cats = React.lazy(() => import('../components/layout/Cats/Cats'));
+const Donations = React.lazy(() =>
+  import('../components/layout/Donations/Donations'),
+);
+const Login = React.lazy(() => import('../components/layout/Login/Login'));
+const Admin = React.lazy(() => import('../components/layout/Admin/Admin'));
+const ViewCat = React.lazy(() =>
+  import('../components/layout/ViewCat/ViewCat'),
+);
 
 export const pageList = [
   {

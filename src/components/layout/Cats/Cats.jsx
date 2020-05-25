@@ -28,11 +28,6 @@ const styles = (theme) => ({
 });
 
 class Cats extends Component {
-  componentDidMount() {
-    const { loadCats } = this.props;
-    loadCats();
-  }
-
   componentDidUpdate() {
     const { cats, sorted, sortCatsForGrid } = this.props;
     const allCatsDimensioned = !cats.find(

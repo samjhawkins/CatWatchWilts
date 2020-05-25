@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import axios from '../axiosInstance';
 import catsMock from '../../../mocks/catsMock';
 import sortGrid from '../../../utils/sortGrid';
+import isPopulatedArray from '../../../utils/isPopulatedArray';
+import {
+  getSessionStorageItem,
+  setSessionStorageItem,
+} from '../../../utils/sessionStorage';
 
 const CatContext = React.createContext();
 
@@ -10,25 +15,34 @@ class CatProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: 0,
+      selectedCat: {},
       sorted: false,
       cats: catsMock,
     };
   }
 
   componentDidMount = () => {
-    // get from session storage
+    const { state } = this;
+    const selectedCat = getSessionStorageItem('selectedCat');
+    this.setState({
+      ...state,
+      selectedCat,
+    });
   };
 
   setSelectedCat = (id) => {
-    const { state } = this;
-    // set in session storage
-    this.setState({ ...state, selected: id });
+    const { cats } = this.state;
+    const prevState = this.state;
+    const selectedCat =
+      (isPopulatedArray(cats) && cats.find((cat) => cat.id === id)) || {};
+    setSessionStorageItem('selectedCat', selectedCat);
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    this.setState({ ...prevState, selectedCat });
   };
 
   loadCats = () => {
     const { state } = this;
-    this.setState({ ...state, cats: catsMock, selected: 0, sorted: false });
+    this.setState({ ...state });
   };
 
   updateCat = () => {

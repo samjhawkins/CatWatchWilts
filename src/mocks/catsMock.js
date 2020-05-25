@@ -1,4 +1,3 @@
-import catNap from '../images/cat_nap.jpg';
 import just from '../images/just_giving_logo.jpg';
 import justThin from '../images/just_giving_logo_thin.jpg';
 
@@ -7,7 +6,7 @@ const catsMock = [
     id: 165272,
     name: 'Fluffy',
     age: '2',
-    image: catNap,
+    image: 'https://res.cloudinary.com/catwatchwilts/image/upload/v1580155244/sample.jpg',
     imageName: 'imageOfFluffy',
     description: 'descriptionOfFluffy',
   },
@@ -40,7 +39,7 @@ const catsMock = [
     id: 590171,
     name: 'Fluffy',
     age: '21',
-    image: catNap,
+    image: 'https://res.cloudinary.com/catwatchwilts/image/upload/v1580155244/sample.jpg',
     imageName: 'imageOfFluffy',
     description: 'descriptionOfFluffy',
   },
@@ -48,7 +47,7 @@ const catsMock = [
     id: 699995,
     name: 'Fluffy',
     age: '23',
-    image: catNap,
+    image: 'https://res.cloudinary.com/catwatchwilts/image/upload/v1580155244/sample.jpg',
     imageName: 'imageOfFluffy',
     description: 'descriptionOfFluffy',
   },
@@ -56,7 +55,7 @@ const catsMock = [
     id: 749382,
     name: 'Fluffy',
     age: '22',
-    image: catNap,
+    image: 'https://res.cloudinary.com/catwatchwilts/image/upload/v1580155244/sample.jpg',
     imageName: 'imageOfFluffy',
     description: 'descriptionOfFluffy',
   },
@@ -64,7 +63,7 @@ const catsMock = [
     id: 863492,
     name: 'Fluffy',
     age: '29',
-    image: catNap,
+    image: 'https://res.cloudinary.com/catwatchwilts/image/upload/v1580155244/sample.jpg',
     imageName: 'imageOfFluffy',
     description: 'descriptionOfFluffy',
   },
@@ -80,7 +79,7 @@ const catsMock = [
     id: 107235,
     name: 'Fluffy',
     age: '12',
-    image: catNap,
+    image: 'https://res.cloudinary.com/catwatchwilts/image/upload/v1580155244/sample.jpg',
     imageName: 'imageOfFluffy',
     description: 'descriptionOfFluffy',
   },
