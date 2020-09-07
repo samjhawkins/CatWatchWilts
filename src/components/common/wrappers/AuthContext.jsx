@@ -23,7 +23,7 @@ class AuthProvider extends Component {
     const token = new URLSearchParams(window.location.search).get('code');
 
     const config = {
-      header: {
+      headers: {
         'Accept-Encoding': 'gzip, deflate',
         Authorization: process.env.BASE64_SECRET,
         'Content-Type': 'application/x-www-form-urlencoded',
