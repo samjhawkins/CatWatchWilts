@@ -11,10 +11,9 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const APP_DIR = path.resolve(__dirname, '../src');
 
-module.exports = (env) => {
-  const { PLATFORM, VERSION } = env;
+module.exports = () => {
   return merge([
-    base(env),
+    base(),
     {
       optimization: {
         usedExports: true,

@@ -26,9 +26,11 @@ class AuthProvider extends Component {
       headers: {
         'Accept-Encoding': 'gzip, deflate',
         Authorization: process.env.BASE64_SECRET,
-        'Content-Type': 'application/x-www-form-urlencoded',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       },
     };
+    logger('process.env', process.env);
 
     axios
       .post(
@@ -45,7 +47,7 @@ class AuthProvider extends Component {
         logger('data', data);
         cookie.save('token', data);
       })
-      .error((e) => {
+      .catch((e) => {
         logger('Error translating:', e);
       });
   };

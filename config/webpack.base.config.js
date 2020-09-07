@@ -6,14 +6,22 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
+const dotenv = require('dotenv');
 
 const APP_DIR = path.resolve(__dirname, '../src');
 
-module.exports = (env) => {
-  const { PLATFORM, VERSION } = env;
+module.exports = () => {
+  // const { PLATFORM, VERSION, CLIENT_ID, BASE64_SECRET } = env;
+  const env = dotenv.config().parsed;
+
+  const envKeys = Object.keys(env).reduce((prev, next)=>{
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+  });
+
   return {
-    mode: PLATFORM,
-    entry: APP_DIR,
+    mode: env.PLATFORM,
+    entry: env.APP_DIR,
     module: {
       rules: [
         {
@@ -26,7 +34,7 @@ module.exports = (env) => {
         {
           test: /\.(scss|css)$/,
           use: [
-            PLATFORM === 'production'
+            env.PLATFORM === 'production'
               ? MiniCssExtractPlugin.loader
               : 'style-loader',
             {
@@ -77,10 +85,7 @@ module.exports = (env) => {
         template: './src/html/index.html',
         filename: './index.html',
       }),
-      new webpack.DefinePlugin({
-        'process.env.VERSION': JSON.stringify(VERSION),
-        'process.env.PLATFORM': JSON.stringify(PLATFORM),
-      }),
+      new webpack.DefinePlugin(envKeys),
       new Visualizer({ filename: './visualizer.html' }),
     ],
     output: {
