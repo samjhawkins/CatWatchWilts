@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cookie from 'react-cookies';
+import axios from '../axiosInstance';
+import logger from '../../../utils/logger';
 
 const AuthContext = React.createContext();
 
@@ -12,10 +14,37 @@ class AuthProvider extends Component {
     };
   }
 
+  componentDidMount() {
+    this.login();
+  }
+
   login = async () => {
     // do a call here to get a token
-    const token = 'MOCK_TOKEN_HERE';
-    return cookie.save('token', token);
+    const token = new URLSearchParams(window.location.search).get('code');
+
+    const config = {
+      header: {
+        'Accept-Encoding': 'gzip, deflate',
+        Authorization: process.env.BASE64_SECRET,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+
+    axios
+      .post(
+        'https://catwatch.auth.eu-west-2.amazoncognito.com/oauth2/token?',
+        {
+          code: token,
+        },
+        config,
+      )
+      .then((data) => {
+        logger('data', data);
+        cookie.save('token', data);
+      })
+      .error((e) => {
+        logger('Error translating:', e);
+      });
   };
 
   logout = () => {
