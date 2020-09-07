@@ -3,4 +3,4 @@ const logger = (...args) => {
   return console.log(...args);
 };
 
-export default logger;
+module.exports = logger;
