@@ -35,6 +35,9 @@ class AuthProvider extends Component {
         'https://catwatch.auth.eu-west-2.amazoncognito.com/oauth2/token?',
         {
           code: token,
+          grant_scope: 'authorization_code',
+          redirect_uri: 'https://localhost:40000',
+          client_id: process.env.CLIENT_ID,
         },
         config,
       )
