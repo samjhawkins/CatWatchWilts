@@ -4,6 +4,8 @@ import cookie from 'react-cookies';
 import axios from '../axiosInstance';
 import logger from '../../../utils/logger';
 
+const redirectUri = 'https://localhost:40000';
+
 const AuthContext = React.createContext();
 
 class AuthProvider extends Component {
@@ -24,23 +26,15 @@ class AuthProvider extends Component {
 
     const config = {
       headers: {
-        'Accept-Encoding': 'gzip, deflate',
         Authorization: process.env.BASE64_SECRET,
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Type': 'application/json',
       },
     };
-    logger('process.env', process.env);
+    logger('process.env.64', process.env.BASE64_SECRET);
 
     axios
       .post(
-        'https://catwatch.auth.eu-west-2.amazoncognito.com/oauth2/token?',
-        {
-          code: token,
-          grant_scope: 'authorization_code',
-          redirect_uri: 'https://localhost:40000',
-          client_id: process.env.CLIENT_ID,
-        },
+        'https://catwatch.auth.eu-west-2.amazoncognito.com/oauth2/token',
+        `code=${token}&grant_type=authorization_code&redirect_uri=${redirectUri}&client_id=${process.env.CLIENT_ID}&scope=all`,
         config,
       )
       .then((data) => {
