@@ -25,9 +25,7 @@ class AuthProvider extends Component {
     logger('process.env.64', process.env.BASE64_SECRET);
 
     axios
-      .get(
-        `${process.env.BACKEND_BASE_API}/token`, {code}
-      )
+      .get(`${process.env.BACKEND_BASE_API}/token`, { code })
       .then((data) => {
         logger('data', data);
         cookie.save('token', data);

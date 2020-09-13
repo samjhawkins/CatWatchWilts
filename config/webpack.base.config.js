@@ -14,7 +14,7 @@ module.exports = () => {
   // const { PLATFORM, VERSION, CLIENT_ID, BASE64_SECRET } = env;
   const env = dotenv.config().parsed;
 
-  const envKeys = Object.keys(env).reduce((prev, next)=>{
+  const envKeys = Object.keys(env).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(env[next]);
     return prev;
   }, {});

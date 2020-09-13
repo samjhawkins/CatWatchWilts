@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withCatContext } from '../../common/wrappers/CatContext';
 import CatForm from '../../common/CatForm/CatForm';
-import getMUIDimensions from "../../../utils/getMUIDimensions";
+import getMUIDimensions from '../../../utils/getMUIDimensions';
 
 const useStyles = makeStyles((theme) => ({
   root: {

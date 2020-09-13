@@ -1,6 +1,3 @@
-
-
-
 const getMUIDimensions = (first, second) => {
   // const ratio = second / first;
   const image = {
@@ -25,7 +22,7 @@ const getMUIDimensions = (first, second) => {
   return {
     image,
     div,
-  }
+  };
 };
 
 export default getMUIDimensions;

@@ -52,7 +52,7 @@ class CatProvider extends Component {
       });
   };
 
-  updateCat = async(cat) => {
+  updateCat = async (cat) => {
     return axios
       .put('/cat', {
         params: {

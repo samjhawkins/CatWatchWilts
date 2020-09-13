@@ -4,8 +4,7 @@ const jwkToPem = require('jwk-to-pem');
 const logger = require('../src/utils/logger');
 
 let pems;
-const iss =
-  'https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_deNO5pYzq';
+const iss = 'https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_deNO5pYzq';
 const ERROR_MESSAGE_UNAUTHORIZED = 'Unauthorized';
 
 function validateToken(req, res, next) {
@@ -53,29 +52,30 @@ function authorization(req, res, next) {
   if (req.method !== 'post') {
     if (!pems) {
       // Download the JWKs and save it as PEM
-      axios.get(`${iss}/.well-known/jwks.json`).then(
-        function (response) {
-            pems = {};
-            logger("data?", response.data)
-            const { keys } = response.data;
-            for (let i = 0; i < keys.length; i += 1) {
-              // Convert each key to PEM
-              const keyId = keys[i].kid;
-              const modulus = keys[i].n;
-              const exponent = keys[i].e;
-              const keyType = keys[i].kty;
-              const jwk = { kty: keyType, n: modulus, e: exponent };
-              const pem = jwkToPem(jwk);
-              pems[keyId] = pem;
-            }
-            // Now continue with validating the token
-            logger('Found PEMs!!!!');
-            return validateToken(req, res, next);
-        },
-      ).error( function(error){
-        logger(response);
-        return error;
-      });
+      axios
+        .get(`${iss}/.well-known/jwks.json`)
+        .then(function (response) {
+          pems = {};
+          logger('data?', response.data);
+          const { keys } = response.data;
+          for (let i = 0; i < keys.length; i += 1) {
+            // Convert each key to PEM
+            const keyId = keys[i].kid;
+            const modulus = keys[i].n;
+            const exponent = keys[i].e;
+            const keyType = keys[i].kty;
+            const jwk = { kty: keyType, n: modulus, e: exponent };
+            const pem = jwkToPem(jwk);
+            pems[keyId] = pem;
+          }
+          // Now continue with validating the token
+          logger('Found PEMs!!!!');
+          return validateToken(req, res, next);
+        })
+        .error(function (error) {
+          logger(response);
+          return error;
+        });
     } else {
       // PEMs are already downloaded, continue with validating the token
       logger('PEMs');
