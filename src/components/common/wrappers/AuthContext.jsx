@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import cookie from 'react-cookies';
+import {
+  getSessionStorageItem,
+  setSessionStorageItem,
+} from '../../../utils/sessionStorage';
 import axios from '../axiosInstance';
 import logger from '../../../utils/logger';
 
@@ -10,17 +13,19 @@ class AuthProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: !!cookie.load('token'),
+      isLoggedIn: !!getSessionStorageItem('token'),
     };
   }
 
-  componentDidMount() {
-    this.login();
-  }
-
   login = async () => {
-    // do a call here to get a token
     const code = new URLSearchParams(window.location.search).get('code');
+
+    if (!code) {
+      this.setState({
+        isLoggedIn: true,
+      });
+      return;
+    }
 
     logger('process.env.64', process.env.BASE64_SECRET);
 
@@ -28,7 +33,7 @@ class AuthProvider extends Component {
       .get(`${process.env.BACKEND_BASE_API}/token`, { code })
       .then((data) => {
         logger('data', data);
-        cookie.save('token', data);
+        setSessionStorageItem('token', data);
       })
       .catch((e) => {
         logger('Error translating:', e);
@@ -36,7 +41,7 @@ class AuthProvider extends Component {
   };
 
   logout = () => {
-    cookie.save('token', '');
+    setSessionStorageItem('token', undefined);
     this.setState({ isLoggedIn: false });
   };
 
@@ -61,7 +66,7 @@ AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export const withContext = (ContextComponent) => {
+const withAuthContext = (ContextComponent) => {
   return (props) => {
     return (
       <AuthContext.Consumer>
@@ -75,4 +80,4 @@ export const withContext = (ContextComponent) => {
 
 const AuthConsumer = AuthContext.Consumer;
 
-export { AuthProvider, AuthConsumer, AuthContext };
+export { AuthProvider, AuthConsumer, AuthContext, withAuthContext };

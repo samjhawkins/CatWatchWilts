@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from '../axiosInstance';
+import logger from '../../../utils/logger';
 import sortGrid from '../../../utils/sortGrid';
 import isPopulatedArray from '../../../utils/isPopulatedArray';
 import {
@@ -29,6 +30,15 @@ class CatProvider extends Component {
     });
   };
 
+  endpointError = (error) => {
+    if (error.status === '1001') {
+      logger('Authentication error - Logging out');
+      const { logout } = this.props;
+      logout();
+    }
+    logger(error);
+  };
+
   setSelectedCat = (id) => {
     const { cats } = this.state;
     const prevState = this.state;
@@ -46,10 +56,7 @@ class CatProvider extends Component {
       .then((response) => {
         this.setState({ ...state, cats: response.data.data });
       })
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log(error);
-      });
+      .catch(this.endpointError);
   };
 
   updateCat = async (cat) => {
@@ -60,10 +67,7 @@ class CatProvider extends Component {
         },
       })
       .then((response) => response.data.data)
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log(error);
-      });
+      .catch(this.endpointError);
   };
 
   calculateDimensions = (index, img) => {
@@ -104,6 +108,7 @@ class CatProvider extends Component {
 }
 
 CatProvider.propTypes = {
+  logout: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
 

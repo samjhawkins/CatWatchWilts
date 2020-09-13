@@ -1,22 +1,11 @@
 import React from 'react';
 import { AppBar, Toolbar, Avatar } from '@material-ui/core/index';
 import Grid from '@material-ui/core/Grid/index';
-import { makeStyles } from '@material-ui/styles';
 import logo from '../../../images/logo.jpg';
 import UndecoratedLink from '../links/UndecoratedLink';
 import MainMenu from './MainMenu';
 import MediaQuery from '../wrappers/MediaQuery';
-
-const useStyles = makeStyles((theme) => ({
-  avatar: {
-    margin: theme.spacing(3),
-    width: theme.spacing(60),
-    height: theme.spacing(30),
-  },
-  container: {
-    padding: theme.spacing(3),
-  },
-}));
+import useStyles from '../../../themes/useStyles';
 
 const NavBar = () => {
   const classes = useStyles();
@@ -35,7 +24,7 @@ const NavBar = () => {
               alt="Cat watch wiltshire logo"
               src={logo}
               variant="rounded"
-              className={classes.avatar}
+              className={classes.avatar_small}
             />
           </UndecoratedLink>
           <MediaQuery>

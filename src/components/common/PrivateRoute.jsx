@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { withContext } from './wrappers/AuthContext';
+import { withAuthContext } from './wrappers/AuthContext';
 
 class PrivateRoute extends Route {
   render() {
@@ -11,4 +11,4 @@ class PrivateRoute extends Route {
   }
 }
 
-export default withContext(PrivateRoute);
+export default withAuthContext(PrivateRoute);

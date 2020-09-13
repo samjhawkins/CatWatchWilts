@@ -6,41 +6,10 @@ import {
   CardContent,
   CardActions,
 } from '@material-ui/core/index';
-import { makeStyles } from '@material-ui/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import LinkedButton from '../../common/links/LinkedButton';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minHeight: '90vh',
-    // marginTop: theme.spacing(10),
-    // marginBottom: theme.spacing(10),
-  },
-  paper: {
-    padding: theme.spacing(16),
-    margin: theme.spacing(16),
-  },
-  youTube: {
-    margin: 'auto',
-    height: '54vw',
-    maxWidth: '800px',
-    maxHeight: '450px',
-    media: {
-      width: '100%',
-      height: 'auto',
-    },
-  },
-  tertiaryButton: {
-    backgroundColor: theme.color.tertiary.main,
-    '&:hover': {
-      backgroundColor: theme.color.tertiary.dark,
-    },
-  },
-  button: {
-    fontSize: theme.spacing(5),
-  },
-}));
+import useStyles from '../../../themes/useStyles';
 
 const Home = () => {
   const classes = useStyles();

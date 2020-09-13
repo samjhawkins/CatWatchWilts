@@ -62,6 +62,6 @@ export const routesConfig = [
     component: Admin,
   },
   {
-    render: PageNotFound,
+    render: () => <PageNotFound />,
   },
 ];

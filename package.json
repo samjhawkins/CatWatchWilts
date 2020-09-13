@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode production --config ./config/webpack.prod.config.js --progress",
     "build.dev": "webpack --mode development --config ./config/webpack.prod.config.js --progress --hot --watch",
-    "dev": "webpack-dev-server --mode development --config ./config/webpack.base.config.js --open --hot --history-api-fallback --env.PLATFORM=local --env.VERSION=stag",
+    "dev": "webpack-dev-server --mode development --config ./config/webpack.base.config.js --open --hot --history-api-fallback --env.VERSION=stag",
     "prod": "npm run build && node server",
     "lint": "eslint src --fix --ext js,jsx",
     "test": "jest --testPathIgnorePatterns --watchAll",
@@ -50,7 +50,6 @@
     "jwk-to-pem": "^2.0.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-cookies": "^0.1.1",
     "react-dom": "^16.13.1",
     "react-final-form": "^6.4.0",
     "react-router-dom": "^5.0.1",
