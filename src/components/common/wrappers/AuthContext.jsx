@@ -4,8 +4,6 @@ import cookie from 'react-cookies';
 import axios from '../axiosInstance';
 import logger from '../../../utils/logger';
 
-const redirectUri = 'https://localhost:40000';
-
 const AuthContext = React.createContext();
 
 class AuthProvider extends Component {
@@ -22,20 +20,13 @@ class AuthProvider extends Component {
 
   login = async () => {
     // do a call here to get a token
-    const token = new URLSearchParams(window.location.search).get('code');
+    const code = new URLSearchParams(window.location.search).get('code');
 
-    const config = {
-      headers: {
-        Authorization: process.env.BASE64_SECRET,
-      },
-    };
     logger('process.env.64', process.env.BASE64_SECRET);
 
     axios
-      .post(
-        'https://catwatch.auth.eu-west-2.amazoncognito.com/oauth2/token',
-        `code=${token}&grant_type=authorization_code&redirect_uri=${redirectUri}&client_id=${process.env.CLIENT_ID}&scope=all`,
-        config,
+      .get(
+        `${process.env.BACKEND_BASE_API}/token`, {code}
       )
       .then((data) => {
         logger('data', data);

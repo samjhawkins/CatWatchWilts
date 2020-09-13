@@ -4,6 +4,7 @@ const https = require('https');
 const path = require('path');
 const fs = require('fs');
 const dbNode = require('./db');
+const token = require('./token');
 const authorization = require('./authorization');
 
 require('dotenv').config();
@@ -13,6 +14,7 @@ const app = express();
 
 app.use('/', express.static(path.join(__dirname, '../dist')));
 app.use(bodyParser.json({ type: '*/*' }));
+app.use('/token', token);
 app.use('/db', authorization);
 app.use('/db', dbNode);
 
