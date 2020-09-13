@@ -1,15 +1,7 @@
 /* eslint-disable */
-const path = require('path');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
-const base = require('./webpack.base.config');
-
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-
-const APP_DIR = path.resolve(__dirname, '../src');
+const base = require('./webpack.base.config');
 
 module.exports = () => {
   return merge([

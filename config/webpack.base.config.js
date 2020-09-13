@@ -11,20 +11,15 @@ const dotenv = require('dotenv');
 const APP_DIR = path.resolve(__dirname, '../src');
 
 module.exports = () => {
-  // const { PLATFORM, VERSION, CLIENT_ID, BASE64_SECRET } = env;
   const env = dotenv.config().parsed;
-
   const envKeys = Object.keys(env).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(env[next]);
     return prev;
   }, {});
 
-  console.log('env', env);
-  console.log('envKeys', envKeys);
-
   return {
     mode: env.PLATFORM,
-    entry: env.APP_DIR,
+    entry: APP_DIR,
     module: {
       rules: [
         {
