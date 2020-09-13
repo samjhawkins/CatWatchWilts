@@ -121,4 +121,4 @@ const withCatContext = (ContextComponent) => {
 
 const CatConsumer = CatContext.Consumer;
 
-export { CatProvider, CatConsumer, CatContext };
+export { CatProvider, CatConsumer, CatContext, withCatContext };
