@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from '../axiosInstance';
-import catsMock from '../../../mocks/catsMock';
 import sortGrid from '../../../utils/sortGrid';
 import isPopulatedArray from '../../../utils/isPopulatedArray';
 import {
@@ -17,7 +16,7 @@ class CatProvider extends Component {
     this.state = {
       selectedCat: {},
       sorted: false,
-      cats: catsMock,
+      cats: [],
     };
   }
 
@@ -40,16 +39,24 @@ class CatProvider extends Component {
     this.setState({ ...prevState, selectedCat });
   };
 
-  loadCats = () => {
+  loadCats = async () => {
     const { state } = this;
-    this.setState({ ...state });
+    return axios
+      .get('/cats')
+      .then((response) => {
+        this.setState({ ...state, cats: response.data.data });
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log(error);
+      });
   };
 
-  updateCat = () => {
+  updateCat = async(cat) => {
     return axios
-      .put('OURBACKENDPOINT/cat', {
+      .put('/cat', {
         params: {
-          ...this.state,
+          cat,
         },
       })
       .then((response) => response.data.data)
@@ -62,9 +69,6 @@ class CatProvider extends Component {
   calculateDimensions = (index, img) => {
     const height = img.offsetHeight; // cols
     const width = img.offsetWidth; // rows
-
-    // console.log('ratiosHeight', Math.ceil(height / width));
-    // console.log('ratiosWidth', Math.ceil(width / height));
 
     const { state } = this;
     const newCats = [...state.cats];
@@ -103,7 +107,7 @@ CatProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export const withCatContext = (ContextComponent) => {
+const withCatContext = (ContextComponent) => {
   return (props) => {
     return (
       <CatContext.Consumer>
