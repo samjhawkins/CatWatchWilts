@@ -41,12 +41,11 @@ class CatProvider extends Component {
 
   setSelectedCat = (id) => {
     const { cats } = this.state;
-    const prevState = this.state;
+    const { state } = this;
     const selectedCat =
       (isPopulatedArray(cats) && cats.find((cat) => cat.id === id)) || {};
     setSessionStorageItem('selectedCat', selectedCat);
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    this.setState({ ...prevState, selectedCat });
+    this.setState({ ...state, selectedCat });
   };
 
   loadCats = async () => {

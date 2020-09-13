@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
@@ -11,51 +10,25 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
+import { useStyles } from '../../../themes/useStyles';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(10),
-    marginBottom: theme.spacing(10),
-    height: '94vh',
-  },
-  image: {
-    backgroundImage:
-      'url(https://images.unsplash.com/photo-1415369629372-26f2fe60c467?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80)',
-    backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'dark'
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: 'cover',
-    backgroundPosition: '50% 25%',
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+const imgUrl =
+  'https://images.unsplash.com/photo-1415369629372-26f2fe60c467?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80';
 
 const Login = () => {
-  const classes = useStyles();
+  const classes = useStyles({ imgUrl });
 
   return (
-    <Grid item container component="main" xs={10} className={classes.root}>
+    <Grid
+      item
+      container
+      component="main"
+      xs={10}
+      className={classes.root_viewCat}
+    >
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
+        <div className={classes.flex_paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>

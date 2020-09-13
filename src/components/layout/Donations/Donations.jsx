@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
@@ -7,32 +6,22 @@ import payPalLogo from '../../../images/pp-logo.png';
 import justGivingLogo from '../../../images/just_giving_logo.jpg';
 import PaymentMethod from './PaymentMethod';
 import DonateButton from '../../common/DonateButton';
+import { useStyles } from '../../../themes/useStyles';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minHeight: '90vh',
-  },
-  image: {
-    backgroundImage:
-      'url(https://images.unsplash.com/photo-1517331156700-3c241d2b4d83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1048&q=80)',
-    backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'dark'
-        ? theme.palette.grey[900]
-        : theme.palette.grey[50],
-    backgroundSize: 'cover',
-    backgroundPosition: '50% 25%',
-  },
-  paper: {
-    padding: theme.spacing(16),
-    margin: theme.spacing(16),
-  },
-}));
+const imgUrl =
+  'https://images.unsplash.com/photo-1517331156700-3c241d2b4d83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1048&q=80';
 
 const Donations = () => {
-  const classes = useStyles();
+  const classes = useStyles({ imgUrl });
   return (
-    <Grid item container component="main" xs={10} className={classes.root}>
+    <Grid
+      item
+      container
+      component="main"
+      xs={10}
+      justify="space-between"
+      className={classes.root}
+    >
       <Grid
         item
         container
@@ -50,7 +39,7 @@ const Donations = () => {
             can go to below.
           </Typography>
         </Grid>
-        {/* Need to replace donate button with something better */}
+        {/* TODO: Need to replace donate button with something better */}
         <PaymentMethod
           name="Paypal"
           logo={payPalLogo}

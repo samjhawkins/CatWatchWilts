@@ -1,21 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
 import LinkedButton from './links/LinkedButton';
-
-const useStyles = makeStyles((theme) => ({
-  appBarItem: {
-    margin: theme.spacing(3),
-  },
-  donateButton: {
-    height: theme.spacing(30),
-    fontWeight: 'bold',
-    backgroundColor: theme.color.white,
-    '&:hover': {
-      backgroundColor: theme.color.tertiary.main,
-    },
-  },
-}));
+import { useStyles } from '../../themes/useStyles';
 
 const DonateButton = ({ to, size }) => {
   const classes = useStyles();

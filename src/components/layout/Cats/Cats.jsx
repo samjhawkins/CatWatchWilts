@@ -10,22 +10,10 @@ import { withStyles } from '@material-ui/styles';
 import isPopulatedArray from '../../../utils/isPopulatedArray';
 import CatCard from './CatCard';
 import { withCatContext } from '../../common/wrappers/CatContext';
+import { themedStyles } from '../../../themes/useStyles';
 
 const columnWidth = 4;
 const direction = 'cols';
-
-const styles = (theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflowY: 'none',
-    backgroundColor: theme.palette.background.paper,
-  },
-  gridList: {
-    width: '100%',
-  },
-});
 
 class Cats extends Component {
   componentDidUpdate() {
@@ -41,8 +29,8 @@ class Cats extends Component {
   render() {
     const { classes, cats } = this.props;
     return (
-      <Container component="main" maxWidth="xl" className={classes.root}>
-        <GridList cellHeight="auto" className={classes.gridList} cols={4}>
+      <Container component="main" maxWidth="xl" className={classes.root_cats}>
+        <GridList cellHeight="auto" className={classes.fullWidth} cols={4}>
           <GridListTile
             key="Subheader"
             cols={columnWidth}
@@ -81,4 +69,4 @@ Cats.propTypes = {
   sortCatsForGrid: PropTypes.func.isRequired,
 };
 
-export default withCatContext(withStyles(styles)(Cats));
+export default withCatContext(withStyles(themedStyles)(Cats));

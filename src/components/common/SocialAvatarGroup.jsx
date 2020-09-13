@@ -1,15 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
 import SocialAvatar from './NavBar/SocialAvatar';
 import faceBook from '../../images/f_logo_White.png';
 import instaGram from '../../images/i_logo_Black.png';
 import twitter from '../../images/t_logo_White.png';
-
-const useStyles = makeStyles((theme) => ({
-  appBarItem: {
-    margin: theme.spacing(3),
-  },
-}));
+import { useStyles } from '../../themes/useStyles';
 
 const SocialAvatarGroup = () => {
   const classes = useStyles();

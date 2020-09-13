@@ -9,15 +9,9 @@ import {
   IconButton,
 } from '@material-ui/core';
 import InfoIcon from '@material-ui/core/SvgIcon/SvgIcon';
-import { makeStyles } from '@material-ui/styles';
 import LinkedButton from '../../common/links/LinkedButton';
 import { withCatContext } from '../../common/wrappers/CatContext';
-
-const useStyles = makeStyles(() => ({
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
-}));
+import { useStyles } from '../../../themes/useStyles';
 
 const CatCard = ({
   setSelectedCat,

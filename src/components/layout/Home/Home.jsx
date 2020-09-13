@@ -9,7 +9,7 @@ import {
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import LinkedButton from '../../common/links/LinkedButton';
-import useStyles from '../../../themes/useStyles';
+import { useStyles } from '../../../themes/useStyles';
 
 const Home = () => {
   const classes = useStyles();

@@ -1,13 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/styles/index';
-
-const useStyles = makeStyles(() => ({
-  link: {
-    textDecoration: 'none',
-  },
-}));
+import { useStyles } from '../../../themes/useStyles';
 
 const UndecoratedLink = ({ to, href, className, children, onClick }) => {
   const classes = useStyles();

@@ -1,22 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from '@material-ui/core/index';
-import { makeStyles } from '@material-ui/styles/index';
 import { withRouter } from 'react-router-dom';
 import UndecoratedLink from '../links/UndecoratedLink';
 import { pageList } from '../../../routes/routes.config';
-
-const useStyles = makeStyles((theme) => ({
-  menuItem: {
-    backgroundColor: theme.color.white,
-    '&:hover': {
-      backgroundColor: theme.palette.secondary.light,
-    },
-  },
-  smallText: {
-    fontSize: '0.7em',
-  },
-}));
+import { useStyles } from '../../../themes/useStyles';
 
 const MainMenu = ({ matches, location, className }) => {
   const classes = useStyles();
@@ -40,7 +28,7 @@ const MainMenu = ({ matches, location, className }) => {
             color={route.color}
             label={route.name}
             selected={currentTab === index}
-            className={`${classes.menuItem} ${smallTextClass}`}
+            className={`${classes.secondaryButton} ${smallTextClass}`}
           />
         </UndecoratedLink>
       ))}

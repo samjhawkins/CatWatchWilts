@@ -5,7 +5,7 @@ import logo from '../../../images/logo.jpg';
 import UndecoratedLink from '../links/UndecoratedLink';
 import MainMenu from './MainMenu';
 import MediaQuery from '../wrappers/MediaQuery';
-import useStyles from '../../../themes/useStyles';
+import { useStyles } from '../../../themes/useStyles';
 
 const NavBar = () => {
   const classes = useStyles();
