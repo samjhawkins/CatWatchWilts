@@ -62,8 +62,8 @@ Cats.propTypes = {
   ).isRequired,
   sorted: PropTypes.bool.isRequired,
   classes: PropTypes.shape({
-    root: PropTypes.shape.isRequired,
-    gridList: PropTypes.shape.isRequired,
+    fullWidth: PropTypes.shape.isRequired,
+    root_cats: PropTypes.shape.isRequired,
   }).isRequired,
   loadCats: PropTypes.func.isRequired,
   sortCatsForGrid: PropTypes.func.isRequired,
