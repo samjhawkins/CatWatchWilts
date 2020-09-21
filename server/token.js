@@ -1,5 +1,5 @@
 const express = require('express');
-const axios = require('../src/components/common/axiosInstance');
+const axios = require('axios');
 
 const app = express.Router();
 const redirectUri = 'https://localhost:40000';

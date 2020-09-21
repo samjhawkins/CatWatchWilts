@@ -17,12 +17,19 @@ class AuthProvider extends Component {
     };
   }
 
+  componentDidMount() {
+    this.login();
+  }
+
   login = async () => {
+    logger('login happenned!');
     const code = new URLSearchParams(window.location.search).get('code');
+    const token = getSessionStorageItem('token');
 
     if (!code) {
+      console.log('login!!!');
       this.setState({
-        isLoggedIn: true,
+        isLoggedIn: !token,
       });
       return;
     }

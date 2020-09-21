@@ -51,7 +51,7 @@ class CatProvider extends Component {
   loadCats = async () => {
     const { state } = this;
     return axios
-      .get('/cats')
+      .get('/db/cats')
       .then((response) => {
         this.setState({ ...state, cats: response.data.data });
       })
@@ -60,7 +60,7 @@ class CatProvider extends Component {
 
   updateCat = async (cat) => {
     return axios
-      .put('/cat', {
+      .put('/db/cat', {
         params: {
           cat,
         },

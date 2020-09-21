@@ -16,13 +16,20 @@ const columnWidth = 4;
 const direction = 'cols';
 
 class Cats extends Component {
+  componentDidMount() {
+    const { loadCats } = this.props;
+    loadCats();
+  }
+
   componentDidUpdate() {
     const { cats, sorted, sortCatsForGrid } = this.props;
-    const allCatsDimensioned = !cats.find(
-      (elem) => !Object.keys(elem).includes(direction),
-    );
-    if (allCatsDimensioned && !sorted) {
-      sortCatsForGrid(direction, columnWidth);
+    if (cats && cats.length) {
+      const allCatsDimensioned = !cats.find(
+        (elem) => !Object.keys(elem).includes(direction),
+      );
+      if (allCatsDimensioned && !sorted) {
+        sortCatsForGrid(direction, columnWidth);
+      }
     }
   }
 

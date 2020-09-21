@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const jwkToPem = require('jwk-to-pem');
@@ -72,8 +73,8 @@ function authorization(req, res, next) {
           logger('Found PEMs!!!!');
           return validateToken(req, res, next);
         })
-        .error(function (error) {
-          logger(response);
+        .catch(function (error) {
+          logger('error', error);
           return error;
         });
     } else {
