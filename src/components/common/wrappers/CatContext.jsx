@@ -60,7 +60,7 @@ class CatProvider extends Component {
 
   updateCat = async (cat) => {
     return axios
-      .put('/db/cat', {
+      .put('/db/cats', {
         params: {
           cat,
         },

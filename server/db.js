@@ -22,7 +22,7 @@ app.post('/cats/:id', async (req, res) => {
       imageName: { S: req.body.imageName },
     },
   };
-  const response = ddb.putItem(params, function (err, data) {
+  const response = ddb.putItem(params, (err, data) => {
     if (err) {
       console.log('Error', err);
       return err;
@@ -55,17 +55,17 @@ app.get('/cats', async (req, res) => {
 });
 
 // Get specific cat details
-app.get('/cats/:id', async (req, res) => {
+app.get('/cat/:id', async (req, res) => {
   console.log('get cat', req.params.id);
   const params = {
     TableName,
     Key: {
-      id: { S: req.params.id },
+      id: req.params.id,
     },
   };
   try {
-    const data = await ddb.getItem(params).promise();
-    res.send({ data: data });
+    const data = await ddb.get(params).promise();
+    res.send({ data });
   } catch (error) {
     console.error(error);
   }

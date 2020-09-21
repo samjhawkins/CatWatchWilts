@@ -10,7 +10,7 @@ const ERROR_MESSAGE_UNAUTHORIZED = 'Unauthorized';
 
 function validateToken(req, res, next) {
   logger(req.headers);
-  const token = req.headers['authorization'];
+  const token = req.headers.authorization;
   logger('token:', token);
   // Fail if the token is not jwt
   const decodedJwt = jwt.decode(token, { complete: true });
@@ -41,7 +41,7 @@ function validateToken(req, res, next) {
 
   // Verify the signature of the JWT token to ensure it's
   // really coming from your User Pool
-  jwt.verify(token, pem, { issuer: iss }, function (err) {
+  jwt.verify(token, pem, { issuer: iss }, (err) => {
     if (err) {
       return new Error(ERROR_MESSAGE_UNAUTHORIZED);
     }
@@ -55,7 +55,7 @@ function authorization(req, res, next) {
       // Download the JWKs and save it as PEM
       axios
         .get(`${iss}/.well-known/jwks.json`)
-        .then(function (response) {
+        .then((response) => {
           pems = {};
           logger('data?', response.data);
           const { keys } = response.data;
@@ -73,7 +73,7 @@ function authorization(req, res, next) {
           logger('Found PEMs!!!!');
           return validateToken(req, res, next);
         })
-        .catch(function (error) {
+        .catch((error) => {
           logger('error', error);
           return error;
         });
