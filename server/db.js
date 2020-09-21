@@ -4,11 +4,11 @@ const app = express.Router();
 const aws = require('aws-sdk');
 
 aws.config.update({ region: 'eu-west-2' });
-const ddb = new aws.DynamoDB({ apiVersion: '2012-08-10' });
+const ddb = new aws.DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
 const TableName = 'Cats';
 
 // Write new cat to database
-app.post('/cats/:id', function (req, res) {
+app.post('/cats/:id', async (req, res) => {
   console.log('id', req.params.id);
   const params = {
     TableName,
@@ -31,26 +31,31 @@ app.post('/cats/:id', function (req, res) {
     return data;
   });
   res.send({ data: response });
+
+  try {
+    const data = await ddb.putItem(params).promise();
+    res.send({ data });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 // Get all cats details
-app.get('/cats', function (req, res) {
+app.get('/cats', async (req, res) => {
   console.log('get all');
   const params = {
     TableName,
   };
-  const cats = ddb.scan(params, function (err, data) {
-    if (err) {
-      console.log('Error', err);
-    } else {
-      console.log('Success', data.Items);
-    }
-  });
-  res.send({ data: cats });
+  try {
+    const { Items } = await ddb.scan(params).promise();
+    res.send({ data: Items });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 // Get specific cat details
-app.get('/cats/:id', function (req, res) {
+app.get('/cats/:id', async (req, res) => {
   console.log('get cat', req.params.id);
   const params = {
     TableName,
@@ -58,14 +63,12 @@ app.get('/cats/:id', function (req, res) {
       id: { S: req.params.id },
     },
   };
-  const cat = ddb.getItem(params, function (err, data) {
-    if (err) {
-      console.log('Error', err);
-    } else {
-      console.log('Success', data.Item);
-    }
-  });
-  res.send({ data: cat });
+  try {
+    const data = await ddb.getItem(params).promise();
+    res.send({ data: data });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 module.exports = app;
