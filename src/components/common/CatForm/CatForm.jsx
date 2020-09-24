@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { Form } from 'react-final-form';
 import { Paper, Grid, Button } from '@material-ui/core';
 import TextInput from '../Fields/TextInput';
+import { withCatContext } from '../wrappers/CatContext';
 
-const CatForm = ({ mode, cat, withInitialDisplay }) => (
+const CatForm = ({ cat, withInitialDisplay, updateCat }) => (
   <Form
     onSubmit={(formValues) => {
-      console.log('formValues', formValues);
+      console.log('formValues submit with', formValues);
+      // updateCat(formValues);
     }}
     initialValues={cat}
     validate={() => {}}
@@ -74,10 +76,11 @@ CatForm.propTypes = {
     image: PropTypes.string.isRequired,
   }).isRequired,
   withInitialDisplay: PropTypes.bool,
+  updateCat: PropTypes.func.isRequired,
 };
 
 CatForm.defaultProps = {
   withInitialDisplay: false,
 };
 
-export default CatForm;
+export default withCatContext(CatForm);

@@ -24,7 +24,7 @@ class CatProvider extends Component {
   componentDidMount = () => {
     const { state } = this;
     const selectedCat = getSessionStorageItem('selectedCat');
-    this.setState({
+    this.loadCats({
       ...state,
       selectedCat,
     });
@@ -48,12 +48,15 @@ class CatProvider extends Component {
     this.setState({ ...state, selectedCat });
   };
 
-  loadCats = async () => {
-    const { state } = this;
+  loadCats = async (updateState = this.state) => {
     return axios
       .get('/db/cats')
       .then((response) => {
-        this.setState({ ...state, cats: response.data.data });
+        let newCats = response.data.data;
+        if (newCats) {
+          newCats = newCats.map((e) => ({ ...e, cols: 1, rows: 1 }));
+        }
+        this.setState({ ...updateState, cats: newCats });
       })
       .catch(this.endpointError);
   };
@@ -78,12 +81,12 @@ class CatProvider extends Component {
     newCats[index].rows = Math.ceil(height / width);
     newCats[index].cols = Math.ceil(width / height);
 
-    this.setState({ ...state, cats: newCats });
+    this.setState({ ...state, cats: newCats, sorted: false });
   };
 
-  sortCatsForGrid = (direction, columnWidth) => {
+  sortCatsForGrid = () => {
     const { state } = this;
-    const sortedArray = sortGrid(state.cats, direction, columnWidth);
+    const sortedArray = sortGrid(state.cats);
     this.setState({ ...state, cats: sortedArray, sorted: true });
   };
 

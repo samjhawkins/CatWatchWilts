@@ -77,13 +77,17 @@ const CatCard = ({
 
 CatCard.propTypes = {
   setSelectedCat: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   calculateDimensions: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  imageName: PropTypes.string.isRequired,
+  imageName: PropTypes.string,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  age: PropTypes.string.isRequired,
+  age: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+};
+
+CatCard.defaultProps = {
+  imageName: '',
 };
 
 export default withCatContext(CatCard);

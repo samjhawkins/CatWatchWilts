@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/styles';
 const themedStyles = (theme) => ({
   // Layout
   root: {
-    minHeight: '90vh',
     maxWidth: '80vw',
     margin: theme.spacing(16),
   },
@@ -42,6 +41,9 @@ const themedStyles = (theme) => ({
   },
   fullWidth: {
     width: '100%',
+  },
+  minHeight: {
+    minHeight: '90vh',
   },
 
   // Media

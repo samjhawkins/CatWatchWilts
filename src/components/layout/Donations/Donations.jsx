@@ -20,7 +20,7 @@ const Donations = () => {
       component="main"
       xs={10}
       justify="space-between"
-      className={classes.root}
+      className={`${classes.root} ${classes.minHeight}`}
     >
       <Grid
         item
@@ -39,7 +39,6 @@ const Donations = () => {
             can go to below.
           </Typography>
         </Grid>
-        {/* TODO: Need to replace donate button with something better */}
         <PaymentMethod
           name="Paypal"
           logo={payPalLogo}

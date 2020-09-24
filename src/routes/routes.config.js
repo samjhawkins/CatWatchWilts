@@ -4,7 +4,6 @@ const PageNotFound = React.lazy(() =>
   import('../components/layout/PageNotFound'),
 );
 const Home = React.lazy(() => import('../components/layout/Home/Home'));
-const Cats = React.lazy(() => import('../components/layout/Cats/Cats'));
 const Donations = React.lazy(() =>
   import('../components/layout/Donations/Donations'),
 );
@@ -20,13 +19,6 @@ export const pageList = [
     path: '/',
     exact: true,
     component: Home,
-    color: 'primary',
-  },
-  {
-    name: 'Cats',
-    path: '/cats',
-    exact: true,
-    component: Cats,
     color: 'primary',
   },
   {

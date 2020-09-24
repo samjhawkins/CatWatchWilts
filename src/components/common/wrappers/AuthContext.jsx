@@ -27,7 +27,6 @@ class AuthProvider extends Component {
     const token = getSessionStorageItem('token');
 
     if (!code) {
-      console.log('login!!!');
       this.setState({
         isLoggedIn: !token,
       });
