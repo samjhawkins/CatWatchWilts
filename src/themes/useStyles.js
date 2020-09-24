@@ -3,8 +3,10 @@ import { makeStyles } from '@material-ui/styles';
 const themedStyles = (theme) => ({
   // Layout
   root: {
-    maxWidth: '80vw',
-    margin: theme.spacing(16),
+    maxWidth: (props) => (props.aboveSM ? '80vw' : ''),
+    margin: (props) => (props.aboveSM ? theme.spacing(16) : ''),
+    marginTop: theme.spacing(16),
+    marginBottom: theme.spacing(16),
   },
   root_viewCat: {
     marginTop: theme.spacing(10),
@@ -109,6 +111,8 @@ const themedStyles = (theme) => ({
   },
   button: {
     fontSize: theme.spacing(5),
+    margin: theme.spacing(2),
+    minWidth: '8.5rem',
   },
 
   // Markup

@@ -24,4 +24,14 @@ MediaQuery.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default MediaQuery;
+const withMediaQuery = (Component) => {
+  return (props) => {
+    return (
+      <MediaQuery>
+        <Component {...props} />
+      </MediaQuery>
+    );
+  };
+};
+
+export { MediaQuery, withMediaQuery };

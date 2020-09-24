@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
@@ -7,18 +8,20 @@ import justGivingLogo from '../../../images/just_giving_logo.jpg';
 import PaymentMethod from './PaymentMethod';
 import DonateButton from '../../common/DonateButton';
 import { useStyles } from '../../../themes/useStyles';
+import { withMediaQuery } from '../../common/wrappers/MediaQuery';
 
 const imgUrl =
   'https://images.unsplash.com/photo-1517331156700-3c241d2b4d83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1048&q=80';
 
-const Donations = () => {
-  const classes = useStyles({ imgUrl });
+const Donations = ({ matches: { aboveSM } }) => {
+  const classes = useStyles({ imgUrl, aboveSM });
   return (
     <Grid
       item
       container
       component="main"
-      xs={10}
+      xs={12}
+      sm={10}
       justify="space-between"
       className={`${classes.root} ${classes.minHeight}`}
     >
@@ -68,4 +71,10 @@ const Donations = () => {
   );
 };
 
-export default Donations;
+Donations.propTypes = {
+  matches: PropTypes.shape({
+    aboveSM: PropTypes.bool.isRequired,
+  }).isRequired,
+};
+
+export default withMediaQuery(Donations);
