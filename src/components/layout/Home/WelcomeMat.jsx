@@ -21,7 +21,7 @@ const WelcomeMat = () => {
       square
       className={classes.paper}
     >
-      <Grid item sm={12} lg={7}>
+      <Grid item xs={12} lg={7}>
         <CardMedia
           component="iframe"
           className={classes.youTube}
@@ -33,7 +33,7 @@ const WelcomeMat = () => {
         />
       </Grid>
       <Grid item xs={false} lg={1} />
-      <Grid item container sm={12} lg={3}>
+      <Grid item container xs={12} lg={3}>
         <Grid item>
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="span">

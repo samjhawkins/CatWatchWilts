@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
@@ -79,9 +80,12 @@ module.exports = () => {
     },
     plugins: [
       new FriendlyErrorsWebpackPlugin(),
+      new HtmlWebpackPlugin({
+        template: './src/html/index.html',
+        filename: './index.html',
+      }),
       new CopyWebpackPlugin({
         patterns: [
-          { from: './src/html/index.html', to: './index.html' },
           { from: './src/images/catPaw.svg', to: './images/catPaw.svg' },
         ],
       }),

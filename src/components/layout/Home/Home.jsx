@@ -18,7 +18,7 @@ const Home = (props) => {
     cats,
     sortCatsForGrid,
     sorted,
-    matches: { aboveSM },
+    matches: { aboveSM, aboveMD },
   } = props;
   const classes = useStyles({ aboveSM });
 
@@ -48,14 +48,14 @@ const Home = (props) => {
         <GridList
           cellHeight="auto"
           className={classes.fullWidth}
-          cols={parseInt(process.env.COLUMN_WIDTH, 0)}
+          cols={aboveMD ? parseInt(process.env.COLUMN_WIDTH, 0) : 1}
         >
           {isPopulatedArray(cats) &&
             cats.map((cat, index) => (
               <GridListTile
                 key={`${cat.id}`}
-                cols={cat.cols || 1}
-                rows={cat.rows || 1}
+                cols={aboveMD ? cat.cols || 1 : 1}
+                rows={aboveMD ? cat.rows || 1 : 1}
               >
                 <CatCard index={index} {...cat} />
               </GridListTile>
@@ -77,6 +77,7 @@ Home.propTypes = {
   sortCatsForGrid: PropTypes.func.isRequired,
   matches: PropTypes.shape({
     aboveSM: PropTypes.bool.isRequired,
+    aboveMD: PropTypes.bool.isRequired,
   }).isRequired,
 };
 
