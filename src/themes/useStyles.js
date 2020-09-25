@@ -41,6 +41,9 @@ const themedStyles = (theme) => ({
   minHeight: {
     minHeight: '90vh',
   },
+  maxHeight: {
+    maxHeight: '80vh',
+  },
   hiddenImage: {
     visibility: 'hidden',
   },

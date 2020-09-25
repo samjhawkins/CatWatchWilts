@@ -14,16 +14,29 @@ const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
   const xsRatio = wider || !aboveSM ? 12 : 6;
 
   return (
-    <Grid item container component="main" className={classes.root}>
+    <Grid
+      item
+      container
+      component="main"
+      className={classes.root}
+    >
       <Grid
         item
         xs={xsRatio}
         md={6}
         component="img"
         src={selectedCat.image}
-        className={classes.fullWidth}
+        className={`${classes.fullWidth} ${classes.maxHeight}`}
       />
-      <Grid item xs={xsRatio} md={6} component={Paper} elevation={6} square>
+      <Grid
+        item
+        xs={xsRatio}
+        md={6}
+        component={Paper}
+        elevation={6}
+        square
+        className={classes.maxHeight}
+      >
         <Typography component="h1" variant="h5">
           {selectedCat.name}
         </Typography>
