@@ -10,7 +10,7 @@ import { withCatContext } from '../../common/wrappers/CatContext';
 import { withMediaQuery } from '../../common/wrappers/MediaQuery';
 import { useStyles } from '../../../themes/useStyles';
 import isPopulatedArray from '../../../utils/isPopulatedArray';
-import CatCard from '../Cats/CatCard';
+import CatCard from '../../common/CatForm/CatCard';
 import WelcomeMat from './WelcomeMat';
 
 const Home = (props) => {

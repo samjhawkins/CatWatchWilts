@@ -9,8 +9,8 @@ import {
   IconButton,
 } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
-import LinkedButton from '../../common/links/LinkedButton';
-import { withCatContext } from '../../common/wrappers/CatContext';
+import LinkedButton from '../links/LinkedButton';
+import { withCatContext } from '../wrappers/CatContext';
 import { useStyles } from '../../../themes/useStyles';
 
 const CatCard = ({
