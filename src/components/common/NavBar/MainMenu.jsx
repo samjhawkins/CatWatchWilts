@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Tab } from '@material-ui/core/index';
+import { Tabs, Tab, Grid } from '@material-ui/core/index';
 import { withRouter } from 'react-router-dom';
 import UndecoratedLink from '../links/UndecoratedLink';
 import { pageList } from '../../../routes/routes.config';
 import { useStyles } from '../../../themes/useStyles';
 
 const MainMenu = ({ matches, location, className }) => {
+  const { aboveSM } = matches;
   const classes = useStyles();
   const currentTab = pageList.findIndex(
     (route) => route.path === location?.pathname,
   );
-  const smallTextClass = matches?.aboveSM ? undefined : classes.smallText;
+  const smallTextClass = aboveSM ? undefined : classes.smallText;
   return (
     <Tabs
       value={currentTab > -1 ? currentTab : 0}
@@ -37,7 +38,8 @@ const MainMenu = ({ matches, location, className }) => {
 };
 
 MainMenu.propTypes = {
-  matches: PropTypes.shape({}).isRequired,
+  matches: PropTypes.shape({ aboveSM: PropTypes.bool, aboveMD: PropTypes.bool })
+    .isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }),

@@ -29,6 +29,11 @@ const themedStyles = (theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  footer: {
+    alignItems: 'center',
+    paddingTop: theme.spacing(20),
+    paddingBottom: theme.spacing(20),
+  },
   topMargin: {
     paddingTop: theme.spacing(8),
   },
