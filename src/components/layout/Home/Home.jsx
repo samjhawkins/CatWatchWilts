@@ -33,7 +33,7 @@ const Home = (props) => {
   return (
     <>
       <Container component="main" maxWidth={maxWidth} className={classes.root}>
-        <WelcomeMat />
+        <WelcomeMat aboveSM={aboveSM} />
       </Container>
       <Container
         component="main"

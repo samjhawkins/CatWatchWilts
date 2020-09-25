@@ -74,7 +74,10 @@ const Donations = ({ matches: { aboveSM } }) => {
 Donations.propTypes = {
   matches: PropTypes.shape({
     aboveSM: PropTypes.bool.isRequired,
-  }).isRequired,
+  }),
+};
+Donations.defaultProps = {
+  matches: { aboveSM: false },
 };
 
 export default withMediaQuery(Donations);

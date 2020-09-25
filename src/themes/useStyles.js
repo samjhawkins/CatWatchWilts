@@ -113,6 +113,7 @@ const themedStyles = (theme) => ({
     fontSize: theme.spacing(5),
     margin: theme.spacing(2),
     minWidth: '8.5rem',
+    width: (props) => (props.aboveSM ? undefined : '90%'),
   },
 
   // Markup

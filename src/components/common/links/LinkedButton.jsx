@@ -27,7 +27,7 @@ const LinkedButton = ({
 };
 
 LinkedButton.propTypes = {
-  to: PropTypes.string.isRequired,
+  to: PropTypes.string,
   text: PropTypes.string.isRequired,
   size: PropTypes.string,
   colour: PropTypes.string,
@@ -36,6 +36,7 @@ LinkedButton.propTypes = {
 };
 
 LinkedButton.defaultProps = {
+  to: null,
   variant: 'contained',
   size: 'small',
   colour: undefined,

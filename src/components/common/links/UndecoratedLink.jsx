@@ -5,20 +5,19 @@ import { useStyles } from '../../../themes/useStyles';
 
 const UndecoratedLink = ({ to, href, className, children, onClick }) => {
   const classes = useStyles();
-  return (
-    <Link
-      to={to}
-      href={href}
-      className={`${classes.link} ${className}`}
-      onClick={onClick}
-    >
+  return to ? (
+    <Link to={to} className={`${classes.link} ${className}`} onClick={onClick}>
       {children}
     </Link>
+  ) : (
+    <a href={href} className={`${classes.link} ${className}`} onClick={onClick}>
+      {children}
+    </a>
   );
 };
 
 UndecoratedLink.propTypes = {
-  to: PropTypes.string.isRequired,
+  to: PropTypes.string,
   href: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
@@ -26,6 +25,7 @@ UndecoratedLink.propTypes = {
 };
 
 UndecoratedLink.defaultProps = {
+  to: undefined,
   href: undefined,
   className: '',
   onClick: () => {},

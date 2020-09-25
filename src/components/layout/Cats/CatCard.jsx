@@ -8,7 +8,7 @@ import {
   GridListTileBar,
   IconButton,
 } from '@material-ui/core';
-import InfoIcon from '@material-ui/core/SvgIcon/SvgIcon';
+import InfoIcon from '@material-ui/icons/Info';
 import LinkedButton from '../../common/links/LinkedButton';
 import { withCatContext } from '../../common/wrappers/CatContext';
 import { useStyles } from '../../../themes/useStyles';
@@ -48,7 +48,8 @@ const CatCard = ({
       <GridListTileBar
         title={
           <span>
-            {name} - {age} year{age === '1' || 's'} old
+            {/* eslint-disable-next-line eqeqeq */}
+            {name} - {age} year{age == '1' || 's'} old
           </span>
         }
         subtitle={

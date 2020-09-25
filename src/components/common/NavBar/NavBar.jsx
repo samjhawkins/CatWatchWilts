@@ -1,6 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Avatar } from '@material-ui/core/index';
-import Grid from '@material-ui/core/Grid/index';
+import { AppBar, Toolbar, Avatar, Grid } from '@material-ui/core/index';
 import logo from '../../../images/logo.jpg';
 import UndecoratedLink from '../links/UndecoratedLink';
 import MainMenu from './MainMenu';

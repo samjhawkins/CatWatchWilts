@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import {
@@ -10,8 +11,8 @@ import {
 import LinkedButton from '../../common/links/LinkedButton';
 import { useStyles } from '../../../themes/useStyles';
 
-const WelcomeMat = () => {
-  const classes = useStyles();
+const WelcomeMat = ({ aboveSM }) => {
+  const classes = useStyles({ aboveSM });
   return (
     <Grid
       item
@@ -50,14 +51,14 @@ const WelcomeMat = () => {
             </Typography>
           </CardContent>
         </Grid>
-        <Grid item>
+        <Grid item xs={12} md={8}>
           <CardActions>
-            <Grid item container xs={12}>
+            <Grid item container xs={12} alignItems="center" justify="center">
               <Grid item xs={12} sm={4} lg={12}>
                 <LinkedButton
                   className={classes.button}
-                  to="/cats"
-                  text="Let's get looking"
+                  href="https://fb.me/wiltsandhantscats"
+                  text="Contact us"
                   size="large"
                   colour="primary"
                 />
@@ -65,7 +66,7 @@ const WelcomeMat = () => {
               <Grid item xs={12} sm={4} lg={12}>
                 <LinkedButton
                   className={classes.button}
-                  to="/blog"
+                  href="https://twitter.com/cat_watch_wilts"
                   text="Whats new"
                   size="large"
                   colour="secondary"
@@ -74,8 +75,8 @@ const WelcomeMat = () => {
               <Grid item xs={12} sm={4} lg={12}>
                 <LinkedButton
                   className={`${classes.tertiaryButton} ${classes.button}`}
-                  to="/contact"
-                  text="Contact us"
+                  to="/donations"
+                  text="Donate"
                   size="large"
                 />
               </Grid>
@@ -86,6 +87,13 @@ const WelcomeMat = () => {
       <Grid item xs={false} lg={1} />
     </Grid>
   );
+};
+
+WelcomeMat.propTypes = {
+  aboveSM: PropTypes.bool,
+};
+WelcomeMat.defaultProps = {
+  aboveSM: false,
 };
 
 export default WelcomeMat;
