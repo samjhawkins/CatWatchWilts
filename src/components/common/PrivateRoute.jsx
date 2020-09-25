@@ -7,7 +7,7 @@ class PrivateRoute extends Route {
     if (this.props.isLoggedIn) {
       return super.render();
     }
-    return <Redirect to="/login" />;
+    return <Redirect to="/" />;
   }
 }
 

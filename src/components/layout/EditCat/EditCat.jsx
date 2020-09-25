@@ -8,7 +8,7 @@ import CatForm from '../../common/CatForm/CatForm';
 import getMUIDimensions from '../../../utils/getMUIDimensions';
 import { useStyles } from '../../../themes/useStyles';
 
-const ViewCat = ({ selectedCat }) => {
+const EditCat = ({ selectedCat }) => {
   const classes = useStyles({ imgUrl: selectedCat.image });
   const breakpoints = getMUIDimensions(selectedCat.rows, selectedCat.cols);
 
@@ -33,13 +33,13 @@ const ViewCat = ({ selectedCat }) => {
   );
 };
 
-ViewCat.propTypes = {
+EditCat.propTypes = {
   selectedCat: PropTypes.shape({
-    name: PropTypes.string,
-    image: PropTypes.string,
-    rows: PropTypes.number,
-    cols: PropTypes.number,
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    rows: PropTypes.number.isRequired,
+    cols: PropTypes.number.isRequired,
   }).isRequired,
 };
 
-export default withCatContext(ViewCat);
+export default withCatContext(EditCat);

@@ -7,10 +7,12 @@ const Home = React.lazy(() => import('../components/layout/Home/Home'));
 const Donations = React.lazy(() =>
   import('../components/layout/Donations/Donations'),
 );
-const Login = React.lazy(() => import('../components/layout/Login/Login'));
 const Admin = React.lazy(() => import('../components/layout/Admin/Admin'));
 const ViewCat = React.lazy(() =>
   import('../components/layout/ViewCat/ViewCat'),
+);
+const EditCat = React.lazy(() =>
+  import('../components/layout/EditCat/EditCat'),
 );
 
 export const pageList = [
@@ -33,17 +35,18 @@ export const pageList = [
 export const routesConfig = [
   ...pageList,
   {
+    name: 'EditCat',
+    path: '/editcat',
+    exact: true,
+    private: true,
+    component: EditCat,
+    color: 'primary',
+  },
+  {
     name: 'ViewCat',
     path: '/viewcat',
     exact: true,
     component: ViewCat,
-    color: 'primary',
-  },
-  {
-    name: 'Login',
-    path: '/login',
-    exact: true,
-    component: Login,
     color: 'primary',
   },
   {

@@ -52,6 +52,11 @@ const themedStyles = (theme) => ({
   minHeight: {
     minHeight: '90vh',
   },
+  spaceItems: {
+    // width: '60%',
+    // display: 'flex',
+    // justifyContent: 'space-around',
+  },
 
   // Media
   youTube: {

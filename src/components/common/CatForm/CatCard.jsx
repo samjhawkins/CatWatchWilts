@@ -6,12 +6,12 @@ import {
   CardMedia,
   GridListTileBar,
   IconButton,
-  Typography,
 } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import InfoIcon from '@material-ui/icons/Info';
 import { withCatContext } from '../wrappers/CatContext';
 import { useStyles } from '../../../themes/useStyles';
+import CatTitle from './CatTitle';
 
 const CatCard = ({
   setSelectedCat,
@@ -49,14 +49,7 @@ const CatCard = ({
         </CardActionArea>
       </Card>
       <GridListTileBar
-        title={
-          <Typography component="span">
-            <>
-              {/* eslint-disable-next-line eqeqeq */}
-              {name} - {age} year{age == '1' || 's'} old
-            </>
-          </Typography>
-        }
+        title={<CatTitle name={name} age={age} setCat={setCat} />}
         actionIcon={
           <IconButton aria-label={`info about ${name}`} className={icon}>
             <InfoIcon />

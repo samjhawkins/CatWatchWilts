@@ -72,8 +72,8 @@ const CatForm = ({ cat, withInitialDisplay, updateCat }) => (
 
 CatForm.propTypes = {
   cat: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    image: PropTypes.string,
   }).isRequired,
   withInitialDisplay: PropTypes.bool,
   updateCat: PropTypes.func.isRequired,

@@ -17,8 +17,8 @@ const getMUIDimensions = (first, second) => {
   //
   // }
   const div = {
-    xs: 12 - image.xs,
-    sm: 12 - image.xs,
+    xs: image.xs === 12 ? undefined : 12 - image.xs,
+    sm: image.sm === 12 ? undefined : 12 - image.sm,
   };
   return {
     image,
