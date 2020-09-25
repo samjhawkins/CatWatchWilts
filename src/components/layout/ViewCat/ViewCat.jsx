@@ -7,25 +7,23 @@ import { withCatContext } from '../../common/wrappers/CatContext';
 import { useStyles } from '../../../themes/useStyles';
 import { withMediaQuery } from '../../common/wrappers/MediaQuery';
 
-const ViewCat = ({ selectedCat, matches: { aboveSM, aboveMD } }) => {
+const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
   const classes = useStyles({ imgUrl: selectedCat.image, aboveSM });
   const wider = selectedCat.cols / selectedCat.rows >= 1;
+
+  const xsRatio = wider || !aboveSM ? 12 : 6;
 
   return (
     <Grid item container component="main" className={classes.root}>
       <Grid
         item
-        xs={wider || !aboveMD ? 12 : 6}
+        xs={xsRatio}
+        md={6}
         component="img"
         src={selectedCat.image}
+        className={classes.fullWidth}
       />
-      <Grid
-        item
-        xs={wider || !aboveMD ? 12 : 6}
-        component={Paper}
-        elevation={6}
-        square
-      >
+      <Grid item xs={xsRatio} md={6} component={Paper} elevation={6} square>
         <Typography component="h1" variant="h5">
           {selectedCat.name}
         </Typography>
