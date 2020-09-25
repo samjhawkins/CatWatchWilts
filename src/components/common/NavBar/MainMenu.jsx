@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Tab, Grid } from '@material-ui/core/index';
+import { Tabs, Tab } from '@material-ui/core/index';
 import { withRouter } from 'react-router-dom';
 import UndecoratedLink from '../links/UndecoratedLink';
 import { pageList } from '../../../routes/routes.config';

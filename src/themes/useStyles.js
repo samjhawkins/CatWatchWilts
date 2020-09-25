@@ -8,12 +8,7 @@ const themedStyles = (theme) => ({
     marginTop: theme.spacing(16),
     marginBottom: theme.spacing(16),
   },
-  root_viewCat: {
-    marginTop: theme.spacing(10),
-    marginBottom: theme.spacing(10),
-    height: '94vh',
-  },
-  root_cats: {
+  cat_tiles: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
@@ -22,12 +17,6 @@ const themedStyles = (theme) => ({
   },
   paper: {
     padding: theme.spacing(8),
-  },
-  flex_paper: {
-    margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   footer: {
     alignItems: 'center',
@@ -52,10 +41,8 @@ const themedStyles = (theme) => ({
   minHeight: {
     minHeight: '90vh',
   },
-  spaceItems: {
-    // width: '60%',
-    // display: 'flex',
-    // justifyContent: 'space-around',
+  hiddenImage: {
+    visibility: 'hidden',
   },
 
   // Media

@@ -7,19 +7,14 @@ import { withCatContext } from '../../common/wrappers/CatContext';
 import CatForm from '../../common/CatForm/CatForm';
 import getMUIDimensions from '../../../utils/getMUIDimensions';
 import { useStyles } from '../../../themes/useStyles';
+import { withMediaQuery } from '../../common/wrappers/MediaQuery';
 
-const EditCat = ({ selectedCat }) => {
-  const classes = useStyles({ imgUrl: selectedCat.image });
+const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
+  const classes = useStyles({ imgUrl: selectedCat.image, aboveSM });
   const breakpoints = getMUIDimensions(selectedCat.rows, selectedCat.cols);
 
   return (
-    <Grid
-      item
-      container
-      component="main"
-      xs={10}
-      className={classes.root_viewCat}
-    >
+    <Grid item container component="main" xs={10} className={classes.root}>
       <Grid item {...breakpoints.image} className={classes.image} />
       <Grid item {...breakpoints.div} component={Paper} elevation={6} square>
         <div className={classes.flex_paper}>
@@ -42,4 +37,4 @@ EditCat.propTypes = {
   }).isRequired,
 };
 
-export default withCatContext(EditCat);
+export default withCatContext(withMediaQuery(EditCat));

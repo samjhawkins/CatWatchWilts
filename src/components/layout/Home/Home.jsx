@@ -38,7 +38,7 @@ const Home = (props) => {
       <Container
         component="main"
         maxWidth={maxWidth}
-        className={classes.root_cats}
+        className={classes.cat_tiles}
       >
         <Typography component="h2">
           Meet some of our our current guests...
