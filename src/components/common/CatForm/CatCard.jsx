@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button,
   Card,
   CardActionArea,
   CardMedia,
   GridListTileBar,
   IconButton,
+  Typography,
 } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import InfoIcon from '@material-ui/icons/Info';
-import LinkedButton from '../links/LinkedButton';
 import { withCatContext } from '../wrappers/CatContext';
 import { useStyles } from '../../../themes/useStyles';
 
@@ -24,12 +24,14 @@ const CatCard = ({
   age,
 }) => {
   const { icon } = useStyles();
+  const history = useHistory();
   const cardCalculateDimensions = ({ target }) => {
     calculateDimensions(index, target);
   };
 
   const setCat = () => {
     setSelectedCat(id);
+    history.push('/viewCat');
   };
 
   return (
@@ -42,29 +44,18 @@ const CatCard = ({
             alt={imageName}
             image={image}
             title={imageName}
+            onClick={setCat}
           />
         </CardActionArea>
       </Card>
       <GridListTileBar
         title={
-          <span>
-            {/* eslint-disable-next-line eqeqeq */}
-            {name} - {age} year{age == '1' || 's'} old
-          </span>
-        }
-        subtitle={
-          <>
-            <Button size="small" color="secondary">
-              Share
-            </Button>
-            <LinkedButton
-              onClick={setCat}
-              to="viewCat"
-              size="small"
-              color="secondary"
-              text="Learn More"
-            />
-          </>
+          <Typography component="span">
+            <>
+              {/* eslint-disable-next-line eqeqeq */}
+              {name} - {age} year{age == '1' || 's'} old
+            </>
+          </Typography>
         }
         actionIcon={
           <IconButton aria-label={`info about ${name}`} className={icon}>
