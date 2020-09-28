@@ -41,11 +41,17 @@ const themedStyles = (theme) => ({
   minHeight: {
     minHeight: '90vh',
   },
-  maxHeight: {
-    maxHeight: '80vh',
+  verticalMargin: {
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
   },
-  hiddenImage: {
-    visibility: 'hidden',
+  swapDimensionsTrue: {
+    margin: 'auto',
+    maxWidth: '50%',
+  },
+  swapDimensionsFalse: {
+    margin: 'auto',
+    maxWidth: '100%',
   },
 
   // Media
@@ -67,8 +73,17 @@ const themedStyles = (theme) => ({
       theme.palette.type === 'dark'
         ? theme.palette.grey[900]
         : theme.palette.grey[50],
-    backgroundSize: 'cover',
+    backgroundSize: (props) => props.backgroundSize || 'cover',
     backgroundPosition: '50% 25%',
+  },
+  imageWidth: {
+    width: (props) => `${props.imageWidth}%`,
+  },
+  imageHeight: {
+    height: (props) => `${props.imageHeight}vw`,
+  },
+  fitHeight: {
+    height: 'fit-content',
   },
   avatar: {
     margin: theme.spacing(1),
