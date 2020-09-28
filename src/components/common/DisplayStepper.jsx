@@ -1,10 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   MobileStepper,
   Button,
   Card,
-  CardActionArea,
   CardActions,
   CardMedia,
   CardContent,
@@ -78,6 +77,12 @@ DisplayStepper.propTypes = {
       image: PropTypes.string,
     }),
   ).isRequired,
+  setDimension: PropTypes.func.isRequired,
+  className: PropTypes.string,
+};
+
+DisplayStepper.defaultProps = {
+  className: '',
 };
 
 export default DisplayStepper;
