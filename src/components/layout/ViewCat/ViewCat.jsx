@@ -7,64 +7,8 @@ import DisplayStepper from '../../common/DisplayStepper';
 import { withCatContext } from '../../common/wrappers/CatContext';
 import { useStyles } from '../../../themes/useStyles';
 import { withMediaQuery } from '../../common/wrappers/MediaQuery';
-import Capitalize from '../../common/Capitalize';
-
-const mockSteps = [
-  {
-    imageName: 'image1',
-    image:
-      'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
-  },
-  {
-    imageName: 'image2',
-    image:
-      'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg',
-  },
-  {
-    imageName: 'image3',
-    image:
-      'https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/reference_guide/outdoor_cat_risks_ref_guide/1800x1200_outdoor_cat_risks_ref_guide.jpg',
-  },
-  {
-    imageName: 'image4',
-    image: 'https://miro.medium.com/max/1000/1*qyAOepULOa_kVehhEIySKA.jpeg',
-  },
-  {
-    imageName: 'image5',
-    image:
-      'https://i.pinimg.com/originals/66/d7/29/66d729c5a9d979b9c65e278373c564b2.jpg',
-  },
-];
-
-const displayValues = {
-  age: true,
-  description: true,
-  rows: true,
-};
-
-const calculatedCatDisplay = (selectedCat, className) => {
-  return Object.keys(selectedCat)
-    .filter((e) => !!displayValues[e])
-    .map((attributeName) => {
-      return (
-        <Grid
-          item
-          container
-          xs={12}
-          md={9}
-          component={Paper}
-          elevation={6}
-          className={className}
-          key={`attribute_${attributeName}`}
-        >
-          <Typography component="h1" variant="h5">
-            <Capitalize>{attributeName}</Capitalize>:{' '}
-            {selectedCat[attributeName]}
-          </Typography>
-        </Grid>
-      );
-    });
-};
+import ObjectMapper from '../../common/ObjectMapper';
+import mockSteps from '../../../mocks/mockSteps';
 
 const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
   const [dimension, setDimension] = useState(false);
@@ -112,10 +56,10 @@ const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
           className={dimensionClass}
         />
       </Grid>
-      {calculatedCatDisplay(
-        selectedCat,
-        `${classes.verticalMargin} ${classes.container}`,
-      )}
+      <ObjectMapper
+        selectedCat={selectedCat}
+        className={`${classes.verticalMargin} ${classes.container}`}
+      />
     </Grid>
   );
 };

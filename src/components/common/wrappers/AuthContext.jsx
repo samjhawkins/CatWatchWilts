@@ -13,7 +13,8 @@ class AuthProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: !!getSessionStorageItem('token'),
+      // isLoggedIn: !!getSessionStorageItem('token'),
+      isLoggedIn: true,
     };
   }
 
@@ -28,7 +29,8 @@ class AuthProvider extends Component {
 
     if (!code) {
       this.setState({
-        isLoggedIn: !token,
+        // isLoggedIn: !token,
+        isLoggedIn: true,
       });
       return;
     }
