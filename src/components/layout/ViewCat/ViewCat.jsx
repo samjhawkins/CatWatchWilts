@@ -39,6 +39,7 @@ const mockSteps = [
 const displayValues = {
   age: true,
   description: true,
+  rows: true,
 };
 
 const calculatedCatDisplay = (selectedCat, className) => {

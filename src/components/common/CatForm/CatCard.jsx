@@ -49,6 +49,8 @@ const CatCard = ({
         </CardActionArea>
       </Card>
       <GridListTileBar
+        style={{ cursor: 'pointer' }}
+        onClick={setCat}
         title={<CatTitle name={name} age={age} setCat={setCat} />}
         actionIcon={
           <IconButton aria-label={`info about ${name}`} className={icon}>
