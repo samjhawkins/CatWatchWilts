@@ -13,8 +13,7 @@ class AuthProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // isLoggedIn: !!getSessionStorageItem('token'),
-      isLoggedIn: true,
+      isLoggedIn: !!getSessionStorageItem('token'),
     };
   }
 
@@ -29,13 +28,10 @@ class AuthProvider extends Component {
 
     if (!code) {
       this.setState({
-        // isLoggedIn: !token,
-        isLoggedIn: true,
+        isLoggedIn: !token,
       });
       return;
     }
-
-    logger('process.env.64', process.env.BASE64_SECRET);
 
     axios
       .get(`${process.env.BACKEND_BASE_API}/token`, { code })
