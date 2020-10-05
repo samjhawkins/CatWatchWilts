@@ -4,7 +4,7 @@ const axios = require('axios');
 const app = express.Router();
 const redirectUri = 'https://localhost:40000';
 
-// Get all cats details
+// Get token
 app.get('/', (req, res, next) => {
   console.log('get token');
   const config = {
@@ -27,8 +27,8 @@ app.get('/', (req, res, next) => {
       config,
     )
     .then((data) => {
-      console.log('data', data);
-      // res.send({ token: data });
+      console.log('Token returning...');
+      res.send({ token: data.data.id_token });
     })
     .catch((e) => {
       console.log('Error translating:', e.message);

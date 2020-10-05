@@ -22,7 +22,7 @@ class AuthProvider extends Component {
   }
 
   login = async () => {
-    logger('login happenned!');
+    logger('login happened!');
     const code = new URLSearchParams(window.location.search).get('code');
     const token = getSessionStorageItem('token');
 
@@ -41,7 +41,7 @@ class AuthProvider extends Component {
       })
       .then((data) => {
         logger('data', data);
-        setSessionStorageItem('token', data);
+        setSessionStorageItem('token', data.data.token);
       })
       .catch((e) => {
         logger('Error translating:', e);
