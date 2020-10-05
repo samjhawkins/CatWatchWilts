@@ -22,15 +22,6 @@ app.post('/cats/:id', async (req, res) => {
       imageName: { S: req.body.imageName },
     },
   };
-  const response = ddb.putItem(params, (err, data) => {
-    if (err) {
-      console.log('Error', err);
-      return err;
-    }
-    console.log('Success', data);
-    return data;
-  });
-  res.send({ data: response });
 
   try {
     const data = await ddb.putItem(params).promise();

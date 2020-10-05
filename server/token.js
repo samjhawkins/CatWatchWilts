@@ -13,7 +13,6 @@ app.get('/', (req, res, next) => {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   };
-  console.log('process.env.64', process.env.BASE64_SECRET);
   const params = new URLSearchParams();
   params.append('code', req.query.code);
   params.append('grant_type', 'authorization_code');
