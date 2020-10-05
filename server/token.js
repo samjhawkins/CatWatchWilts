@@ -13,22 +13,27 @@ app.get('/', (req, res, next) => {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   };
-  console.log('req.params.code', req.params.code);
-  // eslint-disable-next-line no-useless-catch
+  console.log('process.env.64', process.env.BASE64_SECRET);
+  const params = new URLSearchParams();
+  params.append('code', req.params.code);
+  params.append('grant_type', 'authorization_code');
+  params.append('redirect_uri', redirectUri);
+  params.append('client_id', process.env.CLIENT_ID);
+  // params.append('scope', 'all');
   axios
-    .post(
-      'https://catwatch.auth.eu-west-2.amazoncognito.com/oauth2/token',
-      `code=${req.params.code}&grant_type=authorization_code&redirect_uri=${redirectUri}&client_id=${process.env.CLIENT_ID}&scope=all`,
-      config,
-    )
-    .then((data) => {
-      console.log('data', data);
-      // res.send({ token: data });
-    })
-    .catch((e) => {
-      console.log('Error translating:', e.message);
-      next(e);
-    });
+      .post(
+        'https://catwatch.auth.eu-west-2.amazoncognito.com/oauth2/token',
+        params,
+        config,
+      )
+      .then((data) => {
+        console.log('data', data);
+        // res.send({ token: data });
+      })
+      .catch((e) => {
+        console.log('Error translating:', e.message);
+        next(e);
+      });
 });
 
 module.exports = app;
