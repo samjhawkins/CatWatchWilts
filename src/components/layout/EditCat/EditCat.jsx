@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { Form } from 'react-final-form';
+import { Button } from '@material-ui/core';
 import DisplayStepper from '../../common/DisplayStepper';
 import { withCatContext } from '../../common/wrappers/CatContext';
 import { useStyles } from '../../../themes/useStyles';
 import { withMediaQuery } from '../../common/wrappers/MediaQuery';
 import mockSteps from '../../../mocks/mockSteps';
-import { Form } from 'react-final-form';
 import FieldMapper from '../../common/FieldMapper';
-import { Button } from '@material-ui/core';
 
 const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
   const [dimension, setDimension] = useState(false);
