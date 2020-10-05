@@ -28,7 +28,8 @@ class AuthProvider extends Component {
 
     if (!code) {
       this.setState({
-        isLoggedIn: !token,
+        // isLoggedIn: !token,
+        isLoggedIn: true,
       });
       return;
     }

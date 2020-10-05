@@ -5,14 +5,16 @@ const app = express.Router();
 const redirectUri = 'https://localhost:40000';
 
 // Get all cats details
-app.get('/token', (req, res) => {
+app.get('/', (req, res, next) => {
   console.log('get token');
   const config = {
     headers: {
       Authorization: process.env.BASE64_SECRET,
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
   };
-  console.log('process.env.64', process.env.BASE64_SECRET);
+  console.log('req.params.code', req.params.code);
+  // eslint-disable-next-line no-useless-catch
   axios
     .post(
       'https://catwatch.auth.eu-west-2.amazoncognito.com/oauth2/token',
@@ -24,8 +26,8 @@ app.get('/token', (req, res) => {
       // res.send({ token: data });
     })
     .catch((e) => {
-      console.log('Error translating:', e);
-      res.error(new Error('There was a problem verifying the code'));
+      console.log('Error translating:', e.message);
+      next(e);
     });
 });
 

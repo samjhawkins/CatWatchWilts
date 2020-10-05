@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { Form } from 'react-final-form';
+import { Button } from '@material-ui/core';
 import DisplayStepper from '../../common/DisplayStepper';
 import { withCatContext } from '../../common/wrappers/CatContext';
 import { useStyles } from '../../../themes/useStyles';
 import { withMediaQuery } from '../../common/wrappers/MediaQuery';
 import mockSteps from '../../../mocks/mockSteps';
-import { Form } from 'react-final-form';
 import FieldMapper from '../../common/FieldMapper';
-import { Button } from '@material-ui/core';
+import TextInput from '../../common/Fields/TextInput';
 
 const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
   const [dimension, setDimension] = useState(false);
@@ -31,7 +32,7 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
         console.log('formValues submit with', formValues);
         // updateCat(formValues);
       }}
-      initialValues={selectedCat}
+      initialValues={{ ...selectedCat, imageArray: mockSteps }}
       validate={() => {}}
       render={({ handleSubmit, reset, submitting, pristine, values }) => (
         <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
@@ -45,9 +46,13 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
               elevation={6}
               className={`${classes.verticalMargin} ${classes.container}`}
             >
-              <Typography component="h1" variant="h3">
-                {selectedCat.name}
-              </Typography>
+              <TextInput
+                name="name"
+                style={{ width: '98%' }}
+                label="name"
+                variant="outlined"
+                type="string"
+              />
             </Grid>
             <Grid
               item
@@ -58,6 +63,7 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
               className={classes.verticalMargin}
             >
               <DisplayStepper
+                edit
                 steps={selectedCat.imageArray || mockSteps}
                 setDimension={setDimension}
                 className={dimensionClass}

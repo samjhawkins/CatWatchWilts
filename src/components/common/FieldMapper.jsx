@@ -27,7 +27,7 @@ const FieldMapper = ({ selectedCat, className }) => {
           key={`attribute_${attributeName}`}
         >
           <TextInput
-            style={{ width: '100%' }}
+            style={{ width: '98%' }}
             label={attributeName}
             name={attributeName}
             variant="outlined"

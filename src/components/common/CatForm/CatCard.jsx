@@ -10,16 +10,19 @@ import {
 import { useHistory } from 'react-router-dom';
 import InfoIcon from '@material-ui/icons/Info';
 import { withCatContext } from '../wrappers/CatContext';
+import { withAuthContext } from '../wrappers/AuthContext';
 import { useStyles } from '../../../themes/useStyles';
 import CatTitle from './CatTitle';
+import mockSteps from '../../../mocks/mockSteps';
 
 const CatCard = ({
   setSelectedCat,
   calculateDimensions,
+  isLoggedIn,
   id,
   index,
-  imageName,
   image,
+  imageArray,
   name,
   age,
 }) => {
@@ -31,7 +34,7 @@ const CatCard = ({
 
   const setCat = () => {
     setSelectedCat(id);
-    history.push('/viewCat');
+    history.push(isLoggedIn ? '/editCat' : '/viewCat');
   };
 
   return (
@@ -41,9 +44,9 @@ const CatCard = ({
           <CardMedia
             onLoad={cardCalculateDimensions}
             component="img"
-            alt={imageName}
-            image={image}
-            title={imageName}
+            alt={imageArray[image].imageName}
+            image={imageArray[image].image}
+            title={imageArray[image].imageName}
             onClick={setCat}
           />
         </CardActionArea>
@@ -63,18 +66,25 @@ const CatCard = ({
 };
 
 CatCard.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
   setSelectedCat: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   calculateDimensions: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  imageName: PropTypes.string,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   age: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  imageArray: PropTypes.arrayOf(
+    PropTypes.shape({
+      image: PropTypes.string,
+      imageName: PropTypes.string,
+    }),
+  ),
 };
 
 CatCard.defaultProps = {
-  imageName: '',
+  imageArray: mockSteps,
+  image: 0,
 };
 
-export default withCatContext(CatCard);
+export default withAuthContext(withCatContext(CatCard));
