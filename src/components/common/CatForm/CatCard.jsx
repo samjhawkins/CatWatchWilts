@@ -37,6 +37,8 @@ const CatCard = ({
     history.push(isLoggedIn ? '/editCat' : '/viewCat');
   };
 
+  const mainStep = imageArray[0];
+
   return (
     <>
       <Card>
@@ -44,9 +46,9 @@ const CatCard = ({
           <CardMedia
             onLoad={cardCalculateDimensions}
             component="img"
-            alt={imageArray[image].imageName}
-            image={imageArray[image].image}
-            title={imageArray[image].imageName}
+            alt={mainStep.imageName}
+            image={mainStep.image}
+            title={mainStep.imageName}
             onClick={setCat}
           />
         </CardActionArea>

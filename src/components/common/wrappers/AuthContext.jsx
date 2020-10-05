@@ -28,14 +28,17 @@ class AuthProvider extends Component {
 
     if (!code) {
       this.setState({
-        // isLoggedIn: !token,
-        isLoggedIn: true,
+        isLoggedIn: !token,
       });
       return;
     }
 
     axios
-      .get(`${process.env.BACKEND_BASE_API}/token`, { code })
+      .get(`${process.env.BACKEND_BASE_API}/token`, {
+        params: {
+          code,
+        },
+      })
       .then((data) => {
         logger('data', data);
         setSessionStorageItem('token', data);
