@@ -41,7 +41,7 @@ class AuthProvider extends Component {
       })
       .then((data) => {
         logger('data', data);
-        setSessionStorageItem('token', data);
+        setSessionStorageItem('token', data.data.token);
       })
       .catch((e) => {
         logger('Error translating:', e);
