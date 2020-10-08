@@ -16,9 +16,11 @@ import TextInput from './Fields/TextInput';
 const DisplayStepper = (props) => {
   const { steps, setDimension, className, edit } = props;
   const [activeStep, setActiveStep] = useState(0);
-  const {
-    values: { imageArray },
-  } = useFormState();
+  let imageDisplaySteps = steps;
+  if (edit) {
+    const { values } = useFormState();
+    imageDisplaySteps = values.imageArray;
+  }
 
   const handleNext = () => {
     const updatedStep = (activeStep + 1) % steps.length;
@@ -41,9 +43,9 @@ const DisplayStepper = (props) => {
         <CardMedia
           onLoad={onLoad}
           component="img"
-          alt={imageArray[activeStep].imageName}
-          image={imageArray[activeStep].image}
-          title={imageArray[activeStep].imageName}
+          alt={imageDisplaySteps[activeStep].imageName}
+          image={imageDisplaySteps[activeStep].image}
+          title={imageDisplaySteps[activeStep].imageName}
           className={className}
         />
         {edit ? (

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { Grid, Paper, Typography } from '@material-ui/core';
 import DisplayStepper from '../../common/DisplayStepper';
 import { withCatContext } from '../../common/wrappers/CatContext';
 import { useStyles } from '../../../themes/useStyles';
 import { withMediaQuery } from '../../common/wrappers/MediaQuery';
 import ObjectMapper from '../../common/ObjectMapper';
 import mockSteps from '../../../mocks/mockSteps';
+import CatAttributeTile from '../../common/CatAttributeTile';
 
 const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
   const [dimension, setDimension] = useState(false);
@@ -16,6 +15,7 @@ const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
   const dimensionClass = dimension
     ? classes.swapDimensionsTrue
     : classes.swapDimensionsFalse;
+  const catAttributeClass = `${classes.verticalMargin} ${classes.container}`;
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -29,37 +29,19 @@ const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
       justify="center"
       className={classes.root}
     >
-      <Grid
-        item
-        container
-        xs={12}
-        md={9}
-        component={Paper}
-        elevation={6}
-        className={`${classes.verticalMargin} ${classes.container}`}
-      >
+      <CatAttributeTile component={Paper} className={catAttributeClass}>
         <Typography component="h1" variant="h3">
           {selectedCat.name}
         </Typography>
-      </Grid>
-      <Grid
-        item
-        container
-        xs={12}
-        md={9}
-        justify="center"
-        className={classes.verticalMargin}
-      >
+      </CatAttributeTile>
+      <CatAttributeTile className={classes.verticalMargin}>
         <DisplayStepper
           steps={selectedCat.imageArray || mockSteps}
           setDimension={setDimension}
           className={dimensionClass}
         />
-      </Grid>
-      <ObjectMapper
-        selectedCat={selectedCat}
-        className={`${classes.verticalMargin} ${classes.container}`}
-      />
+      </CatAttributeTile>
+      <ObjectMapper selectedCat={selectedCat} className={catAttributeClass} />
     </Grid>
   );
 };

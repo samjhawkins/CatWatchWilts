@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from '../axiosInstance';
+import alterCats from '../../../utils/alterCats';
 import logger from '../../../utils/logger';
 import sortGrid from '../../../utils/sortGrid';
 import isPopulatedArray from '../../../utils/isPopulatedArray';
@@ -53,7 +54,7 @@ class CatProvider extends Component {
     if (process.env.MOCK_CATS === 'true') {
       return this.setState({
         ...updateState,
-        cats: catsMock.map((e) => ({ ...e, cols: 1, rows: 1 })),
+        cats: alterCats(catsMock),
       });
     }
     return axios
@@ -61,7 +62,7 @@ class CatProvider extends Component {
       .then((response) => {
         let newCats = response.data.data;
         if (newCats) {
-          newCats = newCats.map((e) => ({ ...e, cols: 1, rows: 1 }));
+          newCats = alterCats(newCats);
         }
         this.setState({ ...updateState, cats: newCats });
       })

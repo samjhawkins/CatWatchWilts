@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import { Form } from 'react-final-form';
-import { Button } from '@material-ui/core';
+import { Button, Grid, Paper } from '@material-ui/core';
 import DisplayStepper from '../../common/DisplayStepper';
 import { withCatContext } from '../../common/wrappers/CatContext';
 import { useStyles } from '../../../themes/useStyles';
@@ -11,6 +9,8 @@ import { withMediaQuery } from '../../common/wrappers/MediaQuery';
 import mockSteps from '../../../mocks/mockSteps';
 import FieldMapper from '../../common/FieldMapper';
 import TextInput from '../../common/Fields/TextInput';
+import SwitchInput from '../../common/Fields/SwitchInput';
+import CatAttributeTile from '../../common/CatAttributeTile';
 
 const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
   const [dimension, setDimension] = useState(false);
@@ -18,19 +18,16 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
   const dimensionClass = dimension
     ? classes.swapDimensionsTrue
     : classes.swapDimensionsFalse;
+  const catAttributeClass = `${classes.verticalMargin} ${classes.container}`;
 
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
 
-  console.log(
-    "process.env.DEBUG_FORM === 'true'",
-    process.env.DEBUG_FORM === 'true',
-  );
-  console.log('process.env.DEBUG_FORM', process.env.DEBUG_FORM);
   return (
     <Form
       onSubmit={(formValues) => {
+        // eslint-disable-next-line no-console
         console.log('formValues submit with', formValues);
         // updateCat(formValues);
       }}
@@ -39,51 +36,34 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
       render={({ handleSubmit, reset, submitting, pristine, values }) => (
         <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
           <Grid item container xs={12} justify="center">
-            <Grid
-              item
-              container
-              xs={12}
-              md={9}
-              component={Paper}
-              elevation={6}
-              className={`${classes.verticalMargin} ${classes.container}`}
-            >
+            <CatAttributeTile className={catAttributeClass} component={Paper}>
               <TextInput
                 name="name"
-                style={{ width: '98%' }}
+                style={{ width: '80%' }}
                 label="Name"
                 variant="outlined"
                 type="string"
               />
-            </Grid>
-            <Grid
-              item
-              container
-              xs={12}
-              md={9}
-              elevation={6}
-              className={classes.verticalMargin}
-            >
+
+              <SwitchInput
+                name="active"
+                style={{ width: '98%' }}
+                label="Active"
+              />
+            </CatAttributeTile>
+            <CatAttributeTile className={classes.verticalMargin}>
               <DisplayStepper
                 edit
                 steps={selectedCat.imageArray || mockSteps}
                 setDimension={setDimension}
                 className={dimensionClass}
               />
-            </Grid>
+            </CatAttributeTile>
             <FieldMapper
               selectedCat={selectedCat}
-              className={`${classes.verticalMargin} ${classes.container}`}
+              className={catAttributeClass}
             />
-            <Grid
-              item
-              container
-              xs={12}
-              md={9}
-              component={Paper}
-              elevation={6}
-              className={`${classes.verticalMargin} ${classes.container}`}
-            >
+            <CatAttributeTile component={Paper} className={catAttributeClass}>
               <Button
                 type="button"
                 variant="contained"
@@ -101,7 +81,7 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
               >
                 Submit
               </Button>
-            </Grid>
+            </CatAttributeTile>
             {process.env.DEBUG_FORM === 'true' && (
               <pre
                 style={{ overflowWrap: 'break-word' }}
