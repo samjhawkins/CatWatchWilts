@@ -8,6 +8,7 @@ import {
   getSessionStorageItem,
   setSessionStorageItem,
 } from '../../../utils/sessionStorage';
+import catsMock from '../../../mocks/catsMock';
 
 const CatContext = React.createContext();
 
@@ -49,6 +50,12 @@ class CatProvider extends Component {
   };
 
   loadCats = async (updateState = this.state) => {
+    if (process.env.MOCK_CATS === 'true') {
+      return this.setState({
+        ...updateState,
+        cats: catsMock.map((e) => ({ ...e, cols: 1, rows: 1 })),
+      });
+    }
     return axios
       .get('/db/cats')
       .then((response) => {

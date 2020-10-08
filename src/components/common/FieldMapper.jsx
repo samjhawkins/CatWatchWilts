@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextInput from './Fields/TextInput';
+import capitalize from '../../utils/capitalize';
 
 const removedValues = {
+  imageArray: true,
   cols: true,
   rows: true,
   active: true,
@@ -15,6 +17,7 @@ const FieldMapper = ({ selectedCat, className }) => {
   return Object.keys(selectedCat)
     .filter((e) => !removedValues[e])
     .map((attributeName) => {
+      const label = capitalize(attributeName);
       return (
         <Grid
           item
@@ -28,7 +31,7 @@ const FieldMapper = ({ selectedCat, className }) => {
         >
           <TextInput
             style={{ width: '98%' }}
-            label={attributeName}
+            label={label}
             name={attributeName}
             variant="outlined"
             type={`${typeof selectedCat[attributeName]}`}

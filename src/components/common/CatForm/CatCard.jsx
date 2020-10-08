@@ -12,8 +12,8 @@ import InfoIcon from '@material-ui/icons/Info';
 import { withCatContext } from '../wrappers/CatContext';
 import { withAuthContext } from '../wrappers/AuthContext';
 import { useStyles } from '../../../themes/useStyles';
+import defaultImageObject from '../../../utils/defaultImageObject';
 import CatTitle from './CatTitle';
-import mockSteps from '../../../mocks/mockSteps';
 
 const CatCard = ({
   setSelectedCat,
@@ -37,7 +37,7 @@ const CatCard = ({
     history.push(isLoggedIn ? '/editCat' : '/viewCat');
   };
 
-  const mainStep = imageArray[0];
+  const mainStep = imageArray[image] || defaultImageObject;
 
   return (
     <>
@@ -73,7 +73,7 @@ CatCard.propTypes = {
   id: PropTypes.string.isRequired,
   calculateDimensions: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
+  image: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   age: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   imageArray: PropTypes.arrayOf(
@@ -85,8 +85,7 @@ CatCard.propTypes = {
 };
 
 CatCard.defaultProps = {
-  imageArray: mockSteps,
-  image: 0,
+  imageArray: [],
 };
 
 export default withAuthContext(withCatContext(CatCard));

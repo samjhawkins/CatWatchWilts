@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import { Form } from 'react-final-form';
 import { Button } from '@material-ui/core';
 import DisplayStepper from '../../common/DisplayStepper';
@@ -24,8 +23,11 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
     window.scroll(0, 0);
   }, []);
 
-  const withInitialDisplay = true;
-
+  console.log(
+    "process.env.DEBUG_FORM === 'true'",
+    process.env.DEBUG_FORM === 'true',
+  );
+  console.log('process.env.DEBUG_FORM', process.env.DEBUG_FORM);
   return (
     <Form
       onSubmit={(formValues) => {
@@ -49,7 +51,7 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
               <TextInput
                 name="name"
                 style={{ width: '98%' }}
-                label="name"
+                label="Name"
                 variant="outlined"
                 type="string"
               />
@@ -100,7 +102,14 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
                 Submit
               </Button>
             </Grid>
-            {withInitialDisplay && <pre>{JSON.stringify(values, 0, 2)}</pre>}
+            {process.env.DEBUG_FORM === 'true' && (
+              <pre
+                style={{ overflowWrap: 'break-word' }}
+                className={classes.root}
+              >
+                {JSON.stringify(values, 0, 2)}
+              </pre>
+            )}
           </Grid>
         </form>
       )}
@@ -111,7 +120,7 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
 EditCat.propTypes = {
   selectedCat: PropTypes.shape({
     name: PropTypes.string,
-    image: PropTypes.string,
+    image: PropTypes.number,
     rows: PropTypes.number,
     cols: PropTypes.number,
     imageArray: PropTypes.arrayOf(

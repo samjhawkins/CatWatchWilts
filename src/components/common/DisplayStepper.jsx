@@ -10,12 +10,15 @@ import {
   Typography,
 } from '@material-ui/core/index';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+import { useFormState } from 'react-final-form';
 import TextInput from './Fields/TextInput';
-import Grid from '@material-ui/core/Grid';
 
 const DisplayStepper = (props) => {
   const { steps, setDimension, className, edit } = props;
   const [activeStep, setActiveStep] = useState(0);
+  const {
+    values: { imageArray },
+  } = useFormState();
 
   const handleNext = () => {
     const updatedStep = (activeStep + 1) % steps.length;
@@ -33,29 +36,29 @@ const DisplayStepper = (props) => {
   };
 
   return (
-    <Card raised>
+    <Card raised style={{ width: '100%' }}>
       <CardContent style={{ padding: 0, textAlign: 'center' }}>
         <CardMedia
           onLoad={onLoad}
           component="img"
-          alt={steps[activeStep].imageName}
-          image={steps[activeStep].image}
-          title={steps[activeStep].imageName}
+          alt={imageArray[activeStep].imageName}
+          image={imageArray[activeStep].image}
+          title={imageArray[activeStep].imageName}
           className={className}
         />
         {edit ? (
           <>
             <TextInput
               name={`imageArray[${activeStep}].imageName`}
-              style={{ width: '98%' }}
-              label={`imageArray[${activeStep}].imageName`}
+              style={{ width: '98%', marginTop: '10px', marginBottom: '10px' }}
+              label="Image Name"
               variant="outlined"
               type="string"
             />
             <TextInput
               name={`imageArray[${activeStep}].image`}
-              style={{ width: '98%' }}
-              label={`imageArray[${activeStep}].image`}
+              style={{ width: '98%', marginTop: '10px', marginBottom: '10px' }}
+              label="Image URL"
               variant="outlined"
               type="string"
             />

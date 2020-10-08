@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   getSessionStorageItem,
   setSessionStorageItem,
+  removeSessionStorage,
 } from '../../../utils/sessionStorage';
 import axios from '../axiosInstance';
 import logger from '../../../utils/logger';
@@ -28,7 +29,7 @@ class AuthProvider extends Component {
 
     if (!code) {
       this.setState({
-        isLoggedIn: !token,
+        isLoggedIn: !!token,
       });
       return;
     }
@@ -42,14 +43,16 @@ class AuthProvider extends Component {
       .then((data) => {
         logger('data', data);
         setSessionStorageItem('token', data.data.token);
+        this.setState({ isLoggedIn: true });
       })
       .catch((e) => {
         logger('Error translating:', e);
+        this.logout();
       });
   };
 
   logout = () => {
-    setSessionStorageItem('token', undefined);
+    removeSessionStorage('token');
     this.setState({ isLoggedIn: false });
   };
 

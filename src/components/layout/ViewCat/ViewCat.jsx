@@ -67,7 +67,7 @@ const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
 ViewCat.propTypes = {
   selectedCat: PropTypes.shape({
     name: PropTypes.string,
-    image: PropTypes.string,
+    image: PropTypes.number,
     rows: PropTypes.number,
     cols: PropTypes.number,
     imageArray: PropTypes.arrayOf(
