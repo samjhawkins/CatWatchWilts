@@ -1,6 +1,14 @@
 const sortGrid = (arrayIn) => {
   const colWidth = parseInt(process.env.COLUMN_WIDTH, 0);
-  const arrayToSort = [...arrayIn];
+  let arrayToSort = [];
+  let arrayToAppend = [];
+  arrayIn.forEach((item) => {
+    if (item.active) {
+      arrayToSort = [...arrayToSort, item];
+    } else {
+      arrayToAppend = [...arrayToAppend, item];
+    }
+  });
   const sortArray = [];
   const allocatedIndexes = [];
 
@@ -51,7 +59,7 @@ const sortGrid = (arrayIn) => {
     }
   }
 
-  return sortArray;
+  return [...sortArray, ...arrayToAppend];
 };
 
 export default sortGrid;

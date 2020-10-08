@@ -12,9 +12,11 @@ import { useStyles } from '../../../themes/useStyles';
 import isPopulatedArray from '../../../utils/isPopulatedArray';
 import CatCard from '../../common/CatForm/CatCard';
 import WelcomeMat from './WelcomeMat';
+import { withAuthContext } from '../../common/wrappers/AuthContext';
 
 const Home = (props) => {
   const {
+    isLoggedIn,
     cats,
     sortCatsForGrid,
     sorted,
@@ -24,11 +26,14 @@ const Home = (props) => {
 
   useEffect(() => {
     if (!sorted) {
-      sortCatsForGrid();
+      sortCatsForGrid(isLoggedIn);
     }
-  }, [sorted]);
+  }, [sorted, isLoggedIn]);
 
   const maxWidth = aboveSM ? 'xl' : undefined;
+  console.log('isLoggedIn', isLoggedIn);
+  const displayCats = isLoggedIn ? cats : cats.filter(({ active }) => active);
+  console.log('displayCats', displayCats);
 
   return (
     <>
@@ -50,8 +55,8 @@ const Home = (props) => {
           className={classes.fullWidth}
           cols={aboveMD ? parseInt(process.env.COLUMN_WIDTH, 0) : 1}
         >
-          {isPopulatedArray(cats) &&
-            cats.map((cat, index) => (
+          {isPopulatedArray(displayCats) &&
+            displayCats.map((cat, index) => (
               <GridListTile
                 key={`${cat.id}`}
                 cols={aboveMD ? cat.cols || 1 : 1}
@@ -67,6 +72,7 @@ const Home = (props) => {
 };
 
 Home.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
   cats: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -81,4 +87,4 @@ Home.propTypes = {
   }).isRequired,
 };
 
-export default withMediaQuery(withCatContext(Home));
+export default withMediaQuery(withAuthContext(withCatContext(Home)));

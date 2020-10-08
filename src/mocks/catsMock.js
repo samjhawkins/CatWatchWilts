@@ -2,7 +2,7 @@ import mockSteps from './mockSteps';
 
 const catsMock = [
   {
-    active: 'true',
+    active: 'false',
     id: '165272',
     name: 'Fluffy',
     age: '2',
