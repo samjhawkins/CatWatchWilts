@@ -31,9 +31,7 @@ const Home = (props) => {
   }, [sorted, isLoggedIn]);
 
   const maxWidth = aboveSM ? 'xl' : undefined;
-  console.log('isLoggedIn', isLoggedIn);
   const displayCats = isLoggedIn ? cats : cats.filter(({ active }) => active);
-  console.log('displayCats', displayCats);
 
   return (
     <>

@@ -94,7 +94,7 @@ class CatProvider extends Component {
 
   sortCatsForGrid = (isLoggedIn) => {
     const { state } = this;
-    const sortedArray = sortGrid(state.cats);
+    const sortedArray = sortGrid(state.cats, isLoggedIn);
     this.setState({ ...state, cats: sortedArray, sorted: true });
   };
 

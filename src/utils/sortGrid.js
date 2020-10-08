@@ -1,14 +1,18 @@
-const sortGrid = (arrayIn) => {
+const sortGrid = (arrayIn, includeActive) => {
   const colWidth = parseInt(process.env.COLUMN_WIDTH, 0);
   let arrayToSort = [];
   let arrayToAppend = [];
-  arrayIn.forEach((item) => {
-    if (item.active) {
-      arrayToSort = [...arrayToSort, item];
-    } else {
-      arrayToAppend = [...arrayToAppend, item];
-    }
-  });
+  if (!includeActive) {
+    arrayIn.forEach((item) => {
+      if (item.active) {
+        arrayToSort = [...arrayToSort, item];
+      } else {
+        arrayToAppend = [...arrayToAppend, item];
+      }
+    });
+  } else {
+    arrayToSort = [...arrayIn];
+  }
   const sortArray = [];
   const allocatedIndexes = [];
 
