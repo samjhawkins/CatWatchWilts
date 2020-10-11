@@ -7,8 +7,8 @@ import theme from './themes/theme';
 import {
   AuthProvider,
   withAuthContext,
-} from './components/common/wrappers/AuthContext';
-import { CatProvider } from './components/common/wrappers/CatContext';
+} from './components/wrappers/AuthContext';
+import { CatProvider } from './components/wrappers/CatContext';
 
 const CatProviderWithAuth = withAuthContext(CatProvider);
 

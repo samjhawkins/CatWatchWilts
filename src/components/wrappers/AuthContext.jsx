@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {getSessionStorageItem, removeSessionStorage, setSessionStorageItem,} from '../../../utils/sessionStorage';
-import axios from '../../../utils/axiosInstance';
-import logger from '../../../utils/logger';
+import {
+  getSessionStorageItem,
+  removeSessionStorage,
+  setSessionStorageItem,
+} from '../../utils/sessionStorage';
+import axios from '../../utils/axiosInstance';
+import logger from '../../utils/logger';
 
 const AuthContext = React.createContext();
 

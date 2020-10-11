@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
-import {useStyles} from '../../themes/useStyles';
+import { useStyles } from '../../themes/useStyles';
 
 const PaymentMethod = ({ name, button, logo }) => {
   const classes = useStyles();

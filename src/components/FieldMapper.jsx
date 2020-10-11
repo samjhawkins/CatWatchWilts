@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextInput from './Fields/TextInput';
-import capitalize from '../../utils/capitalize';
+import capitalize from '../utils/capitalize';
 
 const removedValues = {
   imageArray: true,

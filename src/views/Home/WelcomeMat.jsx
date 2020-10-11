@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import {CardActions, CardContent, CardMedia, Typography,} from '@material-ui/core';
-import LinkedButton from '../../components/common/links/LinkedButton';
-import {useStyles} from '../../themes/useStyles';
+import {
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@material-ui/core';
+import LinkedButton from '../../components/links/LinkedButton';
+import { useStyles } from '../../themes/useStyles';
 
-const WelcomeMat = ({aboveSM}) => {
-  const classes = useStyles({aboveSM});
+const WelcomeMat = ({ aboveSM }) => {
+  const classes = useStyles({ aboveSM });
   return (
     <Grid
       item

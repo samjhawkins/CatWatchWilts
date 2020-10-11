@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Tab, Tabs} from '@material-ui/core/index';
-import {withRouter} from 'react-router-dom';
+import { Tab, Tabs } from '@material-ui/core/index';
+import { withRouter } from 'react-router-dom';
 import UndecoratedLink from '../links/UndecoratedLink';
-import {pageList} from '../../../utils/routes.config';
-import {useStyles} from '../../../themes/useStyles';
+import { pageList } from '../../utils/routes.config';
+import { useStyles } from '../../themes/useStyles';
 
-const MainMenu = ({matches, location, className}) => {
-  const {aboveSM} = matches;
+const MainMenu = ({ matches, location, className }) => {
+  const { aboveSM } = matches;
   const classes = useStyles();
   const currentTab = pageList.findIndex(
     (route) => route.path === location?.pathname,

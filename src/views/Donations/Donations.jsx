@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import {Typography} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import payPalLogo from '../../images/pp-logo.png';
 import justGivingLogo from '../../images/just_giving_logo.jpg';
 import PaymentMethod from './PaymentMethod';
-import DonateButton from '../../components/common/DonateButton';
-import {useStyles} from '../../themes/useStyles';
-import {withMediaQuery} from '../../components/common/wrappers/MediaQuery';
+import DonateButton from '../../components/DonateButton';
+import { useStyles } from '../../themes/useStyles';
+import { withMediaQuery } from '../../components/wrappers/MediaQuery';
 
 const imgUrl =
   'https://images.unsplash.com/photo-1517331156700-3c241d2b4d83?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1048&q=80';
 
-const Donations = ({matches: {aboveSM}}) => {
-  const classes = useStyles({imgUrl, aboveSM});
+const Donations = ({ matches: { aboveSM } }) => {
+  const classes = useStyles({ imgUrl, aboveSM });
   return (
     <Grid
       item

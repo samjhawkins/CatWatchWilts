@@ -10,8 +10,8 @@ import {
 import { useHistory } from 'react-router-dom';
 import InfoIcon from '@material-ui/icons/Info';
 import { withCatContext } from '../wrappers/CatContext';
-import { useStyles } from '../../../themes/useStyles';
-import defaultImageObject from '../../../utils/defaultImageObject';
+import { useStyles } from '../../themes/useStyles';
+import defaultImageObject from '../../utils/defaultImageObject';
 import CatTitle from './CatTitle';
 
 const CatCard = ({

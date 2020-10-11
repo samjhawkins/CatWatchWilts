@@ -1,20 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {Form} from 'react-final-form';
-import {Button, Grid, Paper} from '@material-ui/core';
-import DisplayStepper from '../../components/common/DisplayStepper';
-import {withCatContext} from '../../components/common/wrappers/CatContext';
-import {useStyles} from '../../themes/useStyles';
-import {withMediaQuery} from '../../components/common/wrappers/MediaQuery';
+import { Form } from 'react-final-form';
+import { Button, Grid, Paper } from '@material-ui/core';
+import DisplayStepper from '../../components/DisplayStepper';
+import { withCatContext } from '../../components/wrappers/CatContext';
+import { useStyles } from '../../themes/useStyles';
+import { withMediaQuery } from '../../components/wrappers/MediaQuery';
 import mockSteps from '../../mocks/mockSteps';
-import FieldMapper from '../../components/common/FieldMapper';
-import TextInput from '../../components/common/Fields/TextInput';
-import SwitchInput from '../../components/common/Fields/SwitchInput';
-import CatAttributeTile from '../../components/common/CatForm/CatAttributeTile';
+import FieldMapper from '../../components/FieldMapper';
+import TextInput from '../../components/Fields/TextInput';
+import SwitchInput from '../../components/Fields/SwitchInput';
+import CatAttributeTile from '../../components/CatForm/CatAttributeTile';
 
-const EditCat = ({selectedCat, matches: {aboveSM}}) => {
+const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
   const [dimension, setDimension] = useState(false);
-  const classes = useStyles({aboveSM});
+  const classes = useStyles({ aboveSM });
   const dimensionClass = dimension
     ? classes.swapDimensionsTrue
     : classes.swapDimensionsFalse;

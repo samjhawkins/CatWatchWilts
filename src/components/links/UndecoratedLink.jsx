@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useStyles } from '../../../themes/useStyles';
+import { useStyles } from '../../themes/useStyles';
 
 const UndecoratedLink = ({ to, href, className, children, onClick }) => {
   const classes = useStyles();

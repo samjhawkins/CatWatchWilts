@@ -1,13 +1,18 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {Container, GridList, GridListTile, Typography,} from '@material-ui/core/index';
-import {withCatContext} from '../../components/common/wrappers/CatContext';
-import {withMediaQuery} from '../../components/common/wrappers/MediaQuery';
-import {useStyles} from '../../themes/useStyles';
+import {
+  Container,
+  GridList,
+  GridListTile,
+  Typography,
+} from '@material-ui/core/index';
+import { withCatContext } from '../../components/wrappers/CatContext';
+import { withMediaQuery } from '../../components/wrappers/MediaQuery';
+import { useStyles } from '../../themes/useStyles';
 import isPopulatedArray from '../../utils/isPopulatedArray';
-import CatCard from '../../components/common/CatForm/CatCard';
+import CatCard from '../../components/CatForm/CatCard';
 import WelcomeMat from './WelcomeMat';
-import {withAuthContext} from '../../components/common/wrappers/AuthContext';
+import { withAuthContext } from '../../components/wrappers/AuthContext';
 
 const Home = (props) => {
   const {
@@ -15,7 +20,7 @@ const Home = (props) => {
     cats,
     sortCatsForGrid,
     sorted,
-    matches: {aboveSM, aboveMD},
+    matches: { aboveSM, aboveMD },
   } = props;
   const classes = useStyles({ aboveSM });
 

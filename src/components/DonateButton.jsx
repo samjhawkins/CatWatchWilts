@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LinkedButton from './links/LinkedButton';
-import { useStyles } from '../../themes/useStyles';
+import { useStyles } from '../themes/useStyles';
 
 const DonateButton = ({ to, size }) => {
   const classes = useStyles();

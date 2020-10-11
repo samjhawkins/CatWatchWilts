@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, Toolbar, Avatar, Grid, Button } from '@material-ui/core';
-import logo from '../../../images/logo.jpg';
+import logo from '../../images/logo.jpg';
 import UndecoratedLink from '../links/UndecoratedLink';
 import MainMenu from './MainMenu';
 import { MediaQuery } from '../wrappers/MediaQuery';
-import { useStyles } from '../../../themes/useStyles';
+import { useStyles } from '../../themes/useStyles';
 import { withAuthContext } from '../wrappers/AuthContext';
 
 const NavBar = ({ logout, isLoggedIn }) => {
