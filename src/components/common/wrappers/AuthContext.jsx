@@ -27,7 +27,7 @@ class AuthProvider extends Component {
     const code = new URLSearchParams(window.location.search).get('code');
     const token = getSessionStorageItem('token');
 
-    if (!code) {
+    if (!code || token) {
       this.setState({
         isLoggedIn: !!token,
       });
@@ -47,7 +47,7 @@ class AuthProvider extends Component {
       })
       .catch((e) => {
         logger('Error translating:', e);
-        this.logout();
+        this.setState({ isLoggedIn: false });
       });
   };
 

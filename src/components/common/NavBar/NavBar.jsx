@@ -1,13 +1,15 @@
 import React from 'react';
-import { AppBar, Toolbar, Avatar, Grid } from '@material-ui/core/index';
+import PropTypes from 'prop-types';
+import { AppBar, Toolbar, Avatar, Grid, Button } from '@material-ui/core';
 import logo from '../../../images/logo.jpg';
 import UndecoratedLink from '../links/UndecoratedLink';
 import MainMenu from './MainMenu';
 import { MediaQuery } from '../wrappers/MediaQuery';
 import { useStyles } from '../../../themes/useStyles';
+import { withAuthContext } from '../wrappers/AuthContext';
 
-const NavBar = () => {
-  const classes = useStyles();
+const NavBar = ({ logout, isLoggedIn }) => {
+  const classes = useStyles({ imageHeight: 3 });
   return (
     <AppBar position="sticky">
       <Toolbar>
@@ -29,10 +31,26 @@ const NavBar = () => {
           <MediaQuery>
             <MainMenu className={classes.appBarItem} />
           </MediaQuery>
+          {isLoggedIn && (
+            <Button
+              size="large"
+              variant="contained"
+              color="secondary"
+              onClick={logout}
+              className={classes.appBarItem}
+            >
+              Logout
+            </Button>
+          )}
         </Grid>
       </Toolbar>
     </AppBar>
   );
 };
 
-export default NavBar;
+NavBar.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
+};
+
+export default withAuthContext(NavBar);

@@ -10,7 +10,6 @@ import {
 import { useHistory } from 'react-router-dom';
 import InfoIcon from '@material-ui/icons/Info';
 import { withCatContext } from '../wrappers/CatContext';
-import { withAuthContext } from '../wrappers/AuthContext';
 import { useStyles } from '../../../themes/useStyles';
 import defaultImageObject from '../../../utils/defaultImageObject';
 import CatTitle from './CatTitle';
@@ -18,9 +17,7 @@ import CatTitle from './CatTitle';
 const CatCard = ({
   setSelectedCat,
   calculateDimensions,
-  isLoggedIn,
   id,
-  index,
   image,
   imageArray,
   name,
@@ -29,12 +26,21 @@ const CatCard = ({
   const { icon } = useStyles();
   const history = useHistory();
   const cardCalculateDimensions = ({ target }) => {
-    calculateDimensions(index, target);
+    calculateDimensions(id, target);
   };
 
-  const setCat = () => {
+  const editCat = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     setSelectedCat(id);
-    history.push(isLoggedIn ? '/editCat' : '/viewCat');
+    history.push('/editCat');
+  };
+
+  const viewCat = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSelectedCat(id);
+    history.push('/viewCat');
   };
 
   const mainStep = imageArray[image] || defaultImageObject;
@@ -49,14 +55,14 @@ const CatCard = ({
             alt={mainStep.imageName}
             image={mainStep.image}
             title={mainStep.imageName}
-            onClick={setCat}
+            onClick={viewCat}
           />
         </CardActionArea>
       </Card>
       <GridListTileBar
         style={{ cursor: 'pointer' }}
-        onClick={setCat}
-        title={<CatTitle name={name} age={age} setCat={setCat} />}
+        onClick={viewCat}
+        title={<CatTitle name={name} age={age} editCat={editCat} />}
         actionIcon={
           <IconButton aria-label={`info about ${name}`} className={icon}>
             <InfoIcon />
@@ -68,11 +74,9 @@ const CatCard = ({
 };
 
 CatCard.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
   setSelectedCat: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   calculateDimensions: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
   image: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   age: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
@@ -88,4 +92,4 @@ CatCard.defaultProps = {
   imageArray: [],
 };
 
-export default withAuthContext(withCatContext(CatCard));
+export default withCatContext(CatCard);

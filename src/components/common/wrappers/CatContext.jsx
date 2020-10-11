@@ -80,15 +80,19 @@ class CatProvider extends Component {
       .catch(this.endpointError);
   };
 
-  calculateDimensions = (index, img) => {
+  calculateDimensions = (catId, img) => {
     const height = img.offsetHeight; // cols
     const width = img.offsetWidth; // rows
 
     const { state } = this;
     const newCats = [...state.cats];
-    newCats[index].rows = Math.ceil(height / width);
-    newCats[index].cols = Math.ceil(width / height);
-
+    const findCat = newCats.findIndex(({ id }) => id === catId);
+    try {
+      newCats[findCat].rows = Math.ceil(height / width);
+      newCats[findCat].cols = Math.ceil(width / height);
+    } catch (e) {
+      logger('Error calculatingDimensions: ', e);
+    }
     this.setState({ ...state, cats: newCats, sorted: false });
   };
 

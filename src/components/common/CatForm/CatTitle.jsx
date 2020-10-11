@@ -4,12 +4,12 @@ import { Typography, Grid } from '@material-ui/core';
 import LinkedButton from '../links/LinkedButton';
 import { withAuthContext } from '../wrappers/AuthContext';
 
-const CatTitle = ({ name, age, setCat, isLoggedIn }) => {
+const CatTitle = ({ name, age, editCat, isLoggedIn }) => {
   return (
     <Grid item container xs={12} justify="space-around">
       {isLoggedIn && (
         <LinkedButton
-          onClick={setCat}
+          onClick={editCat}
           to="editCat"
           size="small"
           color="secondary"
@@ -30,7 +30,7 @@ CatTitle.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   name: PropTypes.string,
   age: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  setCat: PropTypes.func.isRequired,
+  editCat: PropTypes.func.isRequired,
 };
 
 CatTitle.defaultProps = {
