@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import {Grid} from '@material-ui/core/index';
 import renderRoutes from './utils/renderRoutes';
 import NavBar from './components/common/NavBar/NavBar';
-import Footer from './components/common/Footer/Footer';
+import Footer from './components/common/Footer';
 import LoadingFallback from './components/common/LoadingFallback';
 
 const App = () => (
@@ -13,7 +13,7 @@ const App = () => (
         <NavBar/>
         <Grid item container xs={12} justify="center">
           <Switch>{renderRoutes()}</Switch>
-          <Footer />
+          <Footer/>
         </Grid>
       </Grid>
     </Router>

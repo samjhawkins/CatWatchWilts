@@ -1,19 +1,11 @@
 import React from 'react';
 
-const PageNotFound = React.lazy(() =>
-  import('../components/layout/PageNotFound'),
-);
-const Home = React.lazy(() => import('../components/layout/Home/Home'));
-const Donations = React.lazy(() =>
-  import('../components/layout/Donations/Donations'),
-);
-const Admin = React.lazy(() => import('../components/layout/Admin/Admin'));
-const ViewCat = React.lazy(() =>
-  import('../components/layout/ViewCat/ViewCat'),
-);
-const EditCat = React.lazy(() =>
-  import('../components/layout/EditCat/EditCat'),
-);
+const PageNotFound = React.lazy(() => import('../views/PageNotFound'));
+const Home = React.lazy(() => import('../views/Home/Home'));
+const Donations = React.lazy(() => import('../views/Donations/Donations'));
+const Admin = React.lazy(() => import('../views/Admin/Admin'));
+const ViewCat = React.lazy(() => import('../views/ViewCat/ViewCat'));
+const EditCat = React.lazy(() => import('../views/EditCat/EditCat'));
 
 export const pageList = [
   {

@@ -1,8 +1,8 @@
 import React from 'react';
-import { AppBar, Grid, Typography } from '@material-ui/core';
-import { CopyrightRounded } from '@material-ui/icons';
-import SocialAvatarGroup from '../SocialAvatarGroup';
-import { useStyles } from '../../../themes/useStyles';
+import {AppBar, Grid, Typography} from '@material-ui/core';
+import {CopyrightRounded} from '@material-ui/icons';
+import SocialAvatarGroup from './SocialAvatarGroup';
+import {useStyles} from '../../themes/useStyles';
 
 const Footer = () => {
   const classes = useStyles();
@@ -11,7 +11,7 @@ const Footer = () => {
       <Grid xs={11} md={10} item container alignItems="center" justify="center">
         <Grid item container alignItems="center" justify="center">
           <div>
-            <hr />
+            <hr/>
             <Typography component="h3">
               We hope you come back soon, and that you spread the word! If you
               want to contact us then feel free to email us at&nbsp;

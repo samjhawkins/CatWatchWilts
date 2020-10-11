@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Paper, Typography } from '@material-ui/core';
-import DisplayStepper from '../../common/DisplayStepper';
-import { withCatContext } from '../../common/wrappers/CatContext';
-import { useStyles } from '../../../themes/useStyles';
-import { withMediaQuery } from '../../common/wrappers/MediaQuery';
-import ObjectMapper from '../../common/ObjectMapper';
-import mockSteps from '../../../mocks/mockSteps';
-import CatAttributeTile from '../../common/CatAttributeTile';
+import {Grid, Paper, Typography} from '@material-ui/core';
+import DisplayStepper from '../../components/common/DisplayStepper';
+import {withCatContext} from '../../components/common/wrappers/CatContext';
+import {useStyles} from '../../themes/useStyles';
+import {withMediaQuery} from '../../components/common/wrappers/MediaQuery';
+import ObjectMapper from '../../components/common/ObjectMapper';
+import mockSteps from '../../mocks/mockSteps';
+import CatAttributeTile from '../../components/common/CatForm/CatAttributeTile';
 
-const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
+const ViewCat = ({selectedCat, matches: {aboveSM}}) => {
   const [dimension, setDimension] = useState(false);
-  const classes = useStyles({ aboveSM });
+  const classes = useStyles({aboveSM});
   const dimensionClass = dimension
     ? classes.swapDimensionsTrue
     : classes.swapDimensionsFalse;

@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import axios from '../axiosInstance';
+import axios from '../../../utils/axiosInstance';
 import alterCats from '../../../utils/alterCats';
 import logger from '../../../utils/logger';
 import sortGrid from '../../../utils/sortGrid';
 import isPopulatedArray from '../../../utils/isPopulatedArray';
-import {
-  getSessionStorageItem,
-  setSessionStorageItem,
-} from '../../../utils/sessionStorage';
+import {getSessionStorageItem, setSessionStorageItem,} from '../../../utils/sessionStorage';
 import catsMock from '../../../mocks/catsMock';
 
 const CatContext = React.createContext();
