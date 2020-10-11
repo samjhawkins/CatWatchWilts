@@ -36,13 +36,6 @@ const CatCard = ({
     history.push('/editCat');
   };
 
-  const viewCat = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setSelectedCat(id);
-    history.push('/viewCat');
-  };
-
   const mainStep = imageArray[image] || defaultImageObject;
 
   return (
@@ -55,13 +48,10 @@ const CatCard = ({
             alt={mainStep.imageName}
             image={mainStep.image}
             title={mainStep.imageName}
-            onClick={viewCat}
           />
         </CardActionArea>
       </Card>
       <GridListTileBar
-        style={{ cursor: 'pointer' }}
-        onClick={viewCat}
         title={<CatTitle name={name} age={age} editCat={editCat} />}
         actionIcon={
           <IconButton aria-label={`info about ${name}`} className={icon}>

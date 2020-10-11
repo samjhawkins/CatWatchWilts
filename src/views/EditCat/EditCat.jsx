@@ -36,7 +36,11 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
       render={({ handleSubmit, reset, submitting, pristine, values }) => (
         <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
           <Grid item container xs={12} justify="center">
-            <CatAttributeTile className={catAttributeClass} component={Paper}>
+            <CatAttributeTile
+              className={catAttributeClass}
+              component={Paper}
+              justify="space-around"
+            >
               <TextInput
                 name="name"
                 style={{ width: '80%' }}
@@ -47,7 +51,7 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
 
               <SwitchInput
                 name="active"
-                style={{ width: '98%' }}
+                // style={{ width: '98%' }}
                 label="Active"
               />
             </CatAttributeTile>

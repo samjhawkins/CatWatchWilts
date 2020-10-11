@@ -82,7 +82,7 @@ class CatProvider extends Component {
 
   calculateDimensions = (catId, img) => {
     const height = img.offsetHeight; // cols
-    const width = img.offsetWidth; // rows
+    const width = img.offsetWidth + 30; // rows
 
     const { state } = this;
     const newCats = [...state.cats];

@@ -6,6 +6,7 @@ import {
   GridListTile,
   Typography,
 } from '@material-ui/core/index';
+import { useHistory } from 'react-router-dom';
 import { withCatContext } from '../../components/wrappers/CatContext';
 import { withMediaQuery } from '../../components/wrappers/MediaQuery';
 import { useStyles } from '../../themes/useStyles';
@@ -16,6 +17,7 @@ import { withAuthContext } from '../../components/wrappers/AuthContext';
 
 const Home = (props) => {
   const {
+    setSelectedCat,
     isLoggedIn,
     cats,
     sortCatsForGrid,
@@ -23,15 +25,27 @@ const Home = (props) => {
     matches: { aboveSM, aboveMD },
   } = props;
   const classes = useStyles({ aboveSM });
+  const history = useHistory();
 
   useEffect(() => {
     if (!sorted) {
       sortCatsForGrid(isLoggedIn);
     }
-  }, [sorted, isLoggedIn]);
+  }, [sorted]);
+
+  useEffect(() => {
+    sortCatsForGrid(isLoggedIn);
+  }, [isLoggedIn]);
 
   const maxWidth = aboveSM ? 'xl' : undefined;
   const displayCats = isLoggedIn ? cats : cats.filter(({ active }) => active);
+
+  const viewCat = (id) => (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSelectedCat(id);
+    history.push('/viewCat');
+  };
 
   return (
     <>
@@ -56,9 +70,11 @@ const Home = (props) => {
           {isPopulatedArray(displayCats) &&
             displayCats.map((cat, index) => (
               <GridListTile
+                onClick={viewCat(cat.id)}
                 key={`${cat.id}`}
                 cols={aboveMD ? cat.cols || 1 : 1}
                 rows={aboveMD ? cat.rows || 1 : 1}
+                style={{ cursor: 'pointer' }}
               >
                 <CatCard index={index} {...cat} />
               </GridListTile>
@@ -78,6 +94,7 @@ Home.propTypes = {
   ).isRequired,
   sorted: PropTypes.bool.isRequired,
   loadCats: PropTypes.func.isRequired,
+  setSelectedCat: PropTypes.func.isRequired,
   sortCatsForGrid: PropTypes.func.isRequired,
   matches: PropTypes.shape({
     aboveSM: PropTypes.bool.isRequired,
