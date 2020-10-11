@@ -81,7 +81,7 @@ module.exports = () => {
     plugins: [
       new FriendlyErrorsWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: './src/html/index.html',
+        template: './src/index.html',
         filename: './index.html',
       }),
       new CopyWebpackPlugin({
