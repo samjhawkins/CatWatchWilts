@@ -102,6 +102,10 @@ const themedStyles = (theme) => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
+  warning: {
+    color: theme.status.warning,
+    fontWeight: 'bold',
+  },
 
   // Actions
   tertiaryButton: {

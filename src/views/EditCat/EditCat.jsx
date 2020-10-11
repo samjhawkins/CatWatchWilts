@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-final-form';
-import { Button, Grid, Paper } from '@material-ui/core';
+import { Button, Grid, Paper, Typography } from '@material-ui/core';
+import Add from '@material-ui/icons/Add';
 import DisplayStepper from '../../components/DisplayStepper';
 import { withCatContext } from '../../components/wrappers/CatContext';
 import { useStyles } from '../../themes/useStyles';
@@ -48,12 +49,21 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
                 variant="outlined"
                 type="string"
               />
-
-              <SwitchInput
-                name="active"
-                // style={{ width: '98%' }}
-                label="Active"
-              />
+              <SwitchInput name="active" label="Active" />
+            </CatAttributeTile>
+            <CatAttributeTile component={Paper} className={catAttributeClass}>
+              <Button
+                aria-label="Add a cat image"
+                className={classes.icon}
+                color="primary"
+                variant="contained"
+              >
+                <Typography>New image</Typography>
+                <Add />
+              </Button>
+              <Typography className={classes.warning}>
+                (Warning: This will not be confirmed until you save below)
+              </Typography>
             </CatAttributeTile>
             <CatAttributeTile className={classes.verticalMargin}>
               <DisplayStepper
