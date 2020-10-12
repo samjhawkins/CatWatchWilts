@@ -45,21 +45,4 @@ app.get('/cats', async (req, res) => {
   }
 });
 
-// Get specific cat details
-app.get('/cat/:id', async (req, res) => {
-  console.log('get cat', req.params.id);
-  const params = {
-    TableName,
-    Key: {
-      id: req.params.id,
-    },
-  };
-  try {
-    const data = await ddb.get(params).promise();
-    res.send({ data });
-  } catch (error) {
-    console.error(error);
-  }
-});
-
 module.exports = app;
