@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Paper, Typography } from '@material-ui/core';
+import {Grid, Paper, Typography} from '@material-ui/core';
 import DisplayStepper from '../../components/DisplayStepper';
-import { withCatContext } from '../../components/wrappers/CatContext';
-import { useStyles } from '../../themes/useStyles';
-import { withMediaQuery } from '../../components/wrappers/MediaQuery';
+import {withCatContext} from '../../components/wrappers/CatContext';
+import {useStyles} from '../../themes/useStyles';
+import {withMediaQuery} from '../../components/wrappers/MediaQuery';
 import ObjectMapper from '../../components/ObjectMapper';
 import mockSteps from '../../mocks/mockSteps';
 import CatAttributeTile from '../../components/CatForm/CatAttributeTile';
 
-const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
+const ViewCat = ({selectedCat, matches: {aboveSM}}) => {
   const [dimension, setDimension] = useState(false);
-  const classes = useStyles({ aboveSM });
+  const [activeStep, setActiveStep] = useState(0);
+  const classes = useStyles({aboveSM});
   const dimensionClass = dimension
     ? classes.swapDimensionsTrue
     : classes.swapDimensionsFalse;
@@ -39,6 +40,8 @@ const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
           steps={selectedCat.imageArray || mockSteps}
           setDimension={setDimension}
           className={dimensionClass}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
         />
       </CatAttributeTile>
       <ObjectMapper selectedCat={selectedCat} className={catAttributeClass} />

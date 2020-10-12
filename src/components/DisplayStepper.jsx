@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  MobileStepper,
-  Button,
-  Card,
-  CardActions,
-  CardMedia,
-  CardContent,
-  Typography,
-} from '@material-ui/core/index';
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
-import { useFormState } from 'react-final-form';
+import {Button, Card, CardActions, CardContent, CardMedia, MobileStepper, Typography,} from '@material-ui/core/index';
+import {KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
+import {useFormState} from 'react-final-form';
 import TextInput from './Fields/TextInput';
 
 const DisplayStepper = (props) => {
-  const { steps, setDimension, className, edit } = props;
-  const [activeStep, setActiveStep] = useState(0);
+  const {
+    steps,
+    setDimension,
+    activeStep,
+    setActiveStep,
+    className,
+    edit,
+  } = props;
   let imageDisplaySteps = steps;
   if (edit) {
-    const { values } = useFormState();
+    const {values} = useFormState();
     imageDisplaySteps = values.imageArray;
   }
 
@@ -106,6 +104,8 @@ DisplayStepper.propTypes = {
   setDimension: PropTypes.func.isRequired,
   className: PropTypes.string,
   edit: PropTypes.bool,
+  activeStep: PropTypes.number.isRequired,
+  setActiveStep: PropTypes.func.isRequired,
 };
 
 DisplayStepper.defaultProps = {

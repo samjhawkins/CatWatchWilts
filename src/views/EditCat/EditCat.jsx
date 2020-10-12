@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'react-final-form';
-import { Button, Grid, Paper, Typography } from '@material-ui/core';
-import Add from '@material-ui/icons/Add';
+import {Form} from 'react-final-form';
+import {Button, Grid, Paper, Typography} from '@material-ui/core';
 import DisplayStepper from '../../components/DisplayStepper';
-import { withCatContext } from '../../components/wrappers/CatContext';
-import { useStyles } from '../../themes/useStyles';
-import { withMediaQuery } from '../../components/wrappers/MediaQuery';
-import mockSteps from '../../mocks/mockSteps';
+import {withCatContext} from '../../components/wrappers/CatContext';
+import {useStyles} from '../../themes/useStyles';
+import {withMediaQuery} from '../../components/wrappers/MediaQuery';
 import FieldMapper from '../../components/FieldMapper';
 import TextInput from '../../components/Fields/TextInput';
 import SwitchInput from '../../components/Fields/SwitchInput';
 import CatAttributeTile from '../../components/CatForm/CatAttributeTile';
+import AddImageButton from '../../components/CatForm/AddImageButton';
 
-const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
+const EditCat = ({selectedCat, matches: {aboveSM}}) => {
   const [dimension, setDimension] = useState(false);
-  const classes = useStyles({ aboveSM });
+  const [activeStep, setActiveStep] = useState(0);
+  const classes = useStyles({aboveSM});
   const dimensionClass = dimension
     ? classes.swapDimensionsTrue
     : classes.swapDimensionsFalse;
@@ -32,10 +32,11 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
         console.log('formValues submit with', formValues);
         // updateCat(formValues);
       }}
-      initialValues={{ ...selectedCat, imageArray: mockSteps }}
-      validate={() => {}}
-      render={({ handleSubmit, reset, submitting, pristine, values }) => (
-        <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
+      initialValues={selectedCat}
+      validate={() => {
+      }}
+      render={({handleSubmit, reset, submitting, pristine, values, form}) => (
+        <form onSubmit={handleSubmit} noValidate style={{width: '100%'}}>
           <Grid item container xs={12} justify="center">
             <CatAttributeTile
               className={catAttributeClass}
@@ -44,23 +45,24 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
             >
               <TextInput
                 name="name"
-                style={{ width: '80%' }}
+                style={{width: '80%'}}
                 label="Name"
                 variant="outlined"
                 type="string"
               />
-              <SwitchInput name="active" label="Active" />
+              <SwitchInput name="active" label="Active"/>
             </CatAttributeTile>
-            <CatAttributeTile component={Paper} className={catAttributeClass}>
-              <Button
-                aria-label="Add a cat image"
+            <CatAttributeTile
+              component={Paper}
+              className={catAttributeClass}
+              justify="space-between"
+            >
+              <AddImageButton
                 className={classes.icon}
-                color="primary"
-                variant="contained"
-              >
-                <Typography>New image</Typography>
-                <Add />
-              </Button>
+                setActiveStep={setActiveStep}
+                imageArray={values.imageArray}
+                change={form.change}
+              />
               <Typography className={classes.warning}>
                 (Warning: This will not be confirmed until you save below)
               </Typography>
@@ -68,15 +70,14 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
             <CatAttributeTile className={classes.verticalMargin}>
               <DisplayStepper
                 edit
-                steps={selectedCat.imageArray || mockSteps}
+                steps={values.imageArray}
                 setDimension={setDimension}
                 className={dimensionClass}
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
               />
             </CatAttributeTile>
-            <FieldMapper
-              selectedCat={selectedCat}
-              className={catAttributeClass}
-            />
+            <FieldMapper selectedCat={values} className={catAttributeClass}/>
             <CatAttributeTile component={Paper} className={catAttributeClass}>
               <Button
                 type="button"
