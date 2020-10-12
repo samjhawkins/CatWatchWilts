@@ -9,10 +9,10 @@ import ObjectMapper from '../../components/ObjectMapper';
 import mockSteps from '../../mocks/mockSteps';
 import CatAttributeTile from '../../components/CatForm/CatAttributeTile';
 
-const ViewCat = ({selectedCat, matches: {aboveSM}}) => {
+const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
   const [dimension, setDimension] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-  const classes = useStyles({aboveSM});
+  const classes = useStyles({ aboveSM });
   const dimensionClass = dimension
     ? classes.swapDimensionsTrue
     : classes.swapDimensionsFalse;

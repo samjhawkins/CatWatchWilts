@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Button, Typography} from '@material-ui/core';
 import Add from '@material-ui/icons/Add';
 
-const AddImageButton = ({className, setActiveStep, imageArray, change}) => {
+const AddImageButton = ({ className, setActiveStep, imageArray, change }) => {
   const addNewImage = () => {
     const newSteps = [...imageArray];
     newSteps.push({
@@ -24,7 +24,7 @@ const AddImageButton = ({className, setActiveStep, imageArray, change}) => {
       onClick={addNewImage}
     >
       <Typography>New image</Typography>
-      <Add/>
+      <Add />
     </Button>
   );
 };

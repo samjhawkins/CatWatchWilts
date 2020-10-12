@@ -16,7 +16,7 @@ const DisplayStepper = (props) => {
   } = props;
   let imageDisplaySteps = steps;
   if (edit) {
-    const {values} = useFormState();
+    const { values } = useFormState();
     imageDisplaySteps = values.imageArray;
   }
 

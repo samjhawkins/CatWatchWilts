@@ -12,10 +12,10 @@ import SwitchInput from '../../components/Fields/SwitchInput';
 import CatAttributeTile from '../../components/CatForm/CatAttributeTile';
 import AddImageButton from '../../components/CatForm/AddImageButton';
 
-const EditCat = ({selectedCat, matches: {aboveSM}}) => {
+const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
   const [dimension, setDimension] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-  const classes = useStyles({aboveSM});
+  const classes = useStyles({ aboveSM });
   const dimensionClass = dimension
     ? classes.swapDimensionsTrue
     : classes.swapDimensionsFalse;
@@ -33,10 +33,9 @@ const EditCat = ({selectedCat, matches: {aboveSM}}) => {
         // updateCat(formValues);
       }}
       initialValues={selectedCat}
-      validate={() => {
-      }}
-      render={({handleSubmit, reset, submitting, pristine, values, form}) => (
-        <form onSubmit={handleSubmit} noValidate style={{width: '100%'}}>
+      validate={() => {}}
+      render={({ handleSubmit, reset, submitting, pristine, values, form }) => (
+        <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
           <Grid item container xs={12} justify="center">
             <CatAttributeTile
               className={catAttributeClass}
@@ -45,12 +44,12 @@ const EditCat = ({selectedCat, matches: {aboveSM}}) => {
             >
               <TextInput
                 name="name"
-                style={{width: '80%'}}
+                style={{ width: '80%' }}
                 label="Name"
                 variant="outlined"
                 type="string"
               />
-              <SwitchInput name="active" label="Active"/>
+              <SwitchInput name="active" label="Active" />
             </CatAttributeTile>
             <CatAttributeTile
               component={Paper}
@@ -77,7 +76,7 @@ const EditCat = ({selectedCat, matches: {aboveSM}}) => {
                 setActiveStep={setActiveStep}
               />
             </CatAttributeTile>
-            <FieldMapper selectedCat={values} className={catAttributeClass}/>
+            <FieldMapper selectedCat={values} className={catAttributeClass} />
             <CatAttributeTile component={Paper} className={catAttributeClass}>
               <Button
                 type="button"
