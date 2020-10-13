@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {Grid, Paper, Typography} from '@material-ui/core';
+import { Grid, Paper, Typography } from '@material-ui/core';
 import DisplayStepper from '../../components/DisplayStepper';
-import {withCatContext} from '../../components/wrappers/CatContext';
-import {useStyles} from '../../themes/useStyles';
-import {withMediaQuery} from '../../components/wrappers/MediaQuery';
+import { withCatContext } from '../../components/wrappers/CatContext';
+import { useStyles } from '../../themes/useStyles';
+import { withMediaQuery } from '../../components/wrappers/MediaQuery';
 import ObjectMapper from '../../components/ObjectMapper';
 import mockSteps from '../../mocks/mockSteps';
 import CatAttributeTile from '../../components/CatForm/CatAttributeTile';
@@ -52,7 +52,7 @@ const ViewCat = ({ selectedCat, matches: { aboveSM } }) => {
 ViewCat.propTypes = {
   selectedCat: PropTypes.shape({
     name: PropTypes.string,
-    image: PropTypes.number,
+    image: PropTypes.string,
     rows: PropTypes.number,
     cols: PropTypes.number,
     imageArray: PropTypes.arrayOf(

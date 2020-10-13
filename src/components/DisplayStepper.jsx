@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Card, CardActions, CardContent, CardMedia, MobileStepper, Typography,} from '@material-ui/core/index';
-import {KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
-import {useFormState} from 'react-final-form';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  MobileStepper,
+  Typography,
+} from '@material-ui/core/index';
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+import { useFormState } from 'react-final-form';
 import TextInput from './Fields/TextInput';
 
 const DisplayStepper = (props) => {

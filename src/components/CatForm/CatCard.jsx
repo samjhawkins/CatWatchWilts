@@ -36,7 +36,9 @@ const CatCard = ({
     history.push('/editCat');
   };
 
-  const mainStep = imageArray[image] || defaultImageObject;
+  const mainStep =
+    imageArray.find((eachImage) => eachImage.imageId === image) ||
+    defaultImageObject;
 
   return (
     <>
@@ -67,7 +69,7 @@ CatCard.propTypes = {
   setSelectedCat: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   calculateDimensions: PropTypes.func.isRequired,
-  image: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   age: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   imageArray: PropTypes.arrayOf(

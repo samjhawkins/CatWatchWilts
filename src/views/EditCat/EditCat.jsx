@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {Form} from 'react-final-form';
-import {Button, Grid, Paper, Typography} from '@material-ui/core';
+import { Form } from 'react-final-form';
+import { Button, Grid, Paper, Typography } from '@material-ui/core';
 import DisplayStepper from '../../components/DisplayStepper';
-import {withCatContext} from '../../components/wrappers/CatContext';
-import {useStyles} from '../../themes/useStyles';
-import {withMediaQuery} from '../../components/wrappers/MediaQuery';
+import { withCatContext } from '../../components/wrappers/CatContext';
+import { useStyles } from '../../themes/useStyles';
+import { withMediaQuery } from '../../components/wrappers/MediaQuery';
 import FieldMapper from '../../components/FieldMapper';
 import TextInput from '../../components/Fields/TextInput';
 import SwitchInput from '../../components/Fields/SwitchInput';
@@ -114,7 +114,7 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
 EditCat.propTypes = {
   selectedCat: PropTypes.shape({
     name: PropTypes.string,
-    image: PropTypes.number,
+    image: PropTypes.string,
     rows: PropTypes.number,
     cols: PropTypes.number,
     imageArray: PropTypes.arrayOf(

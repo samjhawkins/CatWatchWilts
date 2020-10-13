@@ -38,8 +38,24 @@ app.get('/cats', async (req, res) => {
     TableName,
   };
   try {
-    const { Items } = await ddb.scan(params).promise();
-    res.send({ data: Items });
+    // Get all cats
+    const { Items: catItems } = await ddb.scan(params).promise();
+
+    // Get all images
+    const { Items: imageItems } = await ddb
+      .scan({ TableName: 'CatImages' })
+      .promise();
+
+    // Map images to cats
+    const returnCats = catItems.map((cat) => {
+      return {
+        ...cat,
+        imageArray: imageItems.filter((catImage) => catImage.catId === cat.id),
+      };
+    });
+
+    // Return mapped cats
+    res.send({ data: returnCats });
   } catch (error) {
     console.error(error);
   }

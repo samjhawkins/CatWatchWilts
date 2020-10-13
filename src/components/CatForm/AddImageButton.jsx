@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Typography} from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import Add from '@material-ui/icons/Add';
 
 const AddImageButton = ({ className, setActiveStep, imageArray, change }) => {
