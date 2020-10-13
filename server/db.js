@@ -1,4 +1,5 @@
 const express = require('express');
+const assert = require('assert');
 
 const app = express.Router();
 const aws = require('aws-sdk');
@@ -7,27 +8,142 @@ aws.config.update({ region: 'eu-west-2' });
 const ddb = new aws.DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
 const TableName = 'Cats';
 
+const newOrUpdate = (oldArray) => async (sentInRecord) => {
+  // If we cannot find senInRecord in oldArray, add it,
+  // otherwise check for updates
+  const searchForImage = oldArray.find(
+    (image) => image.imageId === oldArray.imageId,
+  );
+  if (searchForImage === undefined) {
+    return ddb
+      .put({
+        TableName: 'CatImages',
+        Item: {
+          catId: { S: sentInRecord.catId },
+          image: { S: sentInRecord.image },
+          imageName: { S: sentInRecord.imageName },
+          imageId: { S: sentInRecord.imageId },
+        },
+      })
+      .promise();
+  }
+  if (!assert.deepStrictEqual(sentInRecord, searchForImage)) {
+    await ddb
+      .update({
+        TableName,
+        Key: {
+          imageId: sentInRecord.imageId,
+          catId: sentInRecord.catId,
+        },
+        UpdateExpression: `set image = :image, imageName = :imageName`,
+        ExpressionAttributeValues: {
+          ':image': sentInRecord.image,
+          ':imageName': sentInRecord.imageName,
+        },
+      })
+      .promise();
+  }
+  return Promise.resolve();
+};
+const deleteMissing = (sentInArray) => async (oldArrayItem) => {
+  // If we cannot find oldArrayItem in sentInArray, delete it
+  const searchForImage = sentInArray.find(
+    (image) => image.imageId === oldArrayItem.imageId,
+  );
+  if (searchForImage === undefined) {
+    return ddb
+      .delete({
+        TableName: 'CatImages',
+        Key: {
+          catId: oldArrayItem.catId,
+          imageId: oldArrayItem.imageId,
+        },
+      })
+      .promise();
+  }
+  return Promise.resolve();
+};
+
 // Write new cat to database
 app.post('/cats/:id', async (req, res) => {
   console.log('id', req.params.id);
-  const params = {
-    TableName,
-    Item: {
-      id: { S: req.params.id },
-      name: { S: req.body.name },
-      image: { S: req.body.image },
-      active: { S: req.body.active },
-      age: { S: req.body.age },
-      description: { S: req.body.description },
-      imageName: { S: req.body.imageName },
-    },
-  };
 
   try {
-    const data = await ddb.putItem(params).promise();
-    res.send({ data });
+    // Check if cat exists
+    let exists = false;
+    const { Item } = await ddb
+      .get({
+        TableName,
+        Key: {
+          id: req.params.id,
+        },
+        AttributesToGet: ['id'],
+      })
+      .promise();
+    if (Item !== undefined && Item !== null) {
+      exists = true;
+    }
+
+    if (exists) {
+      // Add to db
+      await ddb
+        .put({
+          TableName,
+          Item: {
+            id: { S: req.params.id },
+            name: { S: req.body.name },
+            image: { S: req.body.image },
+            active: { S: req.body.active },
+            age: { S: req.body.age },
+            description: { S: req.body.description },
+          },
+        })
+        .promise();
+    } else {
+      // Update db
+      await ddb
+        .update({
+          TableName,
+          Key: {
+            id: req.params.id,
+          },
+          UpdateExpression: `set name = :name, image = :image, active = :active, age = :age, description = :description`,
+          ExpressionAttributeValues: {
+            ':name': req.body.name,
+            ':image': req.body.image,
+            ':active': req.body.active,
+            ':age': req.body.age,
+            ':description': req.body.description,
+          },
+        })
+        .promise();
+    }
+
+    // Get existing images
+    const { Items: imageItems } = await ddb
+      .scan({ TableName: 'CatImages' })
+      .promise();
+
+    // Filter Images to current cat
+    const filteredImages = imageItems.filter(
+      (imageRecord) => imageRecord.catId === req.params.id,
+    );
+
+    // Now, loop through images sent in, compare to scan,
+    // any new get added,
+    // any matches get updated,
+    // any not found get deleted,
+
+    // evaluate new images coming in
+    await Promise.all([
+      ...req.body.imageArray.map(newOrUpdate(filteredImages)),
+      ...filteredImages.map(deleteMissing(req.body.imageArray)),
+    ]);
+
+    res.send({ status: 200, message: 'ok' });
   } catch (error) {
     console.error(error);
+    res.send({ status: 500, message: 'An error occured' });
   }
 });
 
