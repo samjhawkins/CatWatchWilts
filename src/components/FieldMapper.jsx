@@ -11,6 +11,7 @@ const removedValues = {
   rows: true,
   active: true,
   id: true,
+  image: true,
 };
 
 const FieldMapper = ({ selectedCat, className }) => {

@@ -54,7 +54,7 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
             <CatAttributeTile
               component={Paper}
               className={catAttributeClass}
-              justify="space-between"
+              justify="space-around"
             >
               <AddImageButton
                 className={classes.icon}
@@ -63,7 +63,8 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
                 change={form.change}
               />
               <Typography className={classes.warning}>
-                (Warning: This will not be confirmed until you save below)
+                (Warning: No changes will take effect until save is pressed
+                below)
               </Typography>
             </CatAttributeTile>
             <CatAttributeTile className={classes.verticalMargin}>

@@ -8,10 +8,13 @@ import {
   CardMedia,
   MobileStepper,
   Typography,
+  Grid,
 } from '@material-ui/core/index';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import { useFormState } from 'react-final-form';
+import Delete from '@material-ui/icons/Delete';
 import TextInput from './Fields/TextInput';
+import CurrentSwitchInput from './Fields/CurrentSwitchInput';
 
 const DisplayStepper = (props) => {
   const {
@@ -22,11 +25,8 @@ const DisplayStepper = (props) => {
     className,
     edit,
   } = props;
-  let imageDisplaySteps = steps;
-  if (edit) {
-    const { values } = useFormState();
-    imageDisplaySteps = values.imageArray;
-  }
+  const { values } = useFormState();
+  const imageDisplaySteps = edit && values.length ? values.imageArray : steps;
 
   const handleNext = () => {
     const updatedStep = (activeStep + 1) % steps.length;
@@ -41,6 +41,11 @@ const DisplayStepper = (props) => {
   const onLoad = ({ target }) => {
     const imageRatio = target.offsetHeight / target.offsetWidth;
     setDimension(imageRatio >= 1);
+  };
+
+  const deleteImage = () => {
+    // set current image array without current, reset to 0 index
+    setActiveStep(0);
   };
 
   return (
@@ -70,6 +75,30 @@ const DisplayStepper = (props) => {
               variant="outlined"
               type="string"
             />
+            <Grid
+              item
+              container
+              xs={12}
+              justify="space-around"
+              alignContent="center"
+            >
+              <Button
+                type="button"
+                variant="contained"
+                onClick={deleteImage}
+                disabled={
+                  imageDisplaySteps[activeStep].imageId === values.image
+                }
+              >
+                Delete
+                <Delete />
+              </Button>
+              <CurrentSwitchInput
+                name="image"
+                label="Main image"
+                currentImageId={imageDisplaySteps[activeStep].imageId}
+              />
+            </Grid>
           </>
         ) : (
           <Typography gutterBottom variant="h5" component="h2">
@@ -108,7 +137,7 @@ DisplayStepper.propTypes = {
       imageName: PropTypes.string,
       image: PropTypes.string,
     }),
-  ).isRequired,
+  ),
   setDimension: PropTypes.func.isRequired,
   className: PropTypes.string,
   edit: PropTypes.bool,
@@ -119,6 +148,13 @@ DisplayStepper.propTypes = {
 DisplayStepper.defaultProps = {
   className: '',
   edit: false,
+  steps: [
+    {
+      imageName: '',
+      image: '',
+      imageId: '',
+    },
+  ],
 };
 
 export default DisplayStepper;
