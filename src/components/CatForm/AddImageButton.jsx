@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Typography } from '@material-ui/core';
 import Add from '@material-ui/icons/Add';
+import newIdGenerator from '../../utils/newIdGenerator';
 
 const AddImageButton = ({ className, setActiveStep, imageArray, change }) => {
   const addNewImage = () => {
     const newSteps = [...imageArray];
     newSteps.push({
-      imageId: 'new',
+      imageId: newIdGenerator(),
       imageName: 'Image Name',
       image: 'Image Url',
     });
