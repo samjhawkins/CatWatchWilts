@@ -27,9 +27,13 @@ const DisplayStepper = (props) => {
     edit,
   } = props;
   const classes = useStyles({});
-  const { change } = useForm();
-  const { values } = useFormState();
-  const imageDisplaySteps = edit && values.length ? values.imageArray : steps;
+  let values;
+  let change;
+  if (edit) {
+    change = useForm().change;
+    values = useFormState().values;
+  }
+  const imageDisplaySteps = edit && values?.length ? values.imageArray : steps;
 
   const handleNext = () => {
     const updatedStep = (activeStep + 1) % steps.length;
