@@ -81,6 +81,7 @@ class CatProvider extends Component {
   };
 
   deleteCat = async (cat) => {
+    logger('id to delete', cat);
     // return axios
     //     .delete('/db/cats', {
     //       params: {

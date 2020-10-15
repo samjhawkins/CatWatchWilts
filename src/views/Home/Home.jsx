@@ -40,6 +40,7 @@ const Home = (props) => {
   const maxWidth = aboveSM ? 'xl' : undefined;
   const displayCats = isLoggedIn ? cats : cats.filter(({ active }) => active);
 
+  // eslint-disable-next-line no-unused-vars
   const addCat = () => {
     setSelectedCat();
     history.push('/viewCat');

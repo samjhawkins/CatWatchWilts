@@ -147,6 +147,50 @@ app.post('/cats/:id', async (req, res) => {
   }
 });
 
+app.delete('/cats/:id', async (req, res) => {
+  try {
+    // Get existing images
+    const { Items: imageItems } = await ddb
+      .scan({ TableName: 'CatImages' })
+      .promise();
+
+    // Filter Images to current cat
+    const filteredImages = imageItems.filter(
+      (imageRecord) => imageRecord.catId === req.params.id,
+    );
+
+    // Delete all images
+    await Promise.all(
+      filteredImages.map((arrayItem) => {
+        return ddb
+          .delete({
+            TableName: 'CatImages',
+            Key: {
+              catId: arrayItem.catId,
+              imageId: arrayItem.imageId,
+            },
+          })
+          .promise();
+      }),
+    );
+
+    // Delete cat
+    await ddb
+      .delete({
+        TableName,
+        Key: {
+          catId: req.params.id,
+        },
+      })
+      .promise();
+
+    res.send({ status: 200, message: 'ok' });
+  } catch (error) {
+    console.error(error);
+    res.send({ status: 500, message: 'An error occured' });
+  }
+});
+
 // Get all cats details
 app.get('/cats', async (req, res) => {
   console.log('get all');
