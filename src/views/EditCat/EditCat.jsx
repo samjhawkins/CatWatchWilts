@@ -57,11 +57,10 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
               justify="space-around"
             >
               <AddImageButton
-                className={classes.icon}
+                className={`${classes.icon} ${classes.appBarItem}`}
                 setActiveStep={setActiveStep}
                 imageArray={values.imageArray}
                 change={form.change}
-                className={classes.appBarItem}
               />
               <Typography
                 className={`${classes.warning} ${classes.appBarItem}`}
@@ -83,6 +82,7 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
             <FieldMapper selectedCat={values} className={catAttributeClass} />
             <CatAttributeTile component={Paper} className={catAttributeClass}>
               <Button
+                size="large"
                 type="button"
                 variant="contained"
                 onClick={form.reset}
@@ -93,6 +93,7 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
               </Button>
 
               <Button
+                size="large"
                 variant="contained"
                 color="primary"
                 type="submit"
