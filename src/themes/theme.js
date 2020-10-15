@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { orange, purple, deepPurple, red } from '@material-ui/core/colors';
+import { purple, deepPurple, red } from '@material-ui/core/colors';
 
 const PRIMARY_COLOR = deepPurple;
 const SECONDARY_COLOR = purple;
@@ -7,12 +7,16 @@ const SECONDARY_COLOR = purple;
 const theme = createMuiTheme({
   spacing: 2,
   status: {
-    danger: orange[500],
     warning: red[800],
   },
   color: {
     white: '#fafafa',
     black: '#000000',
+    danger: {
+      light: red[100],
+      main: red[300],
+      dark: red[900],
+    },
     tertiary: {
       light: SECONDARY_COLOR[100],
       main: SECONDARY_COLOR[300],

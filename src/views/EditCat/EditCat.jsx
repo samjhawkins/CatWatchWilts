@@ -34,7 +34,7 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
       }}
       initialValues={selectedCat}
       validate={() => {}}
-      render={({ handleSubmit, reset, submitting, pristine, values, form }) => (
+      render={({ handleSubmit, submitting, pristine, values, form }) => (
         <form onSubmit={handleSubmit} noValidate style={{ width: '100%' }}>
           <Grid item container xs={12} justify="center">
             <CatAttributeTile
@@ -61,8 +61,11 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
                 setActiveStep={setActiveStep}
                 imageArray={values.imageArray}
                 change={form.change}
+                className={classes.appBarItem}
               />
-              <Typography className={classes.warning}>
+              <Typography
+                className={`${classes.warning} ${classes.appBarItem}`}
+              >
                 (Warning: No changes will take effect until save is pressed
                 below)
               </Typography>
@@ -82,8 +85,9 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
               <Button
                 type="button"
                 variant="contained"
-                onClick={reset}
+                onClick={form.reset}
                 disabled={submitting || pristine}
+                className={classes.appBarItem}
               >
                 Reset
               </Button>
@@ -93,8 +97,9 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
                 color="primary"
                 type="submit"
                 disabled={submitting}
+                className={classes.appBarItem}
               >
-                Submit
+                Save
               </Button>
             </CatAttributeTile>
             {process.env.DEBUG_FORM === 'true' && (

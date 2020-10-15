@@ -128,6 +128,12 @@ const themedStyles = (theme) => ({
       backgroundColor: theme.color.tertiary.main,
     },
   },
+  redButton: {
+    backgroundColor: theme.color.danger.main,
+    '&:hover': {
+      backgroundColor: theme.color.danger.dark,
+    },
+  },
   button: {
     fontSize: theme.spacing(5),
     margin: theme.spacing(2),

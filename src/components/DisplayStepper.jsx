@@ -11,10 +11,11 @@ import {
   Grid,
 } from '@material-ui/core/index';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
-import { useFormState } from 'react-final-form';
+import { useFormState, useForm } from 'react-final-form';
 import Delete from '@material-ui/icons/Delete';
 import TextInput from './Fields/TextInput';
 import CurrentSwitchInput from './Fields/CurrentSwitchInput';
+import { useStyles } from '../themes/useStyles';
 
 const DisplayStepper = (props) => {
   const {
@@ -25,6 +26,8 @@ const DisplayStepper = (props) => {
     className,
     edit,
   } = props;
+  const classes = useStyles({});
+  const { change } = useForm();
   const { values } = useFormState();
   const imageDisplaySteps = edit && values.length ? values.imageArray : steps;
 
@@ -44,7 +47,9 @@ const DisplayStepper = (props) => {
   };
 
   const deleteImage = () => {
-    // set current image array without current, reset to 0 index
+    const newArray = [...values.imageArray];
+    newArray.splice(activeStep, 1);
+    change('imageArray', newArray);
     setActiveStep(0);
   };
 
@@ -63,14 +68,14 @@ const DisplayStepper = (props) => {
           <>
             <TextInput
               name={`imageArray[${activeStep}].imageName`}
-              style={{ width: '98%', marginTop: '10px', marginBottom: '10px' }}
+              style={{ width: '98%', marginTop: '15px', marginBottom: '15px' }}
               label="Image Name"
               variant="outlined"
               type="string"
             />
             <TextInput
               name={`imageArray[${activeStep}].image`}
-              style={{ width: '98%', marginTop: '10px', marginBottom: '10px' }}
+              style={{ width: '98%', marginTop: '15px', marginBottom: '15px' }}
               label="Image URL"
               variant="outlined"
               type="string"
@@ -89,6 +94,7 @@ const DisplayStepper = (props) => {
                 disabled={
                   imageDisplaySteps[activeStep].imageId === values.image
                 }
+                className={`${classes.redButton} ${classes.appBarItem}`}
               >
                 Delete
                 <Delete />
@@ -97,6 +103,7 @@ const DisplayStepper = (props) => {
                 name="image"
                 label="Main image"
                 currentImageId={imageDisplaySteps[activeStep].imageId}
+                className={classes.appBarItem}
               />
             </Grid>
           </>
