@@ -85,7 +85,10 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
                 size="large"
                 type="button"
                 variant="contained"
-                onClick={form.reset}
+                onClick={(...args) => {
+                  setActiveStep(0);
+                  form.reset(...args);
+                }}
                 disabled={submitting || pristine}
                 className={classes.appBarItem}
               >

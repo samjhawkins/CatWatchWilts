@@ -80,6 +80,17 @@ class CatProvider extends Component {
       .catch(this.endpointError);
   };
 
+  deleteCat = async (cat) => {
+    // return axios
+    //     .delete('/db/cats', {
+    //       params: {
+    //         cat,
+    //       },
+    //     })
+    //     .then((response) => response.data.data)
+    //     .catch(this.endpointError);
+  };
+
   calculateDimensions = (catId, img) => {
     const height = img.offsetHeight; // cols
     const width = img.offsetWidth + 30; // rows
@@ -109,6 +120,7 @@ class CatProvider extends Component {
         value={{
           calculateDimensions: this.calculateDimensions,
           setSelectedCat: this.setSelectedCat,
+          deleteCat: this.deleteCat,
           loadCats: this.loadCats,
           updateCat: this.updateCat,
           sortCatsForGrid: this.sortCatsForGrid,

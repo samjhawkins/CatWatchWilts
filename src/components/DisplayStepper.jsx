@@ -12,10 +12,10 @@ import {
 } from '@material-ui/core/index';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import { useFormState, useForm } from 'react-final-form';
-import Delete from '@material-ui/icons/Delete';
 import TextInput from './Fields/TextInput';
 import CurrentSwitchInput from './Fields/CurrentSwitchInput';
 import { useStyles } from '../themes/useStyles';
+import DeleteButton from './CatForm/DeleteButton';
 
 const DisplayStepper = (props) => {
   const {
@@ -91,18 +91,13 @@ const DisplayStepper = (props) => {
               justify="space-around"
               alignContent="center"
             >
-              <Button
-                type="button"
-                variant="contained"
+              <DeleteButton
                 onClick={deleteImage}
+                className={`${classes.redButton} ${classes.appBarItem}`}
                 disabled={
                   imageDisplaySteps[activeStep].imageId === values.image
                 }
-                className={`${classes.redButton} ${classes.appBarItem}`}
-              >
-                Delete
-                <Delete />
-              </Button>
+              />
               <CurrentSwitchInput
                 name="image"
                 label="Main image"

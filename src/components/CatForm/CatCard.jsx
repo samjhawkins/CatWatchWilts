@@ -5,17 +5,19 @@ import {
   CardActionArea,
   CardMedia,
   GridListTileBar,
-  IconButton,
 } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import InfoIcon from '@material-ui/icons/Info';
 import { withCatContext } from '../wrappers/CatContext';
+import { withAuthContext } from '../wrappers/AuthContext';
 import { useStyles } from '../../themes/useStyles';
 import defaultImageObject from '../../utils/defaultImageObject';
-import CatTitle from './CatTitle';
+import EditButton from './EditButton';
+import DeleteButton from './DeleteButton';
 
 const CatCard = ({
+  isLoggedIn,
   setSelectedCat,
+  deleteCat,
   calculateDimensions,
   id,
   image,
@@ -23,7 +25,7 @@ const CatCard = ({
   name,
   age,
 }) => {
-  const { icon } = useStyles();
+  const classes = useStyles();
   const history = useHistory();
   const cardCalculateDimensions = ({ target }) => {
     calculateDimensions(id, target);
@@ -36,9 +38,17 @@ const CatCard = ({
     history.push('/editCat');
   };
 
+  const deleteSelectedCat = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    deleteCat(id);
+  };
+
   const mainStep =
     imageArray.find((eachImage) => eachImage.imageId === image) ||
     defaultImageObject;
+  const pluralYears = age && age.toString() === '1' ? '' : 's';
+  const catTitle = `${name} - ${age} year${pluralYears} old`;
 
   return (
     <>
@@ -54,11 +64,28 @@ const CatCard = ({
         </CardActionArea>
       </Card>
       <GridListTileBar
-        title={<CatTitle name={name} age={age} editCat={editCat} />}
-        actionIcon={
-          <IconButton aria-label={`info about ${name}`} className={icon}>
-            <InfoIcon />
-          </IconButton>
+        title={catTitle}
+        subtitle={
+          <>
+            {isLoggedIn && (
+              <>
+                <EditButton
+                  className={classes.appBarItem}
+                  onClick={editCat}
+                  to="editCat"
+                  size="small"
+                  color="secondary"
+                  noLabel
+                />
+                <DeleteButton
+                  size="small"
+                  onClick={deleteSelectedCat}
+                  className={`${classes.redButton} ${classes.appBarItem}`}
+                  noLabel
+                />
+              </>
+            )}
+          </>
         }
       />
     </>
@@ -67,6 +94,8 @@ const CatCard = ({
 
 CatCard.propTypes = {
   setSelectedCat: PropTypes.func.isRequired,
+  deleteCat: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
   calculateDimensions: PropTypes.func.isRequired,
   image: PropTypes.string.isRequired,
@@ -84,4 +113,4 @@ CatCard.defaultProps = {
   imageArray: [],
 };
 
-export default withCatContext(CatCard);
+export default withAuthContext(withCatContext(CatCard));

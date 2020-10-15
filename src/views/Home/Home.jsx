@@ -40,6 +40,11 @@ const Home = (props) => {
   const maxWidth = aboveSM ? 'xl' : undefined;
   const displayCats = isLoggedIn ? cats : cats.filter(({ active }) => active);
 
+  const addCat = () => {
+    setSelectedCat();
+    history.push('/viewCat');
+  };
+
   const viewCat = (id) => (e) => {
     e.preventDefault();
     e.stopPropagation();

@@ -41,7 +41,6 @@ class AuthProvider extends Component {
         },
       })
       .then((data) => {
-        logger('data', data);
         setSessionStorageItem('token', data.data.token);
         this.setState({ isLoggedIn: true });
       })
