@@ -45,12 +45,12 @@ const Donations = ({ matches: { aboveSM } }) => {
         <PaymentMethod
           name="Paypal"
           logo={payPalLogo}
-          button={<DonateButton to="/donations" size="large" />}
+          button={<DonateButton href="https://www.paypal.com/paypalme/catwatchdonations" size="large" />}
         />
         <PaymentMethod
           name="JustGiving"
           logo={justGivingLogo}
-          button={<DonateButton to="/donations" size="large" />}
+          button={<DonateButton href="/donations" size="large" />}
         />
         <Grid item xs={12}>
           <Typography component="div">
