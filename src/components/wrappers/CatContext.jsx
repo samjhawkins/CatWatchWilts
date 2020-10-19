@@ -94,25 +94,17 @@ class CatProvider extends Component {
 
   updateCat = async (cat) => {
     return axios
-      .put('/db/cats', {
-        params: {
-          cat,
-        },
-      })
+      .put(`/db/cats/${cat.id}`, cat)
       .then((response) => response.data.data)
       .catch(this.endpointError);
   };
 
   deleteCat = async (cat) => {
     logger('id to delete', cat);
-    // return axios
-    //     .delete('/db/cats', {
-    //       params: {
-    //         cat,
-    //       },
-    //     })
-    //     .then((response) => response.data.data)
-    //     .catch(this.endpointError);
+    return axios
+      .delete(`/db/cats/${cat}`, {})
+      .then((response) => response.data.data)
+      .catch(this.endpointError);
   };
 
   calculateDimensions = (catId, img) => {

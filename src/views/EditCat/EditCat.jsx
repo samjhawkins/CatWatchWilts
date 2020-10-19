@@ -6,13 +6,14 @@ import DisplayStepper from '../../components/DisplayStepper';
 import { withCatContext } from '../../components/wrappers/CatContext';
 import { useStyles } from '../../themes/useStyles';
 import { withMediaQuery } from '../../components/wrappers/MediaQuery';
+import logger from '../../utils/logger';
 import FieldMapper from '../../components/FieldMapper';
 import TextInput from '../../components/Fields/TextInput';
 import SwitchInput from '../../components/Fields/SwitchInput';
 import CatAttributeTile from '../../components/CatForm/CatAttributeTile';
 import AddImageButton from '../../components/CatForm/AddImageButton';
 
-const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
+const EditCat = ({ selectedCat, updateCat, matches: { aboveSM } }) => {
   const [dimension, setDimension] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const classes = useStyles({ aboveSM });
@@ -29,8 +30,8 @@ const EditCat = ({ selectedCat, matches: { aboveSM } }) => {
     <Form
       onSubmit={(formValues) => {
         // eslint-disable-next-line no-console
-        console.log('formValues submit with', formValues);
-        // updateCat(formValues);
+        logger('formValues submit with', formValues);
+        updateCat(formValues);
       }}
       initialValues={selectedCat}
       validate={() => {}}
@@ -134,6 +135,7 @@ EditCat.propTypes = {
       }),
     ),
   }).isRequired,
+  updateCat: PropTypes.func.isRequired,
   matches: PropTypes.shape({
     aboveSM: PropTypes.bool.isRequired,
     aboveMD: PropTypes.bool.isRequired,

@@ -8,7 +8,7 @@ aws.config.update({ region: 'eu-west-2' });
 const ddb = new aws.DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
 const TableName = 'Cats';
 
-const newOrUpdate = (oldArray) => async (sentInRecord) => {
+const newOrUpdate = (oldArray, catId) => async (sentInRecord) => {
   // If we cannot find senInRecord in oldArray, add it,
   // otherwise check for updates
   const searchForImage = oldArray.find(
@@ -19,10 +19,10 @@ const newOrUpdate = (oldArray) => async (sentInRecord) => {
       .put({
         TableName: 'CatImages',
         Item: {
-          catId: { S: sentInRecord.catId },
-          image: { S: sentInRecord.image },
-          imageName: { S: sentInRecord.imageName },
-          imageId: { S: sentInRecord.imageId },
+          catId,
+          image: sentInRecord.image,
+          imageName: sentInRecord.imageName,
+          imageId: sentInRecord.imageId,
         },
       })
       .promise();
@@ -33,7 +33,7 @@ const newOrUpdate = (oldArray) => async (sentInRecord) => {
         TableName,
         Key: {
           imageId: sentInRecord.imageId,
-          catId: sentInRecord.catId,
+          catId,
         },
         UpdateExpression: `set image = :image, imageName = :imageName`,
         ExpressionAttributeValues: {
@@ -65,8 +65,8 @@ const deleteMissing = (sentInArray) => async (oldArrayItem) => {
 };
 
 // Write new cat to database
-app.post('/cats/:id', async (req, res) => {
-  console.log('id', req.params.id);
+app.put('/cats/:id', async (req, res) => {
+  console.log('edit cat on id', req.params.id);
 
   try {
     // Check if cat exists
@@ -85,21 +85,6 @@ app.post('/cats/:id', async (req, res) => {
     }
 
     if (exists) {
-      // Add to db
-      await ddb
-        .put({
-          TableName,
-          Item: {
-            id: { S: req.params.id },
-            name: { S: req.body.name },
-            image: { S: req.body.image },
-            active: { S: req.body.active },
-            age: { S: req.body.age },
-            description: { S: req.body.description },
-          },
-        })
-        .promise();
-    } else {
       // Update db
       await ddb
         .update({
@@ -107,13 +92,31 @@ app.post('/cats/:id', async (req, res) => {
           Key: {
             id: req.params.id,
           },
-          UpdateExpression: `set name = :name, image = :image, active = :active, age = :age, description = :description`,
+          UpdateExpression: `set #n = :name, image = :image, active = :active, age = :age, description = :description`,
           ExpressionAttributeValues: {
             ':name': req.body.name,
             ':image': req.body.image,
             ':active': req.body.active,
             ':age': req.body.age,
             ':description': req.body.description,
+          },
+          ExpressionAttributeNames: {
+            '#n': 'name',
+          },
+        })
+        .promise();
+    } else {
+      // Add to db
+      await ddb
+        .put({
+          TableName,
+          Item: {
+            id: req.body.id,
+            name: req.body.name,
+            image: req.body.image,
+            active: req.body.active,
+            age: req.body.age,
+            description: req.body.description,
           },
         })
         .promise();
@@ -134,20 +137,21 @@ app.post('/cats/:id', async (req, res) => {
     // any matches get updated,
     // any not found get deleted,
 
-    // evaluate new images coming in
+    // Evaluate new images coming in
     await Promise.all([
-      ...req.body.imageArray.map(newOrUpdate(filteredImages)),
+      ...req.body.imageArray.map(newOrUpdate(filteredImages, req.params.id)),
       ...filteredImages.map(deleteMissing(req.body.imageArray)),
     ]);
 
     res.send({ status: 200, message: 'ok' });
   } catch (error) {
     console.error(error);
-    res.send({ status: 500, message: 'An error occured' });
+    throw new Error('There was an error on the server');
   }
 });
 
 app.delete('/cats/:id', async (req, res) => {
+  console.log('Deleting cat:', req.params.id);
   try {
     // Get existing images
     const { Items: imageItems } = await ddb
@@ -159,9 +163,12 @@ app.delete('/cats/:id', async (req, res) => {
       (imageRecord) => imageRecord.catId === req.params.id,
     );
 
+    console.log('filteredImages', filteredImages);
+
     // Delete all images
     await Promise.all(
       filteredImages.map((arrayItem) => {
+        console.log('arrayItem', arrayItem);
         return ddb
           .delete({
             TableName: 'CatImages',
@@ -174,20 +181,24 @@ app.delete('/cats/:id', async (req, res) => {
       }),
     );
 
+    console.log('deleted all images successfully');
+
     // Delete cat
     await ddb
       .delete({
         TableName,
         Key: {
-          catId: req.params.id,
+          id: req.params.id,
         },
       })
       .promise();
 
+    console.log('deleted cat');
+
     res.send({ status: 200, message: 'ok' });
   } catch (error) {
     console.error(error);
-    res.send({ status: 500, message: 'An error occured' });
+    throw new Error('There was an error on the server');
   }
 });
 
@@ -218,6 +229,7 @@ app.get('/cats', async (req, res) => {
     res.send({ data: returnCats });
   } catch (error) {
     console.error(error);
+    throw new Error('There was an error on the server');
   }
 });
 
