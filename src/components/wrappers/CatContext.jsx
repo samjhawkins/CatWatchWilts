@@ -11,7 +11,6 @@ import {
 } from '../../utils/sessionStorage';
 import catsMock from '../../mocks/catsMock';
 import newIdGenerator from '../../utils/newIdGenerator';
-import imageNotFound from '../../images/image-not-found.svg';
 
 const CatContext = React.createContext();
 
