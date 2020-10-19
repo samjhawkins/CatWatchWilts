@@ -84,9 +84,8 @@ const CatProviderWithoutHistory = (props) => {
   };
   const updateCat = async (cat) => {
     return axios
-      .put(`/db/cats/${cat.id}`, cat)
+      .put(`/db/cats/private/${cat.id}`, cat)
       .then(() => {
-        // Then navigate to the home page and refresh
         history.push('/');
         history.go(0);
       })
@@ -95,9 +94,8 @@ const CatProviderWithoutHistory = (props) => {
   const deleteCat = async (cat) => {
     logger('id to delete', cat);
     return axios
-      .delete(`/db/cats/${cat}`, {})
+      .delete(`/db/cats/private/${cat}`, {})
       .then(() => {
-        // Then navigate to the home page and refresh
         history.push('/');
         history.go(0);
       })

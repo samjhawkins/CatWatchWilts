@@ -15,7 +15,7 @@ const app = express();
 app.use('/', express.static(path.join(__dirname, '../dist')));
 app.use(bodyParser.json({ type: '*/*' }));
 app.use('/token', token);
-app.use('/db/cats/:id', authorization);
+app.use('/db/cats/private/*', authorization);
 app.use('/db', dbNode);
 
 app.get('/**', function (req, res) {

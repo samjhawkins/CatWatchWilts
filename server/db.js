@@ -65,7 +65,7 @@ const deleteMissing = (sentInArray) => async (oldArrayItem) => {
 };
 
 // Write new cat to database
-app.put('/cats/:id', async (req, res) => {
+app.put('/cats/private/:id', async (req, res) => {
   console.log('edit cat on id', req.params.id);
 
   try {
@@ -150,7 +150,7 @@ app.put('/cats/:id', async (req, res) => {
   }
 });
 
-app.delete('/cats/:id', async (req, res) => {
+app.delete('/cats/private/:id', async (req, res) => {
   console.log('Deleting cat:', req.params.id);
   try {
     // Get existing images
