@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory, withRouter } from 'react-router-dom';
 import axios from '../../utils/axiosInstance';
 import alterCats from '../../utils/alterCats';
 import logger from '../../utils/logger';
@@ -14,37 +15,27 @@ import newIdGenerator from '../../utils/newIdGenerator';
 
 const CatContext = React.createContext();
 
-class CatProvider extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedCat: {},
-      sorted: false,
-      cats: [],
-    };
-  }
+const CatProviderWithoutHistory = (props) => {
+  const { children } = props;
+  const history = useHistory();
 
-  componentDidMount = () => {
-    const { state } = this;
-    const selectedCat = getSessionStorageItem('selectedCat');
-    this.loadCats({
-      ...state,
-      selectedCat,
-    });
-  };
+  const [catState, setCatState] = useState({
+    selectedCat: {},
+    sorted: false,
+    cats: [],
+  });
 
-  endpointError = (error) => {
+  const endpointError = (error) => {
     if (error.status === '1001') {
       logger('Authentication error - Logging out');
-      const { logout } = this.props;
+      const { logout } = props;
       logout();
     }
     logger(error);
   };
+  const setSelectedCat = (id) => {
+    const { cats } = catState;
 
-  setSelectedCat = (id) => {
-    const { cats } = this.state;
-    const { state } = this;
     if (id === 'new') {
       const imageId = newIdGenerator();
       const selectedCat = {
@@ -64,18 +55,18 @@ class CatProvider extends Component {
         ],
       };
       setSessionStorageItem('selectedCat', selectedCat);
-      this.setState({ ...state, selectedCat });
+      setCatState({ ...catState, selectedCat });
     } else {
       const selectedCat =
         (isPopulatedArray(cats) && cats.find((cat) => cat.id === id)) || {};
       setSessionStorageItem('selectedCat', selectedCat);
-      this.setState({ ...state, selectedCat });
+      setCatState({ ...catState, selectedCat });
     }
   };
 
-  loadCats = async (updateState = this.state) => {
+  const loadCats = async (updateState = catState) => {
     if (process.env.MOCK_CATS === 'true') {
-      return this.setState({
+      return setCatState({
         ...updateState,
         cats: alterCats(catsMock),
       });
@@ -87,32 +78,37 @@ class CatProvider extends Component {
         if (newCats) {
           newCats = alterCats(newCats);
         }
-        this.setState({ ...updateState, cats: newCats });
+        setCatState({ ...updateState, cats: newCats });
       })
-      .catch(this.endpointError);
+      .catch(endpointError);
   };
-
-  updateCat = async (cat) => {
+  const updateCat = async (cat) => {
     return axios
       .put(`/db/cats/${cat.id}`, cat)
-      .then((response) => response.data.data)
-      .catch(this.endpointError);
+      .then(() => {
+        // Then navigate to the home page and refresh
+        history.push('/');
+        history.go(0);
+      })
+      .catch(endpointError);
   };
-
-  deleteCat = async (cat) => {
+  const deleteCat = async (cat) => {
     logger('id to delete', cat);
     return axios
       .delete(`/db/cats/${cat}`, {})
-      .then((response) => response.data.data)
-      .catch(this.endpointError);
+      .then(() => {
+        // Then navigate to the home page and refresh
+        history.push('/');
+        history.go(0);
+      })
+      .catch(endpointError);
   };
 
-  calculateDimensions = (catId, img) => {
+  const calculateDimensions = (catId, img) => {
     const height = img.offsetHeight; // cols
     const width = img.offsetWidth + 30; // rows
 
-    const { state } = this;
-    const newCats = [...state.cats];
+    const newCats = [...catState.cats];
     const findCat = newCats.findIndex(({ id }) => id === catId);
     try {
       newCats[findCat].rows = Math.ceil(height / width);
@@ -120,39 +116,44 @@ class CatProvider extends Component {
     } catch (e) {
       logger('Error calculatingDimensions: ', e);
     }
-    this.setState({ ...state, cats: newCats, sorted: false });
+    setCatState({ ...catState, cats: newCats, sorted: false });
+  };
+  const sortCatsForGrid = (isLoggedIn) => {
+    const sortedArray = sortGrid(catState.cats, isLoggedIn);
+    setCatState({ ...catState, cats: sortedArray, sorted: true });
   };
 
-  sortCatsForGrid = (isLoggedIn) => {
-    const { state } = this;
-    const sortedArray = sortGrid(state.cats, isLoggedIn);
-    this.setState({ ...state, cats: sortedArray, sorted: true });
-  };
+  useEffect(() => {
+    const selectedCat = getSessionStorageItem('selectedCat');
+    loadCats({
+      ...catState,
+      selectedCat,
+    });
+  }, []);
 
-  render() {
-    const { children } = this.props;
-    return (
-      <CatContext.Provider
-        value={{
-          calculateDimensions: this.calculateDimensions,
-          setSelectedCat: this.setSelectedCat,
-          deleteCat: this.deleteCat,
-          loadCats: this.loadCats,
-          updateCat: this.updateCat,
-          sortCatsForGrid: this.sortCatsForGrid,
-          ...this.state,
-        }}
-      >
-        {children}
-      </CatContext.Provider>
-    );
-  }
-}
+  return (
+    <CatContext.Provider
+      value={{
+        calculateDimensions,
+        setSelectedCat,
+        deleteCat,
+        loadCats,
+        updateCat,
+        sortCatsForGrid,
+        ...catState,
+      }}
+    >
+      {children}
+    </CatContext.Provider>
+  );
+};
 
-CatProvider.propTypes = {
+CatProviderWithoutHistory.propTypes = {
   logout: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
+
+const CatProvider = withRouter(CatProviderWithoutHistory);
 
 const withCatContext = (ContextComponent) => {
   return (props) => {

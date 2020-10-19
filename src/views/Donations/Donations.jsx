@@ -45,7 +45,12 @@ const Donations = ({ matches: { aboveSM } }) => {
         <PaymentMethod
           name="Paypal"
           logo={payPalLogo}
-          button={<DonateButton href="https://www.paypal.com/paypalme/catwatchdonations" size="large" />}
+          button={
+            <DonateButton
+              href="https://www.paypal.com/paypalme/catwatchdonations"
+              size="large"
+            />
+          }
         />
         <PaymentMethod
           name="JustGiving"
