@@ -5,7 +5,9 @@ import {
   GridList,
   GridListTile,
   Typography,
+  Button,
 } from '@material-ui/core/index';
+import Add from '@material-ui/icons/Add';
 import { useHistory } from 'react-router-dom';
 import { withCatContext } from '../../components/wrappers/CatContext';
 import { withMediaQuery } from '../../components/wrappers/MediaQuery';
@@ -40,10 +42,9 @@ const Home = (props) => {
   const maxWidth = aboveSM ? 'xl' : undefined;
   const displayCats = isLoggedIn ? cats : cats.filter(({ active }) => active);
 
-  // eslint-disable-next-line no-unused-vars
   const addCat = () => {
-    setSelectedCat();
-    history.push('/viewCat');
+    setSelectedCat('new');
+    history.push('/editCat');
   };
 
   const viewCat = (id) => (e) => {
@@ -66,6 +67,18 @@ const Home = (props) => {
         <Typography component="h2">
           Meet some of our our current guests...
         </Typography>
+        {isLoggedIn && (
+          <Button
+            aria-label="Add a cat image"
+            className={`${classes.icon} ${classes.appBarItem}`}
+            color="primary"
+            variant="contained"
+            onClick={addCat}
+          >
+            <Typography>Add new cat</Typography>
+            <Add />
+          </Button>
+        )}
       </Container>
       <Container component="main" maxWidth={maxWidth} className={classes.root}>
         <GridList

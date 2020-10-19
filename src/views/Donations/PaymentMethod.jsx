@@ -8,8 +8,17 @@ const PaymentMethod = ({ name, button, logo }) => {
   const classes = useStyles();
   return (
     <>
-      <Grid item container xs={12} className={classes.topMargin}>
-        <Grid item xs={12} sm={8} md={12} lg={9}>
+      <Grid item container xs={12} className={classes.bottomMargin}>
+        <Grid
+          item
+          container
+          xs={12}
+          sm={8}
+          md={12}
+          lg={9}
+          justify="center"
+          alignItems="center"
+        >
           <Avatar
             alt={`${name} logo`}
             src={logo}
@@ -17,7 +26,16 @@ const PaymentMethod = ({ name, button, logo }) => {
             className={classes.avatar_large}
           />
         </Grid>
-        <Grid item xs={12} sm={4} md={12} lg={3}>
+        <Grid
+          item
+          container
+          xs={12}
+          sm={4}
+          md={12}
+          lg={3}
+          justify="center"
+          alignItems="center"
+        >
           {button}
         </Grid>
       </Grid>

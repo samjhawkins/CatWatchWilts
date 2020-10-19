@@ -23,8 +23,8 @@ const themedStyles = (theme) => ({
     paddingTop: theme.spacing(20),
     paddingBottom: theme.spacing(20),
   },
-  topMargin: {
-    paddingTop: theme.spacing(8),
+  bottomMargin: {
+    paddingBottom: theme.spacing(8),
   },
   container: {
     padding: theme.spacing(3),

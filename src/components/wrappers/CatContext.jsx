@@ -10,6 +10,8 @@ import {
   setSessionStorageItem,
 } from '../../utils/sessionStorage';
 import catsMock from '../../mocks/catsMock';
+import newIdGenerator from '../../utils/newIdGenerator';
+import imageNotFound from '../../images/image-not-found.svg';
 
 const CatContext = React.createContext();
 
@@ -44,10 +46,32 @@ class CatProvider extends Component {
   setSelectedCat = (id) => {
     const { cats } = this.state;
     const { state } = this;
-    const selectedCat =
-      (isPopulatedArray(cats) && cats.find((cat) => cat.id === id)) || {};
-    setSessionStorageItem('selectedCat', selectedCat);
-    this.setState({ ...state, selectedCat });
+    if (id === 'new') {
+      const imageId = newIdGenerator();
+      const selectedCat = {
+        active: 'false',
+        id: newIdGenerator(),
+        name: 'Cat Name',
+        age: '0',
+        image: imageId,
+        description:
+          'Add your description of the new cat here, you can put anything that you want',
+        imageArray: [
+          {
+            imageId,
+            imageName: 'Image Name',
+            image: 'https://via.placeholder.com/500',
+          },
+        ],
+      };
+      setSessionStorageItem('selectedCat', selectedCat);
+      this.setState({ ...state, selectedCat });
+    } else {
+      const selectedCat =
+        (isPopulatedArray(cats) && cats.find((cat) => cat.id === id)) || {};
+      setSessionStorageItem('selectedCat', selectedCat);
+      this.setState({ ...state, selectedCat });
+    }
   };
 
   loadCats = async (updateState = this.state) => {
