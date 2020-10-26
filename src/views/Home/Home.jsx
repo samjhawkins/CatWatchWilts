@@ -93,7 +93,10 @@ const Home = (props) => {
                 key={`${cat.id}`}
                 cols={aboveMD ? cat.cols || 1 : 1}
                 rows={aboveMD ? cat.rows || 1 : 1}
-                style={{ cursor: 'pointer' }}
+                style={{
+                  cursor: 'pointer',
+                  filter: `grayscale(${cat.active ? '0%' : '100%'})`,
+                }}
               >
                 <CatCard index={index} {...cat} />
               </GridListTile>
