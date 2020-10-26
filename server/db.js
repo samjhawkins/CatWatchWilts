@@ -1,5 +1,6 @@
 const express = require('express');
 const assert = require('assert');
+const logger = require('../src/utils/logger');
 
 const app = express.Router();
 const aws = require('aws-sdk');
@@ -66,7 +67,7 @@ const deleteMissing = (sentInArray) => async (oldArrayItem) => {
 
 // Write new cat to database
 app.put('/cats/private/:id', async (req, res) => {
-  console.log('edit cat on id', req.params.id);
+  logger('edit cat on id', req.params.id);
 
   try {
     // Check if cat exists
@@ -151,7 +152,7 @@ app.put('/cats/private/:id', async (req, res) => {
 });
 
 app.delete('/cats/private/:id', async (req, res) => {
-  console.log('Deleting cat:', req.params.id);
+  logger('Deleting cat:', req.params.id);
   try {
     // Get existing images
     const { Items: imageItems } = await ddb
@@ -163,12 +164,10 @@ app.delete('/cats/private/:id', async (req, res) => {
       (imageRecord) => imageRecord.catId === req.params.id,
     );
 
-    console.log('filteredImages', filteredImages);
-
     // Delete all images
     await Promise.all(
       filteredImages.map((arrayItem) => {
-        console.log('arrayItem', arrayItem);
+        logger('arrayItem', arrayItem);
         return ddb
           .delete({
             TableName: 'CatImages',
@@ -181,7 +180,7 @@ app.delete('/cats/private/:id', async (req, res) => {
       }),
     );
 
-    console.log('deleted all images successfully');
+    logger('deleted all images successfully');
 
     // Delete cat
     await ddb
@@ -193,7 +192,7 @@ app.delete('/cats/private/:id', async (req, res) => {
       })
       .promise();
 
-    console.log('deleted cat');
+    logger('deleted cat');
 
     res.send({ status: 200, message: 'ok' });
   } catch (error) {

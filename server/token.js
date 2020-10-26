@@ -1,12 +1,13 @@
 const express = require('express');
 const axios = require('axios');
+const logger = require('../src/utils/logger');
 
 const app = express.Router();
 const redirectUri = 'https://localhost:40000';
 
 // Get token
 app.get('/', (req, res, next) => {
-  console.log('get token');
+  logger('Get token');
   const config = {
     headers: {
       Authorization: process.env.BASE64_SECRET,
@@ -26,11 +27,11 @@ app.get('/', (req, res, next) => {
       config,
     )
     .then((data) => {
-      console.log('Token returning...');
-      res.send({ token: data.data.id_token });
+      logger('Token returning...');
+      res.send({ token: data.data.access_token });
     })
     .catch((e) => {
-      console.log('Error translating:', e.message);
+      logger('Error translating:', e.message);
       next(e);
     });
 });

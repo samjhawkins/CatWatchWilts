@@ -5,7 +5,7 @@ const jwkToPem = require('jwk-to-pem');
 const logger = require('../src/utils/logger');
 
 let pems;
-const iss = 'https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_deNO5pYzq';
+const iss = 'https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_vgJeQrS3T';
 const ERROR_MESSAGE_UNAUTHORIZED = 'Unauthorized';
 
 function validateToken(req, res, next) {
@@ -50,14 +50,13 @@ function validateToken(req, res, next) {
 }
 
 function authorization(req, res, next) {
-  console.log('Auth hit!!!');
   if (!pems) {
     // Download the JWKs and save it as PEM
     axios
       .get(`${iss}/.well-known/jwks.json`)
       .then((response) => {
         pems = {};
-        logger('data?', response.data);
+        logger('data:', response.data);
         const { keys } = response.data;
         for (let i = 0; i < keys.length; i += 1) {
           // Convert each key to PEM
