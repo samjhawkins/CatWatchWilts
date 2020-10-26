@@ -4,15 +4,22 @@ const webpack = require('webpack');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
+const dotenv = require('dotenv');
 
 const APP_DIR = path.resolve(__dirname, '../src');
 
-module.exports = (env) => {
-  const { PLATFORM, VERSION } = env;
+module.exports = () => {
+  const env = dotenv.config().parsed;
+  const envKeys = Object.keys(env).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+  }, {});
+
   return {
-    mode: PLATFORM,
+    mode: env.PLATFORM,
     entry: APP_DIR,
     module: {
       rules: [
@@ -26,7 +33,7 @@ module.exports = (env) => {
         {
           test: /\.(scss|css)$/,
           use: [
-            PLATFORM === 'production'
+            env.PLATFORM === 'production'
               ? MiniCssExtractPlugin.loader
               : 'style-loader',
             {
@@ -74,13 +81,15 @@ module.exports = (env) => {
     plugins: [
       new FriendlyErrorsWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: './src/html/index.html',
+        template: './src/index.html',
         filename: './index.html',
       }),
-      new webpack.DefinePlugin({
-        'process.env.VERSION': JSON.stringify(VERSION),
-        'process.env.PLATFORM': JSON.stringify(PLATFORM),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: './src/images/catPaw.svg', to: './images/catPaw.svg' },
+        ],
       }),
+      new webpack.DefinePlugin(envKeys),
       new Visualizer({ filename: './visualizer.html' }),
     ],
     output: {

@@ -1,25 +1,16 @@
 /* eslint-disable */
-const path = require('path');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
+const TerserPlugin = require('terser-webpack-plugin');
 const base = require('./webpack.base.config');
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-
-const APP_DIR = path.resolve(__dirname, '../src');
-
-module.exports = (env) => {
-  const { PLATFORM, VERSION } = env;
+module.exports = () => {
   return merge([
-    base(env),
+    base(),
     {
       optimization: {
         usedExports: true,
         splitChunks: {
-          chunks: 'all'
+          chunks: 'all',
         },
         minimizer: [new TerserPlugin({})],
       },

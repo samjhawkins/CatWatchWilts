@@ -1,7 +1,10 @@
-const getSessionStorageItem = (item) =>
-  JSON.parse(sessionStorage.getItem(item) || '{}');
-
+const getSessionStorageItem = (item) => {
+  const returnVar = JSON.parse(sessionStorage.getItem(item) || '{}');
+  return Object.keys(returnVar).length ? returnVar : undefined;
+};
 const setSessionStorageItem = (item, data) =>
   sessionStorage.setItem(item, JSON.stringify(data || {}));
 
-export { getSessionStorageItem, setSessionStorageItem };
+const removeSessionStorage = (item) => sessionStorage.removeItem(item);
+
+export { getSessionStorageItem, setSessionStorageItem, removeSessionStorage };

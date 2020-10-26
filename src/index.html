@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CatWatchWiltshire</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <base href="/" />
+    <link rel="shortcut icon" href="#" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      #app {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      #loader_container {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #waitText {
+        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        line-height: 1;
+        letter-spacing: -0.00833em;
+      }
+
+      #walker {
+        height: 4rem;
+        width: 80vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .paw {
+        position: relative;
+        animation: appear 8s linear infinite;
+        animation-delay: calc(var(--n) * 0.75s);
+        opacity: 0;
+      }
+
+      .paw:nth-child(even) {
+        bottom: 80%;
+      }
+
+      @keyframes appear {
+        0%, 20%, 100% {
+          opacity: 0;
+        }
+        12%, 16% {
+          opacity: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="loader_container">
+        <div id="walker">
+          <img class="paw" style="--n: 1" src="./images/catPaw.svg" />
+          <img class="paw" style="--n: 2" src="./images/catPaw.svg" />
+          <img class="paw" style="--n: 3" src="./images/catPaw.svg" />
+          <img class="paw" style="--n: 4" src="./images/catPaw.svg" />
+          <img class="paw" style="--n: 5" src="./images/catPaw.svg" />
+          <img class="paw" style="--n: 6" src="./images/catPaw.svg" />
+          <img class="paw" style="--n: 7" src="./images/catPaw.svg" />
+          <img class="paw" style="--n: 8" src="./images/catPaw.svg" />
+          <img class="paw" style="--n: 9" src="./images/catPaw.svg" />
+          <img class="paw" style="--n: 10" src="./images/catPaw.svg" />
+        </div>
+        <h2 id="waitText">
+          Site is loading, please wait...
+        </h2>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,21 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { Grid } from '@material-ui/core/index';
-import renderRoutes from './routes/renderRoutes';
-import NavBar from './components/common/NavBar/NavBar';
-import Footer from './components/common/Footer/Footer';
+import renderRoutes from './utils/renderRoutes';
+import NavBar from './components/NavBar/NavBar';
+import Footer from './components/Footer';
+import LoadingFallback from './components/LoadingFallback';
 
 const App = () => (
-  <React.Suspense fallback={() => <span>Loading...</span>}>
-    <Router>
-      <Grid container direction="column" justify="center" alignItems="center">
-        <NavBar />
-        <Grid item container xs={12} justify="center">
-          <Switch>{renderRoutes()}</Switch>
-          <Footer />
-        </Grid>
+  <React.Suspense fallback={<LoadingFallback />}>
+    <Grid container direction="column" justify="center" alignItems="center">
+      <NavBar />
+      <Grid item container xs={12} justify="center">
+        <Switch>{renderRoutes()}</Switch>
+        <Footer />
       </Grid>
-    </Router>
+    </Grid>
   </React.Suspense>
 );
 

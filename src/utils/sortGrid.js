@@ -1,5 +1,18 @@
-const sortGrid = (arrayIn, direction, sum) => {
-  const arrayToSort = [...arrayIn];
+const sortGrid = (arrayIn, includeActive) => {
+  const colWidth = parseInt(process.env.COLUMN_WIDTH, 0);
+  let arrayToSort = [];
+  let arrayToAppend = [];
+  if (!includeActive) {
+    arrayIn.forEach((item) => {
+      if (item.active) {
+        arrayToSort = [...arrayToSort, item];
+      } else {
+        arrayToAppend = [...arrayToAppend, item];
+      }
+    });
+  } else {
+    arrayToSort = [...arrayIn];
+  }
   const sortArray = [];
   const allocatedIndexes = [];
 
@@ -14,9 +27,10 @@ const sortGrid = (arrayIn, direction, sum) => {
       if (allocatedIndexes.includes(indexes[reducerIndex])) {
         return;
       }
-      sumOfAll += arrayToSort[indexes[reducerIndex]][direction];
+      sumOfAll +=
+        arrayToSort[indexes[reducerIndex]][process.env.TILE_DIRECTION];
     }
-    if (sumOfAll === sum) {
+    if (sumOfAll === colWidth) {
       // found a match, so process
       indexes.forEach((currentIndex) => {
         sortArray.push(arrayToSort[currentIndex]);
@@ -28,10 +42,10 @@ const sortGrid = (arrayIn, direction, sum) => {
   // prioritise the largest combo over the least
   const deepestSort = (depth, ...indexes) => {
     const newDepth = depth + 1;
-    if (newDepth <= sum) {
+    if (newDepth <= colWidth) {
       for (let i = 0; i < arrayToSort.length; i += 1) {
         if (!(allocatedIndexes.includes(i) || indexes.includes(i))) {
-          if (newDepth < sum) {
+          if (newDepth < colWidth) {
             deepestSort(newDepth, ...indexes, i);
           }
           checkElement(...indexes, i);
@@ -49,7 +63,7 @@ const sortGrid = (arrayIn, direction, sum) => {
     }
   }
 
-  return sortArray;
+  return [...sortArray, ...arrayToAppend];
 };
 
 export default sortGrid;
