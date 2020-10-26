@@ -107,7 +107,7 @@ const EditCat = ({ selectedCat, updateCat, matches: { aboveSM } }) => {
                 Save
               </Button>
             </CatAttributeTile>
-            {process.env.DEBUG_FORM === 'true' && (
+            {process.env.FEVAR_DEBUG_FORM === 'true' && (
               <pre
                 style={{ overflowWrap: 'break-word' }}
                 className={classes.root}

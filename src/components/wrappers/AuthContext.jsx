@@ -35,7 +35,7 @@ class AuthProvider extends Component {
     }
 
     axios
-      .get(`${process.env.BACKEND_BASE_API}/token`, {
+      .get(`${process.env.FEVAR_BACKEND_BASE_API}/token`, {
         params: {
           code,
         },

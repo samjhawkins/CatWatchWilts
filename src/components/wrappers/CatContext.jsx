@@ -65,7 +65,7 @@ const CatProviderWithoutHistory = (props) => {
   };
 
   const loadCats = async (updateState = catState) => {
-    if (process.env.MOCK_CATS === 'true') {
+    if (process.env.FEVAR_MOCK_CATS === 'true') {
       return setCatState({
         ...updateState,
         cats: alterCats(catsMock),

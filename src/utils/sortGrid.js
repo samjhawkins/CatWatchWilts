@@ -1,5 +1,5 @@
 const sortGrid = (arrayIn, includeActive) => {
-  const colWidth = parseInt(process.env.COLUMN_WIDTH, 0);
+  const colWidth = parseInt(process.env.FEVAR_COLUMN_WIDTH, 0);
   let arrayToSort = [];
   let arrayToAppend = [];
   if (!includeActive) {
@@ -28,7 +28,7 @@ const sortGrid = (arrayIn, includeActive) => {
         return;
       }
       sumOfAll +=
-        arrayToSort[indexes[reducerIndex]][process.env.TILE_DIRECTION];
+        arrayToSort[indexes[reducerIndex]][process.env.FEVAR_TILE_DIRECTION];
     }
     if (sumOfAll === colWidth) {
       // found a match, so process

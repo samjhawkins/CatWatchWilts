@@ -13,10 +13,12 @@ const APP_DIR = path.resolve(__dirname, '../src');
 
 module.exports = () => {
   const env = dotenv.config().parsed;
-  const envKeys = Object.keys(env).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(env[next]);
-    return prev;
-  }, {});
+  const envKeys = Object.keys(env)
+    .filter((el) => el.includes('FEVAR_'))
+    .reduce((prev, next) => {
+      prev[`process.env.${next}`] = JSON.stringify(env[next]);
+      return prev;
+    }, {});
 
   return {
     mode: env.PLATFORM,

@@ -84,7 +84,7 @@ const Home = (props) => {
         <GridList
           cellHeight="auto"
           className={classes.fullWidth}
-          cols={aboveMD ? parseInt(process.env.COLUMN_WIDTH, 0) : 1}
+          cols={aboveMD ? parseInt(process.env.FEVAR_COLUMN_WIDTH, 0) : 1}
         >
           {isPopulatedArray(displayCats) &&
             displayCats.map((cat, index) => (
