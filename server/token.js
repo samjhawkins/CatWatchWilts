@@ -3,7 +3,7 @@ const axios = require('axios');
 const logger = require('../src/utils/logger');
 
 const app = express.Router();
-const redirectUri = 'https://localhost:40000';
+const redirectUri = 'https://cw.coilar.com';
 
 // Get token
 app.get('/', (req, res, next) => {
